@@ -4,7 +4,7 @@
 - data: c:\Windows\System32\(16 random alphabet characters).exe
   ioc_type: file_path_name
   note: webshell drops ransomware to the %SYSTEM%
-- data: hxxp://yuuuuu44[.]com/vpn-service/$(f1)/crunchyroll-vpn
+- data: http://yuuuuu44[.]com/vpn-service/$(f1)/crunchyroll-vpn
   ioc_type: url
   note: Where $(f1) is a randomly-generated 16-alphabetic character string
 - data: yuuuuu44.com

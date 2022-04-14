@@ -1,0 +1,6 @@
+- data: https://contact.nightsky.cyou
+  ioc_type: url
+  note:
+- data: https://www.youtube.com/watch?v=NpXEQHDOA5o
+  ioc_type: url
+  note:

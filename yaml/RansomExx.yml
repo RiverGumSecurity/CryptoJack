@@ -1,0 +1,21 @@
+- data: http://rnsm777cdsjrsdlbs4v5qoeppu3px6sb2igmh53jzrx7ipcrbjz5b2ad.onion/752c4bb6d74d99f647866ff73b79bb4cfeafd0d1/
+  ioc_type: url
+  note:
+- data: https://d.symcb.com/cps
+  ioc_type: url
+  note:
+- data: https://d.symcb.com/rpa
+  ioc_type: url
+  note:
+- data: https://d.symcb.com/rpa
+  ioc_type: url
+  note:
+- data: https://noc.social/@uhnwi
+  ioc_type: url
+  note:
+- data: http://s.symcb.com/universal-root.crl
+  ioc_type: url
+  note:
+- data: http://s.symcd.com
+  ioc_type: url
+  note:

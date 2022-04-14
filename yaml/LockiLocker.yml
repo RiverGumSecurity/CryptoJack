@@ -1,0 +1,9 @@
+- data: https://picc.io/X8GRzsw.gif
+  ioc_type: url
+  note:
+- data: https://localbitcoins.com/buy_bitcoins
+  ioc_type: url
+  note:
+- data: http://www.coindesk.com/information/how-can-i-buy-bitcoins/
+  ioc_type: url
+  note:

@@ -1,0 +1,13 @@
+- data: http://179.43.160.195/
+  ioc_type: url
+  note:
+- data: http://cdn2546713.cdnmegafiles.com/data23072021_1.dat
+  ioc_type: url
+  note:
+- data: http://chat5sqrnzqewampznybomgn4hf2m53tybkarxk4sfaktwt7oqpkcvyd.onion/gate.php
+  ioc_type: url
+  note:
+- data: https://torproject.org/
+  ioc_type: url
+  note:
+

@@ -1,0 +1,9 @@
+- data: https://localbitcoins.com/buy_bitcoins
+  ioc_type: url
+  note:
+- data: http://www.coindesk.com/information/how-can-i-buy-bitcoins/
+  ioc_type: url
+  note:
+- data: vssadmin delete shadows /all 
+  ioc_type: command
+  note:

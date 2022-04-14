@@ -1,0 +1,43 @@
+- data: IoCs related to Midas ransomware
+  ioc_type: description
+  note: ''
+- data: fe5e26ee2e15cbc10970fc3f0d249b02bbbc79b8dbc7adbd41340f3c0a4afd8d
+  ioc_type: sha-256
+  note: legitimate, benign dism.exe abused to load dismcore.dll
+- data: 3d779d02a0c7061caa8b412119a27b39692f3ecba80aa5e070434b95cf24b436
+  ioc_type: sha-256
+  note: dismcore.dll Troj/MSIL-SDB
+- data: 4823f478e5fb68be06ba987539c3e1c52e2597b0b35edc5b66fcedcef66fb1f6
+  ioc_type: sha-256
+  note: encrypted form of https://github.com/monoxgas/sRDI (detected as ATK/sRDI-A)
+- data: 0d43eca3777f98773314e04870bcbe76d6c5eb0694356509cd9f698d9a169f76
+  ioc_type: sha-256
+  note: Harmony Loader (reflective loader decrypted during the attack)
+- data: de58d52374108d5ee8bd12b09034d4fa15ea5789b191e64ed1a559915ea393e8
+  ioc_type: sha-256
+  note: example batch file used to start dism.exe (contains randomized path name)
+- data: 73d62f5989336da3809c150861bac08c13547a9992181fec1c51741b53aeb2f3
+  ioc_type: sha-256
+  note: example vbs script used to start batch file (contains randomized path name)
+- data: 5.34.178.211
+  ioc_type: ip
+  note: c2 address used by threat actors
+- data: 185.16.40.78
+  ioc_type: ip
+  note: c2 address used by threat actors
+- data: c:\users\public\videos
+  ioc_type: file_path_name
+  note: Multiple PowerShell scripts run from this location on infected machines
+- data: lz_els.ps1
+  ioc_type: filename
+  note: Run from c:\users\public\videos
+- data: adtest.ps1
+  ioc_type: filename
+  note: Run from c:\users\public\videos
+- data: dism_els.ps1
+  ioc_type: filename
+  note: Run from c:\users\public\videos
+- data: out32.ps1
+  ioc_type: filename
+  note: Run from c:\users\public\videos
+

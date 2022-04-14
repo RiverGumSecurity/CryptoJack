@@ -1,0 +1,295 @@
+- data: Indicators from Dharma RaaS attacks
+  ioc_type: description
+  note: ''
+- data: \\tsclient\e
+  ioc_type: file_path_name
+  note: Network mounted drive for Dharma RaaS attacks via RDP
+- data: \\tsclient\e\ps\
+  ioc_type: file_path_name
+  note: Powershell directory for Dharma RDP RaaS attack
+- data: \\tsclient\e\torqNet\
+  ioc_type: file_path_name
+  note: Tor tools for Dharma RDP RaaS attack
+- data: \\tsclient\e\ms16\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\mimikatz_trunk\x64
+  ioc_type: file_path_name
+  note: 64-bit Mimikatz files for Dharma RDP RaaS
+- data: \\tsclient\e\mimikatz_trunk\Win32
+  ioc_type: file_path_name
+  note: 32-bit Mimikatz files for Dharma RDP RaaS
+- data: \\tsclient\e\Password Viewers\
+  ioc_type: file_path_name
+  note: Password viewers for Dharma RDP RaaS
+- data: \\tsclient\e\rdpv
+  ioc_type: file_path_name
+  note: RDP Password Viewer files for Dharma RDP RaaS
+- data: \\tsclient\e\Lazagne
+  ioc_type: file_path_name
+  note: LaZagne password scraper files for Dharma RDP RaaS
+- data: \\tsclient\e\Hash_Suite_Free\Tools
+  ioc_type: file_path_name
+  note: Hash Suite Free files for Dharma RDP RaaS
+- data: \\tsclient\e\1SafeMode
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\SafeCrypt\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\PCHunter\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\exe\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\RegistryFinder\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\x\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\torqNet\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\AdvancedIPScanner\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\WmiDomain\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\2fin\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\bat\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\2018\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\mimiNLbrute\
+  ioc_type: file_path_name
+  note: ''
+- data: \\tsclient\e\miadnlrdp\
+  ioc_type: file_path_name
+  note: ''
+- data: 1bfb9bf7a00b8b6e9a0a7eb8fcf9c69738562d3f
+  ioc_type: sha1
+  note: Initial Dharma RaaS compromise script
+- data: toolbelt.ps1
+  ioc_type: file_name
+  note: Main attack script
+- data: elevate.ps1
+  ioc_type: file_name
+  note: Privelege escalation script
+- data: LApass.ps1
+  ioc_type: file_name
+  note: Dharma user changer script
+- data: lubrute.ps1
+  ioc_type: file_name
+  note: Dharma local user brute force attack
+- data: Find-Pass.ps1
+  ioc_type: file_name
+  note: ''
+- data: Delete-AVServices.ps1
+  ioc_type: file_name
+  note: PowerShell kills services and runs uninstall on AV services
+- data: appWiz.ps1
+  ioc_type: file_name
+  note: Dharma script to automate application removal wizard
+- data: Disable-WinDefend.ps1
+  ioc_type: file_name
+  note: Dharma script to disable Windows Defender
+- data: purgeMemory.ps1
+  ioc_type: file_name
+  note: Shadow copy deletion and other tasks associated with Dharma execution
+- data: winhostok.ps1
+  ioc_type: file_name
+  note: ''
+- data: NetPC.ps1
+  ioc_type: file_name
+  note: Dharma script to harvest PC names from network
+- data: NetSubPC.ps1
+  ioc_type: file_name
+  note: Dharma script to harvest PC names from subnets on local network
+- data: NetADPC.ps1
+  ioc_type: file_name
+  note: Dharma script to harvest PC names from Active Directory
+- data: GetHosts.ps1
+  ioc_type: file_name
+  note: Dharma script to use WMI to find hostnames
+- data: adbrute.ps1
+  ioc_type: file_name
+  note: Dharma Active Directory account brute force script
+- data: 2sys.ps1
+  ioc_type: file_name
+  note: ''
+- data: wallet.ps1
+  ioc_type: file_name
+  note: ''
+- data: toolbelt1.ps1
+  ioc_type: file_name
+  note: Secondary Dharma control script
+- data: Start-Tor.ps1
+  ioc_type: file_name
+  note: ''
+- data: Email-Screenshot.ps1
+  ioc_type: file_name
+  note: Dharma script to exfiltrate system data by emailing screenshots
+- data: rdpv.exe
+  ioc_type: file_name
+  note: Nirsoft RDP password viewer
+- data: takeaway.exe
+  ioc_type: file_name
+  note: RarSFX carrying Dharma payload
+- data: winhost.exe
+  ioc_type: file_name
+  note: Dharma ransomware
+- data: purgememory.ps1
+  ioc_type: file_name
+  note: ''
+- data: ns2.exe
+  ioc_type: file_name
+  note: Dharma network scanner
+- data: bulletspassview.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: bulletspassview.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: chromepass.cfg
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: chromepass.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: chromepass.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: dialupass.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: dialupass.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: iepv.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: iepv.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: mailpv.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: mailpv.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: mspass.cfg
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: mspass.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: mspass.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: netpass.cfg
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: netpass.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: netpass.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: passwordfox.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: passwordfox.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: pstpassword.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: pstpassword.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: routerpassview.cfg
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: routerpassview.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: routerpassview.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: sniffpass.cfg
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: sniffpass.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: sniffpass.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: webbrowserpassview.cfg
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: webbrowserpassview.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: webbrowserpassview.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: wirelesskeyview.chm
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: wirelesskeyview.exe
+  ioc_type: file_name
+  note: Nirsoft password viewer
+- data: javsecc.exe
+  ioc_type: file_name
+  note: Dharma AutoIT container for Tor relay
+- data: 185.20.187.20
+  ioc_type: ip
+  note: Host storing some of Dharma RaaS files
+- data: b7dc961e4485c967f43f1be6fbbe067a81cc2181
+  ioc_type: sha1
+  note: takeaway.exe
+- data: 23ef76d2e4cec624821c9ca087376c2a4584db45
+  ioc_type: sha1
+  note: takeaway.exe
+- data: 4576efe2b713b1fd1a967b9beec57bf66a6cdbf8
+  ioc_type: sha1
+  note: takeaway.exe
+- data: e5f3330884a48c5fa462e0299f4bff261b4dbc80
+  ioc_type: sha1
+  note: takeaway.exe
+- data: 15d4894e73dfe5f63061462a1bf6a9b5976457c2
+  ioc_type: sha1
+  note: takeaway.exe
+- data: 6fb1fb1641c1faf65b5d7c786b7ea0df0be14b4b
+  ioc_type: sha1
+  note: takeaway.exe
+- data: 1eea0f017bffa0a868605f373efa74b4858e1c37
+  ioc_type: sha1
+  note: takeaway.exe
+- data: 629c9649ced38fd815124221b80c9d9c59a85e74
+  ioc_type: sha1
+  note: NS2.ex
+- data: 5adfa3cc0480795406f69170f9fcf2b34a5984e3
+  ioc_type: sha1
+  note: purgeMemory.ps1
+- data: 5ac57e3d0e94e87f9ed14a7351c770932c4b7d08
+  ioc_type: sha1
+  note: takeaway.ps1
+- data: 55e1e325d3849dff0daf50bf330ce28155ab7e51
+  ioc_type: sha1
+  note: winhost.ex
+- data: 1cec5e4563e2c1570353e54a4ecc12ab4d896ab7227fd8651adcd56b884c0c1c
+  ioc_type: sha256
+  note: GdAgentSrv.de.dll
+- data: 28042dd4a92a0033b8f1d419b9e989c5b8e32d1d2d881f5c8251d58ce35b9063
+  ioc_type: sha256
+  note: Process Hacker
+

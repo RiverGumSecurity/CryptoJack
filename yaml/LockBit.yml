@@ -1,0 +1,196 @@
+- data: Files from the Lockbit ransomware report
+  ioc_type: description
+  note: https://news.sophos.com/en-us/2020/10/21/lockbit-attackers-uses-automated-attack-tools-to-identify-tasty-targets/
+- data: C:\Windows\System32\CloudBAK.exe
+  ioc_type: file_path_name
+  note: Renamed PowerShell.exe
+- data: C:\Windows\System32\defrag32.exe
+  ioc_type: file_path_name
+  note: Renamed PowerShell.exe
+- data: C:\Windows\System32\diagnosticMem.exe
+  ioc_type: file_path_name
+  note: Renamed PowerShell.exe
+- data: C:\Windows\System32\Ras.exe
+  ioc_type: file_path_name
+  note: Renamed PowerShell.exe
+- data: C:\Windows\System32\wermgupd.exe
+  ioc_type: file_path_name
+  note: Renamed PowerShell.exe
+- data: C:\Windows\System32\wermreport.exe
+  ioc_type: file_path_name
+  note: Renamed PowerShell.exe
+- data: 1_Remote Desktop Connectio~.lnk
+  ioc_type: filename
+  note: LNK file for backdoor persistence
+- data: Remote Desktop Connection.lnk
+  ioc_type: filename
+  note: Mal/PowLnkObf-A LNK file for backdoor persistence
+- data: 142.91.170.175
+  ioc_type: ip
+  note: LockBit persistent backdoor downloader
+- data: 142.91.170.6
+  ioc_type: ip
+  note: LockBit backdoor C&C
+- data: 0b6cb591f1a0db7d74d8e802000fce9a61bfe520922eefbad1166d1f7c13d222
+  ioc_type: sha256
+  note: LNK file for backdoor persistence
+- data: 397138156bb09696045398ca709bcaa73e0fe7cc48be9b6654f29bce0c535015
+  ioc_type: sha256
+  note: Log obfuscation data for LockBit
+- data: 4250172289cf5e82f5decd7b72d3455538faf7dc26c97abfcfa243aae2a66d8e
+  ioc_type: sha256
+  note: LockBit Task Scheduler data file
+- data: 443cd5c871a7e0e75284c10c279a9d19156c44d2a038f35c3abd83ecd52cb14c
+  ioc_type: sha256
+  note: Mal/PSDL-J PowerShell
+- data: 49614c9b05cceea11c341e790283ee75606bd304dc0c9899a1d4a036bda33f8a
+  ioc_type: sha256
+  note: Mal/PowLnkObf-A LNK file for backdoor persistence
+- data: 560f5444461de30e9b2f00a8cb37f4c6d736bb35cc9fb85894b198c59508cde7
+  ioc_type: sha256
+  note: Log obfuscation data for LockBit
+- data: 5819b1d4ee001e387223a7a6fc1ad4a476e45ccd75b354932108073985c05b95
+  ioc_type: sha256
+  note: LockBit PowerShell backdoor
+- data: af5511fd2bfda3970d7ed82d0138ff9388f17f55fcfbbee0ee37e9608c91bb65
+  ioc_type: sha256
+  note: LockBit PowerShell backdoor
+- data: e6f11f2dd14c5fde7695a3b6185fbeb1bfc7376ad58597d6969c0307585858b0
+  ioc_type: sha256
+  note: Log obfuscation data for LockBit
+- data: ff61e09fbd4515297004a025b0ef1d502548a9f4a1ba3bf25ebfb93ac18fbf27
+  ioc_type: sha256
+  note: Mal/PSDL-J PowerShell
+- data: https://docs.google.com/spreadsheets/d/11C7pdR3r_VeOPQXpRCGtUEJoftKO1wB7ZFfX0t94XTw/edit#gid=0&range=B1
+  ioc_type: url
+  note: LockBit backdoor installer loader URL
+- data: vssadmin Delete Shadows /All /Quiet
+  ioc_type: command
+  note: LockBit
+- data: vssadmin delete shadows /all /quiet & wmic shadowcopy delete & bcdedit /set {default} bootstatuspolicy ignoreallfailures & bcdedit /set {default} recoveryenabled no & wbadmin delete catalog -quiet
+  ioc_type: command
+  note: LockBit
+- data: wmic SHADOWCOPY /nointeractive
+  ioc_type: command
+  note: LockBit
+- data: appro@openssl.org
+  ioc_type: email
+  note: LockBit
+- data: contact@lulusofware.com 
+  ioc_type: email
+  note: LockBit
+- data: goodmen@cock.li 
+  ioc_type: email
+  note: LockBit
+- data: pcabcd@countermail.com
+  ioc_type: email
+  note: LockBit
+- data: recoverymanager@cock.li
+  ioc_type: email
+  note: LockBit
+- data: http://dualmonitortool.sourceforge.net
+  ioc_type: url
+  note: LockBit
+- data: http://fsf.org
+  ioc_type: url
+  note: LockBit
+- data: https://bridges.torproject.org
+  ioc_type: url
+  note: LockBit
+- data: http://jimmac.musichall.cz
+  ioc_type: url
+  note: LockBit
+- data: http://lockbit4g37glgfl.onion
+  ioc_type: url
+  note: LockBit
+- data: http://lockbit-decryptor.com
+  ioc_type: url
+  note: LockBit
+- data: http://lockbit-decryptor.top
+  ioc_type: url
+  note: LockBit
+- data: http://lockbit-decryptor.top/?12345678911234567891123456789112
+  ioc_type: url
+  note: LockBit
+- data: http://lockbitks2tvnmwk.onion/?12345678911234567891123456789112
+  ioc_type: url
+  note: LockBit
+- data: http://lockbitkodidilol.onion/?
+  ioc_type: url
+  note: LockBit
+- data: http://lockbitks2tvnmwk.onion/?
+  ioc_type: url
+  note: LockBit
+- data: http://lockbitsap2oaqhcun3syvbqt6n5nzt7fqosc6jdlmsfleu3ka4k2did.onion
+  ioc_type: url
+  note: LockBit
+- data: http://lockbitsup4yezcd5enk5unncx3zcy7kw6wllyqmiyhvanjj352jayid.onion
+  ioc_type: url
+  note: LockBit
+- data: http://lockbitapt6vx57t3eeqjofwgcglmutr3a35nygvokja5uuccip4ykyd.onion
+  ioc_type: url
+  note: LockBit
+- data: http://purl.org/dc/dcmitype/StillImage
+  ioc_type: url
+  note: LockBit
+- data: https://02ip.ru/1dDb77.jpg
+  ioc_type: url
+  note: LockBit
+- data: https://bigblog.at
+  ioc_type: url
+  note: LockBit
+- data: https://digitalclock4.sourceforge.io/
+  ioc_type: url
+  note: LockBit
+- data: https://hg.mozilla.org/releases/mozilla-release/raw-file/default/security/nss/lib/ckfw/builtins/certdata.txt
+  ioc_type: url
+  note: LockBit
+- data: https://iplo.ru/1LJjq7.txt
+  ioc_type: url
+  note: LockBit
+- data: http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd
+  ioc_type: url
+  note: LockBit
+- data: https://stage-api-updateservice.sodapdf.com
+  ioc_type: url
+  note: LockBit
+- data: https://tb-manual.torproject.org/about
+  ioc_type: url
+  note: LockBit
+- data: http://tempuri.org/
+  ioc_type: url
+  note: LockBit
+- data: http://upclick.com/
+  ioc_type: url
+  note: LockBit
+- data: http://upx.sf.net
+  ioc_type: url
+  note: LockBit
+- data: C:\badpath
+  ioc_type: file_path_name
+  note: LockBit
+- data: C:\dacufofupip2\rimemofozetozi\file-gedigitasopuv\36 yo.pdb
+  ioc_type: file_path_name
+  note: LockBit
+- data: C:\Program Files (x86)\Soda PDF Desktop
+  ioc_type: file_path_name
+  note: LockBit
+- data: C:\sources\cecil\symbols\mdb\obj\net_4_5_Release\Mono.Cecil.Mdb.pdb
+  ioc_type: file_path_name
+  note: LockBit
+- data: C:\Src\a\OfficeSuite\platforms\OfficeSuite\Projects\64bit_release\Reactive\.pdb
+  ioc_type: file_path_name
+  note: LockBit
+- data: C:\tmp\
+  ioc_type: file_path_name
+  note: LockBit
+- data: C:\Users\manzhang\Desktop\WeChat Image_20191022170753.jpg
+  ioc_type: file_path_name
+  note: LockBit
+- data: C:\Users\qt\work\qt\qtbase\lib\libEGL.pdb
+  ioc_type: file_path_name
+  note: LockBit
+- data: C:\Users\qt\work\qt\qtspeech\lib\Qt5TextToSpeech.pdb
+  ioc_type: file_path_name
+  note: LockBit
+

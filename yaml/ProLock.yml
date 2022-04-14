@@ -1,0 +1,81 @@
+- data: Indicators from ProLock ransomware
+  ioc_type: description
+  note: ''
+- data: C:\ProgramData\WinMgr.bmp
+  ioc_type: file_path_name
+  note: Image file containing ProLock executable code
+- data: C:\ProgramDaa\WinMgr.xml
+  ioc_type: file_path_name
+  note: XML file used for creation of ProLock ransomware task in Windows Task Scheduler
+- data: C:\ProgramData\run.bat
+  ioc_type: file_path_name
+  note: Batch file used to create ProLock ransomware task
+- data: C:\ProgramData\clean.bat
+  ioc_type: file_path_name
+  note: Batch file containing base64-encoded Powershell script that invokes ProLock
+    executable
+- data: C:\Windows\System32\Tasks\WinMgr
+  ioc_type: file_path_name
+  note: Task created to execute ProLock
+- data: '[HOW TO RECOVER FILES].txt'
+  ioc_type: file_name
+  note: ProLock ransom note file
+- data: http://185.212.128.8/B/
+  ioc_type: url_path
+  note: Download point for clean.bat
+- data: 185.212.128.8
+  ioc_type: ip address
+  note: ProLock C&C host
+- data: 9cae5fcefc8bc9b748b4b16549e789e27ae816df
+  ioc_type: sha_1
+  note: clean.bat ProLock Powershell dropper sample 1
+- data: a037439ad7e79dbf4a20664cf10126c93429e350
+  ioc_type: sha_1
+  note: run.bat ProLock launcher script
+- data: 18661f8c245d26be1ec4df48a9e186569a77237f424f322f00ef94652b9d5f35
+  ioc_type: sha_256
+  note: Run.bat ProLock launcher script
+- data: 0ce3614560e7c1ddbc3b8f56f3e45278de47d3bb
+  ioc_type: sha_1
+  note: clean.bat ProLock Powershell dropper sample 2
+- data: b262b1b82e5db337d367ea1d4119cadb928963896f1aff940be763a00d45f305
+  ioc_type: sha_256
+  note: clean.bat ProLock Powershell dropper sample 2
+- data: 4f125d890a8f98c9c7069b0bb2b5625c7754fad6
+  ioc_type: sha_1
+  note: WinMgr.xml ProLock task scheduler configuration file
+- data: 2f0e4b178311a260601e054b0b405999715084227e49ff18a19e1a59f7b2f309
+  ioc_type: sha_256
+  note: WinMgr.xml ProLock task scheduler configuration file
+- data: e2a961c9a78d4c8bf118a0387dc15c564efc8fe9
+  ioc_type: sha_1
+  note: WinMgr.bmp file carrying ProLock executable (sample 1 and 2 identical)
+- data: a6ded68af5a6e5cc8c1adee029347ec72da3b10a439d98f79f4b15801abd7af0
+  ioc_type: sha_256
+  note: WinMgr.bmp file carrying ProLock executable (sample 1 and 2 identical)
+- data: dfbd62a3d1b239601e17a5533e5cef53036647901f3fb72be76d92063e279178
+  ioc_type: sha_256
+  note: ProLock executable sample 3 (memory extracted)
+- data: 81d5888bb8d43d88315c040be1f51db6bb5cf64c
+  ioc_type: sha_1
+  note: ProLock executable sample 3 (memory extracted)
+- data: HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\UNCAsIntranet
+  ioc_type: registry_path_key
+  note: Prolock sets to 0 (off)
+- data: HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\AutoDetect
+  ioc_type: registry_path_key
+  note: Prolock sets to 1 (on)
+- data: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{1738D1D9-01DA-41FC-B106-6F4DF75D08C9}\Path
+  ioc_type: registry_path_key
+  note: 'sets values Type: REG_SZ, Length: 16, Data: \WinMgr'
+- data: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{1738D1D9-01DA-41FC-B106-6F4DF75D08C9}\Hash
+  ioc_type: registry_path_key
+  note: 'sets values Type: REG_BINARY, Length: 32, Data: 56 4F 39 36 66 75 E5 89 94
+    FF 87 0F 38 FC 15 FB'
+- data: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\WinMgr\Id
+  ioc_type: registry_path_key
+  note: 'sets values Type: REG_SZ, Length: 78, Data: {1738D1D9-01DA-41FC-B106-6F4DF75D08C9}'
+- data: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\WinMgr\Index
+  ioc_type: registry_path_key
+  note: 'Sets values Type: REG_DWORD, Length: 4, Data: 1'
+

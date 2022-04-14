@@ -1,0 +1,25 @@
+- data: e7ccbcc9f500272f8b6422e9900c5131768cc9ca074e6cb8cc92bce385a7ee2e
+  ioc_type: sha256
+  note: Netfilim (Nemty) ransomware
+- data: 3cd9b8f675d4718c4d73a9b1656836790a058b8ba46c1e0f254d46775ab06556
+  ioc_type: sha256
+  note: Cobalt Strike
+- data: -nop -w hidden -c IEX ((new-object net.webclient).downloadstring
+  ioc_type: command_line_parameter
+  note: Powershell command
+- data: aes.one
+  ioc_type: domain
+  note: C2
+- data: '%AppData%/Local/MEGAsync.exe'
+  ioc_type: file_path_name
+  note: MEGA app to exfiltrate data
+- data: '%AppData%/Local/MEGAupdater.exe'
+  ioc_type: file_path_name
+  note: MEGA app to exfiltrate data
+- data: 45.11.180.250
+  ioc_type: ip
+  note: Threat Actor Infrastructure
+- data: INFECTION-HELP.txt
+  ioc_type: filename
+  note: Ransom Note
+

@@ -1,0 +1,306 @@
+- data: main.exe
+  ioc_type: filename
+  note: Memento team ransomware
+- data: 7793b3b3545da61a7a073e64ac22c60fa38df8fbf0bbc95721a814992857c67a
+  ioc_type: sha256
+  note: Memento team ransomware variant
+- data: 48c6d499618d81280f7aa3acf6aecc2f37983f527f4a729b133ae6fca20ec8c7
+  ioc_type: sha256
+  note: Memento team ransomware variant
+- data: 91854f69ae78f5b5627c9e8800a1e5ef6f56b47a0193f03e260e362905770052
+  ioc_type: sha256
+  note: Memento encryption filter
+- data: filter.txt
+  ioc_type: filename
+  note: Memento team ransomware variant
+- data: r.exe
+  ioc_type: filename
+  note: WinRAR  copy
+- data: 07e1e386d8ffcc5b5ef1e55d6fb31a210522e2d9f1955dc24ba5c43523813612
+  ioc_type: sha256
+  note: WinRAR  copy
+- data: config.key
+  ioc_type: filename
+  note: Public key for Memento encryption
+- data: RuntimeBroker.exe
+  ioc_type: filename
+  note: Memento team ransomware variant
+- data: 6a4729fc8fc796318b44841e322c1f3bee37b2737e359e5e5b777d8855b370a6
+  ioc_type: sha256
+  note: Memento team ransomware variant
+- data: 09a0caadc4df3d4278368f94f52007894c2b51d3785d985cb8e42646e8a33b68
+  ioc_type: sha256
+  note: Memento team ransomware variant
+- data: RuntimeScheduler.exe
+  ioc_type: filename
+  note: Memento team ransomware variant
+- data: kbview.bat
+  ioc_type: filename
+  note: Batch file for deployment of keylogger
+- data: wincert.bat
+  ioc_type: filename
+  note: Persistent C2 batch file
+- data: ca57391cdbac224f159e858425d231d068aa76316e0345cb8d58c716b9eff587
+  ioc_type: sha256
+  note: Plink SSH connector
+- data: pl.exe
+  ioc_type: filename
+  note: Plink SSH connector
+- data: plin.exe
+  ioc_type: filename
+  note: Plink SSH connector
+- data: BCWipeTM.exe
+  ioc_type: filename
+  note: BestCrypt Wipe  utility
+- data: 3037956db905355f66cbd02ad9778f86551b0c34f386ee0adb7c2feb941a0e30
+  ioc_type: sha256
+  note: BestCrypt Wipe  utility
+- data: BCShExt.dll
+  ioc_type: filename
+  note: BestCrypt shell extension
+- data: e9a096c886ce42c2dec0fae1492c2943a2e321fcff2a5697d1689ff146f4b4b6
+  ioc_type: sha256
+  note: BestCrypt shell extension
+- data: 654ad61bc4de2b9ad07add2dc7a6de22d24436f699bdb7923c7f510ee67b7e0a
+  ioc_type: sha256
+  note: BestCrypt shell extension
+- data: BCWipeSvc.exe
+  ioc_type: filename
+  note: BestCrypt Wipe utility
+- data: 952476a3ead7a97ff9c4906a2801ad993e4850a3e10c4350bbd44ab2eeabbb02
+  ioc_type: sha256
+  note: BestCrypt Wipe utility
+- data: bcupdt.exe
+  ioc_type: filename
+  note: BestCrypt Updater
+- data: ceec3cbb3a97c6be2c0446fcd74134ab8feec66f985bc50f17fb41350494c6ef
+  ioc_type: sha256
+  note: BestCrypt Updater
+- data: bcview.exe
+  ioc_type: filename
+  note: Part of BCWipe utilty
+- data: 1a186d51bb4e4fd18acad387b2872d164e3a772e935b26c9fc673fdf53ccb533
+  ioc_type: sha256
+  note: Part of BCWipe utilty
+- data: bcwipe.exe
+  ioc_type: filename
+  note: BestCrypt Wipe utility
+- data: 8327eb8465d62959a40ea487c0fd0da178a8857e4b49a1594c5a2df3631ca179
+  ioc_type: sha256
+  note: BestCrypt Wipe utility
+- data: bcwipegui.exe
+  ioc_type: filename
+  note: BestCrypt Wipe utility
+- data: 0bd68bd1e4567f15bc81c31d37971a71fc870781acb4cab0f51c675dcd779b5b
+  ioc_type: sha256
+  note: BestCrypt Wipe utility
+- data: insbcbus.exe
+  ioc_type: filename
+  note: BestCrypt Wipe  utility
+- data: d415ac7805edf8d634fbe6ac913e1e53a0d2ea0fce5146e0054056458a2a8f96
+  ioc_type: sha256
+  note: BestCrypt Wipe utility
+- data: logview.exe
+  ioc_type: filename
+  note: Jetico Log Viewer
+- data: cd7c9f1bd77e304a913758e95597d96399f823d887d7787fd8e9d8ec7a921d38
+  ioc_type: sha256
+  note: Jetico Log Viewer
+- data: taskeng.exe
+  ioc_type: filename
+  note: keylogger
+- data: e54d9a45850786f52b8169eceb1be0a4e21d5d000b933dda470b00d17c8fb169
+  ioc_type: sha256
+  note: keylogger
+- data: mimikatz.exe
+  ioc_type: filename
+  note: Mimikatz credential stealer
+- data: 31eb1de7e840a342fd468e558e5ab627bcb4c542a8fe01aec4d5ba01d539a0fc
+  ioc_type: sha256
+  note: Mimikatz credential stealer
+- data: secretsdump.exe
+  ioc_type: filename
+  note: secretsdump.py compiled hash stealer
+- data: c3405d9c9d593d75d773c0615254e69d0362954384058ee970a3ec0944519c37
+  ioc_type: sha256
+  note: ''
+- data: wmiexec.exe
+  ioc_type: filename
+  note: WMIexec backdoor
+- data: 14f0c4ce32821a7d25ea5e016ea26067d6615e3336c3baa854ea37a290a462a8
+  ioc_type: sha256
+  note: WMIexec backdoor
+- data: nm.exe
+  ioc_type: filename
+  note: NMAP
+- data: 14f0c4ce32821a7d25ea5e016ea26067d6615e3336c3baa854ea37a290a462a8
+  ioc_type: sha256
+  note: NMAP
+- data: tmp5FE0.tmp.exe
+  ioc_type: filename
+  note: BitCoinMiner
+- data: 3bed84f229f5e8ca22c3768a7430ceb5e6e9ecb611df55691f07039e618f265b
+  ioc_type: sha256
+  note: BitCoinMiner
+- data: npcap-0.93.exe
+  ioc_type: filename
+  note: NMAP PCAP driver installer
+- data: c3757e7f49bd40012ef9cd320568c401bad1ba1843a4055b11bebc2f10bd83ca
+  ioc_type: sha256
+  note: NMAP
+- data: TxR.exe
+  ioc_type: filename
+  note: Memento dropper for SSH reverse shell and web exfiltration
+- data: 1767cb41af0bbedf8554c5ddf7968cc1e039a06b7e4b7f9cd42ed4dd301bf02f
+  ioc_type: sha256
+  note: Memento dropper for SSH reverse shell and web exfiltration
+- data: nssm.zip
+  ioc_type: filename
+  note: Non-Sucking Service Manager install payload
+- data: config.json
+  ioc_type: filename
+  note: XMRIg configuration file
+- data: peview.exe
+  ioc_type: filename
+  note: Process Hacker PE viewer
+- data: ProcessHacker.exe
+  ioc_type: filename
+  note: Process Haclker
+- data: GoogleChangeManagement.xml
+  ioc_type: filename
+  note: Persistent SSH reverse shell configuration file
+- data: MicrosoftOutLookUpdater.bat
+  ioc_type: filename
+  note: Persistent SSH reverse shell batch file
+- data: MicrosoftOutLookUpdater.exe
+  ioc_type: filename
+  note: Plink SSH connector
+- data: MicrosoftOutlookUpdateSchedule.xml
+  ioc_type: filename
+  note: Persistent SSH reverse shell configuration file
+- data: 78.138.105.150
+  ioc_type: ip
+  note: Memento ransomware callhome
+- data: 183.110.224.164
+  ioc_type: ip
+  note: compromised site used for remote PowerShell
+- data: 27.102.66.114
+  ioc_type: ip
+  note: SSH connection
+- data: 123.45.67.89
+  ioc_type: ip
+  note: keylogger download
+- data: 169.51.60.221
+  ioc_type: ip
+  note: Source of file loaded to memory by malicious PowerShell
+- data: 27.102.127.120
+  ioc_type: ip
+  note: SSH connection
+- data: 45.77.76.158:25643
+  ioc_type: ip
+  note: Remote script source for BitCoinMiner
+- data: 190.144.115.54:443
+  ioc_type: ip
+  note: remote script source for XMR miner
+- data: 195.201.124.214:10001
+  ioc_type: ip
+  note: Mimu XMR miner callhome
+- data: hxxp://78.138.105.150:11180/sv.php
+  ioc_type: url
+  note: Memento Ransomware C2 address
+- data: checkvisa.xyz
+  ioc_type: domain
+  note: remote PowerShell
+- data: novelengine. com
+  ioc_type: domain
+  note: compromised site used for remote PowerShell
+- data: https://google.onedriver-srv.ml/gadfTs55sghsSSS
+  ioc_type: url
+  note: Callhome for exfiltration
+- data: 169.51.60.221:1331/en-us/docs.html?type=&v=1
+  ioc_type: url
+  note: source for remote script executing XMRig miner
+- data: 27.102.127.120/r.exe
+  ioc_type: url
+  note: remote copy of WinRAR
+- data: hxxp://45.77.76.158:25643/w
+  ioc_type: url
+  note: Remote script source for BitCoinMiner
+- data: google.onedriver-srv.ml
+  ioc_type: domain
+  note: SSH reverse shell and web exfil host
+- data: transfer.sh/cnPW0x/Connector3.exe
+  ioc_type: url
+  note: Backdoor download location
+- data: hxxp://190.144.115.54:443/mine.bat
+  ioc_type: url
+  note: miner remote script
+- data: hxxp://27.102.127.120/x1.rar
+  ioc_type: url
+  note: Memento tool remote archive
+- data: hxxp://27.102.127.120/x2.rar
+  ioc_type: url
+  note: Memento tool remote archive
+- data: hxxp://27.102.127.120/r.exe
+  ioc_type: url
+  note: Memento tool download
+- data: hxxp://lurchmath.org/wordpress-temp/wp-content/plugins/xmrig.zip
+  ioc_type: url
+  note: XMRIg remote archive
+- data: hxxps://raw.githubusercontent.com/c3pool/xmrig_setup/master/xmrig.zip
+  ioc_type: url
+  note: XMRig remote archive
+- data: benjamin@gentilkiwi.com
+  ioc_type: email
+  note: Memento
+- data: cscasha2@certum.pl
+  ioc_type: email
+  note: Memento
+- data: curve25519-sha256@libssh.org
+  ioc_type: email
+  note: Memento
+- data: rijndael-cbc@lysator.liu.se
+  ioc_type: email
+  note: Memento
+- data: simple@putty.projects.tartarus.org
+  ioc_type: email
+  note: Memento
+- data: SSHCONNECTION@putty.projects.tartarus.org
+  ioc_type: email
+  note: Memento
+- data: winadj@putty.projects.tartarus.org
+  ioc_type: email
+  note: Memento
+- data: zlib@openssh.com
+  ioc_type: email
+  note: Memento
+- data: http://blog.gentilkiwi.com/mimikatz
+  ioc_type: url
+  note: ''
+- data: http://crl.certum.pl/cscasha2.crl
+  ioc_type: url
+  note: ''
+- data: http://crl.certum.pl/ctnca.crl
+  ioc_type: url
+  note: ''
+- data: http://materialdesigninxaml.net
+  ioc_type: url
+  note: ''
+- data: http://metro.mahapps.com/winfx/xaml/controls
+  ioc_type: url
+  note: ''
+- data: http://repository.certum.pl/cscasha2.cer
+  ioc_type: url
+  note: ''
+- data: http://repository.certum.pl/ctnca.cer
+  ioc_type: url
+  note: ''
+- data: http://repository.certum.pl/ctnca.cer
+  ioc_type: url
+  note: ''
+- data: http://subca.ocsp-certum.com
+  ioc_type: url
+  note: ''
+- data: http://www.certum.pl/CPS
+  ioc_type: url
+  note: ''

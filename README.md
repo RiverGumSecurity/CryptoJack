@@ -1,5 +1,7 @@
 # CryptoJack
 
+## ⚠️ ** THIS SOFTWARE CAN DESTROY DATA! YOU HAVE BEEN WARNED! ** ⚠️
+
 **This software is provided *as is* for penetration testing threat emulation use ONLY!**
 
 CryptoJack is a ransomware simulation/threat emulation program which can be used to check whether current

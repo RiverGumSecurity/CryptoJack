@@ -102,6 +102,41 @@ __________________________________________________
 2022/04/18 10:46:24 ENCRYPTED 7/70: C:\demo\Bosom\Continent\ApparelUnemployment.pdf
 ```
 
+After the testing is complete, you can **decrypt** the files using the decryption tool.
+This requires that the encryption key files are maintained in the fake or real directory
+structure (see warning above). As the files are decrypted, a SHA256 hash is checked
+in the database and assuming file integrity is correct, the string "OK" will be printed
+during decryption. Example output is below...
+
+```
+PS C:\demo> .\decrypt.exe -d .\Bosom\
+
+_________________________________________________
+
+    ╔═╗┬─┐┬ ┬┌─┐┌┬┐┌─┐ ╦┌─┐┌─┐┬┌─
+    ║  ├┬┘└┬┘├─┘ │ │ │ ║├─┤│  ├┴┐
+    ╚═╝┴└─ ┴ ┴   ┴ └─┘╚╝┴ ┴└─┘┴ ┴
+    DECRYPTOR
+
+    Version 1.0.1 by Joff Thyer
+    Black Hills Information Security
+    Copyright (c) 2022
+__________________________________________________
+
+
+[*] --<[ WARNING ]>--    --<[ WARNING ]>--    --<[ WARNING ]>--
+[*]
+[*] You are about to decrypt ALL files recursively in the target
+[*] directory: [.\Bosom\]
+[*]
+[*] --<[ WARNING ]>--    --<[ WARNING ]>--    --<[ WARNING ]>--
+
+[*] DO YOU REALLY WANT TO PROCEED [Y|N]? Y
+2022/04/18 11:18:54 DECRYPTED 1/70: C:\demo\Bosom\AlcoveAtrium.pdf.cryptojack (OK)
+2022/04/18 11:18:54 DECRYPTED 2/70: C:\demo\Bosom\AmnestyTownhouse.xlsx.cryptojack (OK)
+2022/04/18 11:18:54 DECRYPTED 3/70: C:\demo\Bosom\AnchovyInfarction.xlsx.cryptojack (OK)
+```
+
 
 ## YML IOC Profiles
 

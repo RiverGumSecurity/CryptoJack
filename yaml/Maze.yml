@@ -2,49 +2,46 @@
   ioc_type: description
   note: https://news.sophos.com/en-us/2020/09/17/maze-attackers-adopt-ragnar-locker-virtual-machine-technique
 - data: cmd.exe /c c:\programdata\3.bat
-  ioc_type: command_line
+  ioc_type: command
   note: ''
-- data: cmd.exe /C mklink /j "C:\SDRSMLINK\Documents and Settings" "C:\Documents and
-    Settings"
-  ioc_type: command_line
+- data: cmd.exe /C mklink /j "C:\SDRSMLINK\Documents and Settings" "C:\Documents and Settings"
+  ioc_type: command
   note: ''
-- data: cmd.exe /C mklink /j "C:\SDRSMLINK\Program files (x86)" "C:\Program files
-    (x86)"
-  ioc_type: command_line
+- data: cmd.exe /C mklink /j "C:\SDRSMLINK\Program files (x86)" "C:\Program files (x86)"
+  ioc_type: command
   note: ''
 - data: cmd.exe /C mklink /j "C:\SDRSMLINK\Program files" "C:\Program files"
-  ioc_type: command_line
+  ioc_type: command
   note: ''
-- data: cmd.exe /C mklink /j "C:\SDRSMLINK\System Volume Information" "C:\System Volume
-    Information"
-  ioc_type: command_line
+- data: cmd.exe /C mklink /j "C:\SDRSMLINK\System Volume Information" "C:\System Volume Information"
+  ioc_type: command
   note: ''
 - data: cmd.exe /C mklink /j C:\SDRSMLINK\$Recycle.Bin C:\$Recycle.Bin
-  ioc_type: command_line
+  ioc_type: command
   note: ''
 - data: cmd.exe /C mklink /j C:\SDRSMLINK\Config.Msi C:\Config.Msi
-  ioc_type: command_line
+  ioc_type: command
   note: ''
 - data: cmd.exe /C mklink /j C:\SDRSMLINK\ProgramData C:\ProgramData
-  ioc_type: command_line
+  ioc_type: command
   note: ''
 - data: cmd.exe /C mklink /j C:\SDRSMLINK\Recovery C:\Recovery
-  ioc_type: command_line
+  ioc_type: command
   note: ''
 - data: cmd.exe /C mklink /j C:\SDRSMLINK\Restore C:\Restore
-  ioc_type: command_line
+  ioc_type: command
   note: ''
 - data: cmd.exe /C mklink /j C:\SDRSMLINK\StorageReports C:\StorageReports
-  ioc_type: command_line
+  ioc_type: command
   note: ''
 - data: cmd.exe /C mklink /j C:\SDRSMLINK\TEMP C:\TEMP
-  ioc_type: command_line
+  ioc_type: command
   note: ''
 - data: cmd.exe /C mklink /j C:\SDRSMLINK\Users C:\Users
-  ioc_type: command_line
+  ioc_type: command
   note: ''
 - data: cmd.exe /C mklink C:\SDRSMLINK\DECRYPT-fileS.txt C:\DECRYPT-fileS.txt
-  ioc_type: command_line
+  ioc_type: command
   note: ''
 - data: enc.exe --logging
   ioc_type: command_line_parameter

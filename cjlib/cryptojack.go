@@ -94,7 +94,7 @@ func Request_IOC_HTTP() {
 
 func OSCmd(cmd string, ch chan<-string, wg *sync.WaitGroup) {
     defer wg.Done()
-    command := fmt.Sprintf("echo \"%s\"", cmd)
+    command := fmt.Sprintf("echo %s", cmd)
 
     shell := ""
     arg1 := ""

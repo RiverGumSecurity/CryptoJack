@@ -28,7 +28,7 @@
 - data: rundll32.exe C:\\Windows\\sed.dll,DllRegisterServer -passegregor1313 --full
   ioc_type: command
   note: Egregor execution command line
-- data: C:\WINDOWS\system32\cmd.exe /c "e.bat" -passegregor1313
+- data: C:\WINDOWS\system32\cmd.exe /c e.bat -passegregor1313
   ioc_type: command
   note: Egregor execution command line
 - data: rundll32.exe C:\perflogs\clang.dll,DllRegisterServer -peguard6

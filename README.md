@@ -8,6 +8,14 @@ a Linux or Windows environment.
 
 **⚠️WARNING⚠️: When using this tool, DO NOT DELETE THE ENCRYPTION KEY FILE(S). 
 Encrypted data IS NOT RECOVERABLE if you DELETE the encryption key file(s).**
+After an encryption operation, the following files are *CRITICAL* and must not be deleted.
+
+* __RansomKey__.txt (Windows/Linux/UNIX public key file)
+* __RansomKey__.txt:rsaPrivKey (Windows private key in alternate data store)
+* __RansomKey__.txt:aesEncKey (Windows AES symmetric key in alternate data store)
+* .CryptoJack.rsaPrivKey (Linux/UNIX private key file)
+* .CryptoJack.aesEncKey (Linux/UNIX AES symmetric key file)
+* .CryptoJack.Hashes.db (All platforms file hashes database)
 
 CryptoJack consists of four components:
 

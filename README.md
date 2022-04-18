@@ -12,12 +12,12 @@ Encrypted data IS NOT RECOVERABLE if you DELETE the encryption key file(s).**
 
 After an encryption operation, the following files are *CRITICAL* and must not be deleted.
 
-* \_\_RansomKey\_\_.txt (Windows/Linux/UNIX public key file)
-* \_\_RansomKey\_\_.txt:rsaPrivKey (Windows private key in alternate data store)
-* \_\_RansomKey\_\_.txt:aesEncKey (Windows AES symmetric key in alternate data store)
-* .CryptoJack.rsaPrivKey (Linux/UNIX private key file)
-* .CryptoJack.aesEncKey (Linux/UNIX AES symmetric key file)
-* .CryptoJack.Hashes.db (All platforms file hashes database)
+* **\_\_RansomKey\_\_.txt**: Windows/Linux/UNIX public key file
+* **\_\_RansomKey\_\_.txt**:rsaPrivKey (Windows private key in alternate data store)
+* **\_\_RansomKey\_\_.txt**:aesEncKey (Windows AES symmetric key in alternate data store)
+* **.CryptoJack.rsaPrivKey**: Linux/UNIX private key file
+* **.CryptoJack.aesEncKey**: Linux/UNIX AES symmetric key file
+* **.CryptoJack.Hashes.db**: Windows/Linux/UNIX encrypted file hashes database
 ---
 
 CryptoJack consists of four components:

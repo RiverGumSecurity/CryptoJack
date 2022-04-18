@@ -6,8 +6,8 @@ or spreading ability but rather focuses on the core activity of recursively encr
 files in a specified directory. CryptoJack is written in GOlang and will execute in either
 a Linux or Windows environment.
 
-*WARNING: When using this tool, DO NOT DELETE THE ENCRYPTION KEY FILE(S). Any encrypted data will NOT BE
-RECOVERABLE if you DELETE the encryption key file(s).*
+<font color=RED>**WARNING: When using this tool, DO NOT DELETE THE ENCRYPTION KEY FILE(S). 
+Encrypted data IS NOT RECOVERABLE if you DELETE the encryption key file(s).**</font>
 
 CryptoJack consists of four components:
 

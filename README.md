@@ -1,6 +1,8 @@
 # CryptoJack
 
-CryptoJack is a ransomware simulation program which can be used to check whether current
+**This software is provided *as is* for threat emulation uses ONLY!**
+
+CryptoJack is a ransomware simulation/threat emulation program which can be used to check whether current
 defenses are able to detect ransomware activity.  CryptoJack has no built in exploitation
 or spreading ability but rather focuses on the core activity of recursively encrypting
 files in a specified directory. CryptoJack is written in GOlang and will execute in either
@@ -160,4 +162,11 @@ In the latter case of **command**, an *echo* statement is always placed in front
   ioc_type: command
   note: LockBit
 ```
+
+Please use this tool for its intended simulation / threat emulation purposes ONLY.
+Thank you,
+<br />
+Joff Thyer
+
+
 

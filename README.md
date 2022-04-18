@@ -1,6 +1,6 @@
 # CryptoJack
 
-## ⚠️ ** THIS SOFTWARE CAN DESTROY DATA! YOU HAVE BEEN WARNED! ** ⚠️
+### ⚠️ ** THIS SOFTWARE CAN DESTROY DATA! ** ⚠️
 
 **This software is provided *as is* for penetration testing threat emulation use ONLY!**
 
@@ -19,7 +19,7 @@ CryptoJack consists of four components:
 
 
 ---
-⚠️**WARNING⚠️: When using this tool, DO NOT DELETE THE ENCRYPTION KEY FILE(S). 
+** ⚠️WARNING⚠️ **: When using this tool, DO NOT DELETE THE ENCRYPTION KEY FILE(S). 
 Encrypted data IS NOT RECOVERABLE if you DELETE the encryption key file(s).**
 
 After an encryption operation, the following listed files are **CRITICAL** and must not be deleted.

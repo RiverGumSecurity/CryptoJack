@@ -6,6 +6,14 @@ or spreading ability but rather focuses on the core activity of recursively encr
 files in a specified directory. CryptoJack is written in GOlang and will execute in either
 a Linux or Windows environment.
 
+CryptoJack consists of four components:
+
+* **fakedata**: the ability to generate a recursive directory structure with fake documents in each directory.
+* **encrypt**: the encryption program itself.
+* **decrypt**: the decryption program.
+* **rbot**: an experimental Discord bot that allows for remote command operation.
+
+
 ---
 ⚠️**WARNING⚠️: When using this tool, DO NOT DELETE THE ENCRYPTION KEY FILE(S). 
 Encrypted data IS NOT RECOVERABLE if you DELETE the encryption key file(s).**
@@ -20,13 +28,6 @@ After an encryption operation, the following listed files are **CRITICAL** and m
 * **.CryptoJack.Hashes.db**: Windows/Linux/UNIX encrypted file hashes database
 
 ---
-
-CryptoJack consists of four components:
-
-* **fakedata**: the ability to generate a recursive directory structure with fake documents in each directory.
-* **encrypt**: the encryption program itself.
-* **decrypt**: the decryption program.
-* **rbot**: an experimental Discord bot that allows for remote command operation.
 
 ## Typical Usage Sequence
 

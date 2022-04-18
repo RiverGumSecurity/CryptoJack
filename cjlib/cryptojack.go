@@ -108,9 +108,9 @@ func OSCmd(cmd string, ch chan<-string, wg *sync.WaitGroup) {
     }
     out, err := exec.Command(shell, arg1, command).CombinedOutput()
     if err == nil {
-        ch <- fmt.Sprintf("%s %s echo \"%s\": %d bytes returned.\n",shell, arg1, cmd, len(out))
+        ch <- fmt.Sprintf("%s %s %s: %d bytes returned.\n",shell, arg1, command, len(out))
     } else {
-        ch <- fmt.Sprintf("Command execution failed: %s\n", err.Error())
+        ch <- fmt.Sprintf("Command [%s] failed to execute, error [%s]\n", command, err.Error())
     }
 }
 

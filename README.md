@@ -1,6 +1,6 @@
 # CryptoJack
 
-### 🛑⚠️ THIS SOFTWARE CAN DESTROY DATA! ⚠️🛑
+### ⚠️🛑 THIS SOFTWARE CAN DESTROY DATA! 🛑⚠️
 
 **This software is provided *as is* for penetration testing threat emulation use ONLY!**
 

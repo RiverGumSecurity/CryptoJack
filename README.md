@@ -64,7 +64,7 @@ __________________________________________________
 2022/04/18 10:45:08 Fake Data Creation: [C:\demo\Bosom\Psychologist]
 2022/04/18 10:45:08 Fake Data Creation: [C:\demo\Bosom\Allocation]
 Created 5 fake directories and 70 files in [C:\demo\Bosom]!
-PS C:\demo> .\fakedata.exe
+
 ```
 
 After creating fake data, you would then execute the **encrypt** operation providing a YML

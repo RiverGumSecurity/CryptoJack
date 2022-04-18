@@ -10,7 +10,7 @@ a Linux or Windows environment.
 ⚠️**WARNING⚠️: When using this tool, DO NOT DELETE THE ENCRYPTION KEY FILE(S). 
 Encrypted data IS NOT RECOVERABLE if you DELETE the encryption key file(s).**
 
-After an encryption operation, the following files are *CRITICAL* and must not be deleted.
+After an encryption operation, the following listed files are **CRITICAL** and must not be deleted.
 
 * **\_\_RansomKey\_\_.txt**: Windows/Linux/UNIX public key file
 * **\_\_RansomKey\_\_.txt**:rsaPrivKey (Windows private key in alternate data store)

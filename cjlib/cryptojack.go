@@ -95,9 +95,20 @@ func Request_IOC_HTTP() {
 func OSCmd(cmd string, ch chan<-string, wg *sync.WaitGroup) {
     defer wg.Done()
     command := fmt.Sprintf("echo \"%s\"", cmd)
-    out, err := exec.Command("cmd.exe", "/c", command).CombinedOutput()
+
+    shell := ""
+    arg1 := ""
+    switch runtime.GOOS {
+    case "windows":
+        shell = "cmd.exe"
+        arg1 = "/c"
+    default:
+        shell = "/bin/sh"
+        arg1 = "-c"
+    }
+    out, err := exec.Command(shell, arg1, command).CombinedOutput()
     if err == nil {
-        ch <- fmt.Sprintf("cmd.exe /c echo \"%s\": %d bytes returned.\n",cmd,len(out))
+        ch <- fmt.Sprintf("%s %s echo \"%s\": %d bytes returned.\n",shell, arg1, cmd, len(out))
     } else {
         ch <- fmt.Sprintf("Command execution failed: %s\n", err.Error())
     }

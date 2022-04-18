@@ -1,6 +1,6 @@
 # CryptoJack
 
-**This software is provided *as is* for threat emulation uses ONLY!**
+**This software is provided *as is* for penetration testing threat emulation use ONLY!**
 
 CryptoJack is a ransomware simulation/threat emulation program which can be used to check whether current
 defenses are able to detect ransomware activity.  CryptoJack has no built in exploitation

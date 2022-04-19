@@ -48,11 +48,24 @@ func ReadYamlIOC(filename string) error {
     var yamliocs []ioc
     b, err := ioutil.ReadFile(filename)
     if err != nil { return err }
+    if strings.HasSuffix(filename, ".enc") {
+        key := []byte { 0xde, 0xad, 0xbe, 0xef }
+        b = xorstr([]byte(b), key)
+        fmt.Println(string(b))
+    }
     if err := yaml.Unmarshal([]byte(b), &yamliocs); err != nil { return err }
     for _, i := range yamliocs {
         IOCS[i.Ioc_type] = append(IOCS[i.Ioc_type], i.Data)
     }
     return nil
+}
+
+func xorstr(buf []byte, k []byte) []byte {
+    res := make([]byte, len(buf))
+    for i := 0; i < len(buf); i++ {
+        res[i] = buf[i] ^ k[i % len(k)]
+    }
+    return res
 }
 
 func Request_IOC_Commands() {

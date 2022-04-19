@@ -18,7 +18,7 @@ class EncryptYAML():
             print('[*] Encrypting {} -> {}'.format(f,newfile))
             with open(f, 'rb') as fh:
                 content = fh.read()
-            encrypted = self.xor(content, b'\xde\xad\xbe\xad')
+            encrypted = self.xor(content, b'\xde\xad\xbe\xef')
             with open(newfile, 'wb') as fh:
                 fh.write(encrypted)
 

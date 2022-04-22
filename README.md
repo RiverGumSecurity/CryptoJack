@@ -36,9 +36,21 @@ After an encryption operation, the following listed files are **CRITICAL** and m
 ## Compiling
 
 In order to compile the source code, you will the latest **golang** compiler installed
-as well as **mingw-gcc**.
+as well as **mingw-gcc**. Make sure you choose the 64-bit version of everything!
 
+* [https://go.dev/doc/install] (https://go.dev/doc/install)
+* [https://www.mingw-w64.org/] (https://www.mingw-w64.org/)
 
+After you install the right things above, make sure the *mingw-w64* bin directory is in your
+path and then use the **mingw32-make** command. The output from compilation should look like this:
+
+```
+PS C:\CryptoJack> mingw32-make.exe
+[*] Building encrypt, decrypt, fakedata, and rbot
+=================================================
+  Successfully compiled the CryptoJack Project!
+=================================================
+```
 
 ## Typical Usage Sequence
 

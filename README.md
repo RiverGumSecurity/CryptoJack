@@ -33,6 +33,13 @@ After an encryption operation, the following listed files are **CRITICAL** and m
 
 ---
 
+## Compiling
+
+In order to compile the source code, you will the latest **golang** compiler installed
+as well as **mingw-gcc**.
+
+
+
 ## Typical Usage Sequence
 
 Most people will be comforted by the idea that you can create a fake data directory

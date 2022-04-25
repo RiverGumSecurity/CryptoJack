@@ -191,7 +191,8 @@ Joff Thyer
 
 <br />
 This project is a product of both Black Hills Information Security LLC and RiverGum Security LLC.
-![BHIS Logo](images/bhislogo.png)
+
+![BHIS Logo](/images/bhislogo.png)
 
 
 

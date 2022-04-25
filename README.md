@@ -194,6 +194,7 @@ This project is a product of both Black Hills Information Security LLC and River
 
 <div align=center>
 <img src="./images/bhislogo.png" width="100">
+<img src="./images/rivergumlogo.png" width="100">
 </div>
 
 

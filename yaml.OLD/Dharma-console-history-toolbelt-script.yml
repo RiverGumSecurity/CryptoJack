@@ -1,0 +1,63 @@
+- data: int X
+  ioc_type: public static extern bool movewindow(intptr hwnd
+  note: int Y
+- data: '120'
+  ioc_type: '[console.window]::movewindow($consolehwnd'
+  note: '2'
+- data: '"d.M.yyyy"'
+  ioc_type: if ($tbfile -and (($tbfile).lastwritetime.touniversaltime() - ([datetime]::parseexact($menudate
+  note: '''en-US'' -as [Globalization.CultureInfo]))).TotalSeconds -lt 0) {Write-Host
+    `nDisk E: outdated!}}`'
+- data: '''Warsaw Technology'''
+  extra:
+  - '''Huorong'''
+  - '''QQPCMgr'''
+  - '''Client Agent'''
+  - '''SentinelOne'''
+  - '''Cybereason'''
+  - '''Kingsoft Core'''
+  - '''eScan'''
+  ioc_type: $avsvc = 'dell pba'
+  note: '''OfficeScan'''
+- data: '"privilege::debug"'
+  ioc_type: start  mimikatz.exe -argumentlist ("log"
+  note: '"sekurlsa::logonpasswords"'
+- data: Domain
+  ioc_type: foreach ($string in $mimi) {$words = @(" username "
+  note: Password )`
+- data: '"$env:UserName'
+  ioc_type: start  $pshome\powershell.exe " -executionpolicy bypass -file `"2sys.ps1`"
+    -noexit"
+  note: $localPass"}`
+- data: int X
+  ioc_type: public static extern bool movewindow(intptr hwnd
+  note: int Y
+- data: '120'
+  ioc_type: '[console.window]::movewindow($consolehwnd'
+  note: '2'
+- data: '"d.M.yyyy"'
+  ioc_type: if ($tbfile -and (($tbfile).lastwritetime.touniversaltime() - ([datetime]::parseexact($menudate
+  note: '''en-US'' -as [Globalization.CultureInfo]))).TotalSeconds -lt 0) {Write-Host
+    `nDisk E: outdated!}}`'
+- data: '''Warsaw Technology'''
+  extra:
+  - '''Huorong'''
+  - '''QQPCMgr'''
+  - '''Client Agent'''
+  - '''SentinelOne'''
+  - '''Cybereason'''
+  - '''Kingsoft Core'''
+  - '''eScan'''
+  ioc_type: $avsvc = 'dell pba'
+  note: '''OfficeScan'''
+- data: '"privilege::debug"'
+  ioc_type: start  mimikatz.exe -argumentlist ("log"
+  note: '"sekurlsa::logonpasswords"'
+- data: Domain
+  ioc_type: foreach ($string in $mimi) {$words = @(" username "
+  note: Password )`
+- data: '"$env:UserName'
+  ioc_type: start  $pshome\powershell.exe " -executionpolicy bypass -file `"2sys.ps1`"
+    -noexit"
+  note: $localPass"}`
+

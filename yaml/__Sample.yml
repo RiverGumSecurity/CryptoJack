@@ -1,0 +1,30 @@
+api_calls:
+  - AdjustTokenPrivileges()
+  - GetIPAddrTable()
+  - GetLogicalDrives()
+  - GetNativeSystemInfo()
+  - NetResourceEnumA()
+  - NetShareEnumA()
+  - ShellExecuteA()
+  - Socket()
+commands:
+  - 'mimikatz'
+  - 'net stop'
+  - 'psexec'
+  - 'scp file.txt root@127.0.0.1:'
+  - 'taskkill /im:svchost.exe /f'
+  - 'vssadmin delete shadows /all /quiet'
+drop_file:
+  path: 'c:\\windows\\temp\\file.txt'
+  content:
+file_extension: .royal
+file_size_min: 1024
+file_size_max: 5242880
+ransom_note:
+registry_keys:
+  - key: joff
+    value: fred
+  - key: jim
+    value: david
+web_requests:
+  - http://www.google.com

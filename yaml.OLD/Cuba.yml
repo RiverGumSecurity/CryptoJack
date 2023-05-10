@@ -1,0 +1,60 @@
+- data: http://45.32.229.66/komar.ps1
+  ioc_type: url
+  note:
+- data: http://cuba4mp6ximo2zlo.onion
+  ioc_type: url
+  note:
+- data: http://www.sysinternals.com
+  ioc_type: url
+  note:
+- data: http://crl.microsoft.com/pki/crl/products/MicCodSigPCA_08-31-2010.crl
+  ioc_type: url
+  note:
+- data: http://crl.microsoft.com/pki/crl/products/MicRooCerAut_2010-06-23.crl
+  ioc_type: url
+  note:
+- data: http://crl.microsoft.com/pki/crl/products/MicRooCerAut2011_2011_03_22.crl
+  ioc_type: url
+  note:
+- data: http://crl.microsoft.com/pki/crl/products/microsoftrootcert.crl
+  ioc_type: url
+  note:
+- data: http://crl.microsoft.com/pki/crl/products/MicrosoftTimeStampPCA.crl
+  ioc_type: url
+  note:
+- data: http://crl.microsoft.com/pki/crl/products/MicTimStaPCA_2010-07-01.crl
+  ioc_type: url
+  note:
+- data: http://www.microsoft.com/exporting
+  ioc_type: url
+  note:
+- data: http://www.microsoft.com/pki/certs/MicCodSigPCA_08-31-2010.crt
+  ioc_type: url
+  note:
+- data: http://www.microsoft.com/pki/certs/MicRooCerAut_2010-06-23.crt
+  ioc_type: url
+  note:
+- data: http://www.microsoft.com/pki/certs/MicRooCerAut2011_2011_03_22.crt
+  ioc_type: url
+  note:
+- data: http://www.microsoft.com/pki/certs/MicrosoftRootCert.crt
+  ioc_type: url
+  note:
+- data: http://www.microsoft.com/pki/certs/MicrosoftTimeStampPCA.crt
+  ioc_type: url
+  note:
+- data: http://www.microsoft.com/pki/certs/MicTimStaPCA_2010-07-01.crt
+  ioc_type: url
+  note:
+- data: http://www.microsoft.com/PKI/docs/CPS/default.htm
+  ioc_type: url
+  note:
+- data: http://www.microsoft.com/pkiops/certs/MicCodSigPCA2011_2011-07-08.crt
+  ioc_type: url
+  note:
+- data: http://www.microsoft.com/pkiops/crl/MicCodSigPCA2011_2011-07-08.crl
+  ioc_type: url
+  note:
+- data: http://www.microsoft.com/pkiops/docs/primarycps.htm
+  ioc_type: url
+  note:

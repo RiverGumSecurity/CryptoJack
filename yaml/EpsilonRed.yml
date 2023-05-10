@@ -1,67 +1,193 @@
-- data: IOCs from https://news.sophos.com/en-us/2021/05/28/epsilonred/
-  ioc_type: description
-  note: ''
-- data: 57EE78299598170C766FF73CEFCA9E78B9B81AC6999E8ADB61903BC89BE313BA
-  ioc_type: sha256
-  note: red.ps1
-- data: 7259975D7E3B3D9D059A38F4393AB920764B46CA243E192E08F7699999382E07
-  ioc_type: sha256
-  note: RED.7z archive (contains all subsequent files)
-- data: 172BBF46E5F46DD7A9EA0C22054B644F60EFC3A9AD26A6F0E95CA57E38AF60A7
-  ioc_type: sha256
-  note: 1.ps1 file
-- data: 9845619CB9C3612055A934C4270568391832EAB40A66DBB22B1B37FA05559C92
-  ioc_type: sha256
-  note: 2.ps1 file
-- data: 5120998FA1482D4D0D0099D91AAB2AF647C0272819D7DCF792EEC01C77AB9391
-  ioc_type: sha256
-  note: 3.ps1 file
-- data: 4D6272AEADF7FC131AC126DC07D7BFD2E878D359E5E7BB5376A67295CE05FC15
-  ioc_type: sha256
-  note: 4.ps1 file
-- data: 0794C8630F40F04C0E7CEA40F11DC3F1A829A3BE69852FE9E184AA8B7ED20797
-  ioc_type: sha256
-  note: 5.ps1 file
-- data: 7A8128F8788524E54A69619B69870DFD4C50DB46E3EB786899F7275DAB73D2D9
-  ioc_type: sha256
-  note: 6.ps1 file
-- data: 4EAF5E93953756BC2196BFCFB030B6EAAD687FA1E8DB9F47B09819F3B4315230
-  ioc_type: sha256
-  note: 7.ps1 file
-- data: 8C294F1EF05DF823460BD11CE34EA7860178DE6BC3D9B0127A3B9C08CF62437F
-  ioc_type: sha256
-  note: 8.ps1 file
-- data: A9A6D35469E471666758ED5D1174EDC5B650C0ACB2C351213EADFB408F74BDCB
-  ioc_type: sha256
-  note: 9.ps1 file
-- data: 039DA6B099303FDFD087BB7DF94012780DFE375C67234CE495C78CF2DCF7FD9D
-  ioc_type: sha256
-  note: 10.ps1 file
-- data: 699FFB898864BF804CF726F39B5E8168D55E44FC1584B71BA25E31B43AE543E8
-  ioc_type: sha256
-  note: 11.ps1 file
-- data: EE10F3A798AAA03F4CED2DDB28D2B36FE415EA2CBBD9C3B97B2A230A72D77F5C
-  ioc_type: sha256
-  note: 12.ps1 file
-- data: C1F963ABA616680E611601E446955E9552C69DB23DABAB8444718D82AD830029
-  ioc_type: sha256
-  note: C.ps1 file
-- data: 5AA7DE7EAB570522C93D337D395396057033AD6596DB4A0BDA15D77A6D4C6C3A
-  ioc_type: sha256
-  note: S.ps1 file
-- data: 84755B2177B72364918F18C62A23854E7A8A66C4F5005CC040357850ADF9D811
-  ioc_type: sha256
-  note: P.exe
-- data: ce5ba1e5d70d95d52b89a1b8278ff8dd4d1e25c38c90ca202b43bdc014795d78
-  ioc_type: sha256
-  note: rutserv.exe (Remote Utilities installer)
-- data: 35ffc1263005fd0a954deed20a7fb0cd53dbab6bb17ff8bd34559a5a124686c7
-  ioc_type: sha256
-  note: rutserv.exe (Remote Utilities installer)
-- data: epsilons[.]red
-  ioc_type: domain
-  note: ''
-- data: https://j.mp/epsilonred-cleanup
-  ioc_type: info
-  note: CyberChef recipe to render the PowerShell readable to humans
-
+command:
+  - C:\Windows\SysWow64\NOTEPAD.EXE C:\Windows\locker_64.dll.log
+  - makecab  lsass.dmp lsass.dmp.cab
+  - procdump64.exe -accepteula -ma lsass.exe lsass.dmp
+  - rundll32.exe\_ locker_64.dll,DllRegisterServer /SCAN:L
+  - rundll32.exe locker_64.dll,DllRegisterServer
+  - schtasks /Create /RU <domain>\\<username> /SC DAILY /ST 03:42 /TN updater /TR
+    regsvr32.exe /i C:\\Users\\<username>\\AppData\\wininit64.dll /F
+  - taskhost.exe regsvr32.exe /i C:\\Users\\<username>\\AppData\\wininit64.dll
+  - '%COMSPEC% /C echo copy c:\\wininit64.dll c:\\Users\\<username>\\ appdata ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\\jEmLSzCoDrwddqjU.txt
+    > \\WINDOWS\ \Temp\\LtWMjPKPlFsUiCKD.bat & %COMSPEC% /C start %COMSPEC% /C \\WINDOWS\
+    \Temp\\LtWMjPKPlFsUiCKD.bat'
+  - '%COMSPEC% /C echo REG ADD HKLM\\SOFTWARE\\Microsoft\\Windows NT\\ CurrentVersion\\Image
+    File Execution Options\\utilman.exe /f /v Debugger /t  REG_SZ /d %windir%\\system32\\cmd.exe
+    ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\ \DDEjIHhcFicEzhmu.txt > \\WINDOWS\\Temp\\mchdhcdhpdBvOxXF.bat
+    & %COMSPEC%  /C start %COMSPEC% /C \\WINDOWS\\Temp\\mchdhcdhpdBvOxXF.bat'
+  - '%COMSPEC% /C echo dir c:\\ ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\\xJqUhSaZPqxAjHzn.txt  >
+    \\WINDOWS\\Temp\\mOWsUypRQFwlZMkF.bat & %COMSPEC% /C start %COMSPEC%  /C'
+  - '%COMSPEC% /C echo whoami ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\\FaUocMGJjmCAbJMr.txt  >
+    \\WINDOWS\\Temp\\uxvbnnSkrkOMnsJg.bat & %COMSPEC% /C start %COMSPEC%  /C'
+  - regsvr32.exe /i\_C:\\Users\\<username>\\AppData\\wininit64.dll
+  - regsvr32.exe /i\_C:\\Program Files\\Google\\Drive\\wininit64.dll
+  - regsvr32.exe /i\_C:\\AMD\\WU-CCC2\\ccc2_install\\wininit64.dll
+  - rundll32.exe C:\\Windows\\sed.dll,DllRegisterServer -passegregor1313 --full
+  - rundll32.exe C:\\Windows\\sed.dll,DllRegisterServer -passegregor1313 --full
+  - C:\WINDOWS\system32\cmd.exe /c e.bat -passegregor1313
+  - rundll32.exe C:\perflogs\clang.dll,DllRegisterServer -peguard6
+domain:
+  - 139.60.161.68
+  - 185.38.185.87
+  - 45.134.21.8
+  - 46.21.153.135
+  - albanallahacrab.club
+  - dclogictrust.com
+  - masskwearing.cyou
+  - padishahmurrka.best
+  - uragusexgre.club
+  - update.ajaxrenew.com
+  - yuuuuu44.com
+  - docns.com
+  - tapavi.com
+  - contirecovery.best
+  - epsilons[.]red
+email:
+  - appro@openssl.org
+  - konedieyp@airmail.cc
+  - uenwonken@memail.com
+filename:
+  - locker_64.dll
+  - RecoveryManual.html
+  - wininit64.dll
+  - mfc.ini
+  - C:\Windows\debug\mfc.ini
+  - autologin.sys
+  - C:\windows\temp\autologin.sys
+  - 2.exe
+  - FuckGPO.exe
+  - autoupdate.exe
+  - autologin.exe
+  - zy.exe
+  - c:\Windows\System32\(16 random alphabet characters).exe
+  - \\tsclient\e
+  - \\tsclient\e\ps\
+  - \\tsclient\e\torqNet\
+  - \\tsclient\e\ms16\
+  - \\tsclient\e\mimikatz_trunk\x64
+  - \\tsclient\e\mimikatz_trunk\Win32
+  - \\tsclient\e\Password Viewers\
+  - \\tsclient\e\rdpv
+  - \\tsclient\e\Lazagne
+  - \\tsclient\e\Hash_Suite_Free\Tools
+  - \\tsclient\e\1SafeMode
+  - \\tsclient\e\SafeCrypt\
+  - \\tsclient\e\PCHunter\
+  - \\tsclient\e\exe\
+  - \\tsclient\e\RegistryFinder\
+  - \\tsclient\e\x\
+  - \\tsclient\e\torqNet\
+  - \\tsclient\e\AdvancedIPScanner\
+  - \\tsclient\e\WmiDomain\
+  - \\tsclient\e\2fin\
+  - \\tsclient\e\bat\
+  - \\tsclient\e\2018\
+  - \\tsclient\e\mimiNLbrute\
+  - \\tsclient\e\miadnlrdp\
+  - toolbelt.ps1
+  - elevate.ps1
+  - LApass.ps1
+  - lubrute.ps1
+  - Find-Pass.ps1
+  - Delete-AVServices.ps1
+  - appWiz.ps1
+  - Disable-WinDefend.ps1
+  - purgeMemory.ps1
+  - winhostok.ps1
+  - NetPC.ps1
+  - NetSubPC.ps1
+  - NetADPC.ps1
+  - GetHosts.ps1
+  - adbrute.ps1
+  - 2sys.ps1
+  - wallet.ps1
+  - toolbelt1.ps1
+  - Start-Tor.ps1
+  - Email-Screenshot.ps1
+  - rdpv.exe
+  - takeaway.exe
+  - winhost.exe
+  - purgememory.ps1
+  - ns2.exe
+  - bulletspassview.chm
+  - bulletspassview.exe
+  - chromepass.cfg
+  - chromepass.chm
+  - chromepass.exe
+  - dialupass.chm
+  - dialupass.exe
+  - iepv.chm
+  - iepv.exe
+  - mailpv.chm
+  - mailpv.exe
+  - mspass.cfg
+  - mspass.chm
+  - mspass.exe
+  - netpass.cfg
+  - netpass.chm
+  - netpass.exe
+  - passwordfox.chm
+  - passwordfox.exe
+  - pstpassword.chm
+  - pstpassword.exe
+  - routerpassview.cfg
+  - routerpassview.chm
+  - routerpassview.exe
+  - sniffpass.cfg
+  - sniffpass.chm
+  - sniffpass.exe
+  - webbrowserpassview.cfg
+  - webbrowserpassview.chm
+  - webbrowserpassview.exe
+  - wirelesskeyview.chm
+  - wirelesskeyview.exe
+  - javsecc.exe
+  - C:\perflogs\clang.dll
+info:
+  - https://j.mp/epsilonred-cleanup
+ip:
+  - 27.1.1.34
+  - 41.226.2.178
+  - 213.152.165.29
+  - 213.152.165.30
+  - 104.21.89.10
+  - 172.64.80.0/20
+  - 185.220.101.204
+  - 185.220.101.216
+  - 23.106.160.174
+  - 23.82.140.137
+  - 185.20.187.20
+url_path:
+  - /Menus.aspx
+  - /menus.aspx
+  - /us/ky/louisville/312-s-fourth-st.html
+web_request:
+  - https://pastebin.com/raw/iL4qbi4S
+  - https://update.ajaxrenew.com:80/functionalStatus/VDcrCtBuGm8dime2C5zQ3EHbRE156AkpMu6W?_=BMJGPDBAJFIKGNADKCNLFGFHFPDGKPCBJDIPDMHOGDPCDEDMDGFPDCOPLDIJOEFLOPLKEFKEFGOEMAJGKCDGNNGDGAICEHKJPOJMPGHAHAJNCPMKCPPHOIOCLIIPJNLPMKEIEMFADHKEOHALNBPNLFFCLOMFKJOLGJFHKGALKPAKKJIDIBEJDHFMKPMMCNPBLDGICIIFJBDLGBMKLLLDHJAJIMMNNLGCPCKCBLOCDKJMGHCCCFGPMIEKLMEBFLBK
+  - http://27.1.1.34:8080/docs/s/wi.txt
+  - http://222.122.47.27:2143/auth/xmrig.exe
+  - http://139.180.184.147:45532/fake.php
+  - http://yuuuuu44[.]com/vpn-service/$(f1)/crunchyroll-vpn
+  - http://pigetrzlperjreyr3fbytm27bljaq4eungv3gdq2tohnoyfrqu4bx5qd.onion/bt01
+  - http://pigetrzlperjreyr3fbytm27bljaq4eungv3gdq2tohnoyfrqu4bx5qd.onion/bt10
+  - http://xxxx.onion/xxxx-xxxx-xxxx-xxxx
+  - http://45.32.229.66/komar.ps1
+  - http://cuba4mp6ximo2zlo.onion
+  - http://www.sysinternals.com
+  - http://crl.microsoft.com/pki/crl/products/MicCodSigPCA_08-31-2010.crl
+  - http://crl.microsoft.com/pki/crl/products/MicRooCerAut_2010-06-23.crl
+  - http://crl.microsoft.com/pki/crl/products/MicRooCerAut2011_2011_03_22.crl
+  - http://crl.microsoft.com/pki/crl/products/microsoftrootcert.crl
+  - http://crl.microsoft.com/pki/crl/products/MicrosoftTimeStampPCA.crl
+  - http://crl.microsoft.com/pki/crl/products/MicTimStaPCA_2010-07-01.crl
+  - http://www.microsoft.com/exporting
+  - http://www.microsoft.com/pki/certs/MicCodSigPCA_08-31-2010.crt
+  - http://www.microsoft.com/pki/certs/MicRooCerAut_2010-06-23.crt
+  - http://www.microsoft.com/pki/certs/MicRooCerAut2011_2011_03_22.crt
+  - http://www.microsoft.com/pki/certs/MicrosoftRootCert.crt
+  - http://www.microsoft.com/pki/certs/MicrosoftTimeStampPCA.crt
+  - http://www.microsoft.com/pki/certs/MicTimStaPCA_2010-07-01.crt
+  - http://www.microsoft.com/PKI/docs/CPS/default.htm
+  - http://www.microsoft.com/pkiops/certs/MicCodSigPCA2011_2011-07-08.crt
+  - http://www.microsoft.com/pkiops/crl/MicCodSigPCA2011_2011-07-08.crl
+  - http://www.microsoft.com/pkiops/docs/primarycps.htm
+  - https://www.blockchain.com/btc/address/xxxxxxxxxxxxxxxxx

@@ -1,87 +1,37 @@
-- data: IoCs related to Astro Locker ransomware
-  ioc_type: description
-  note: https://news.sophos.com/en-us/2021/03/31/sophos-mtr-in-real-time-what-is-astro-locker-team/
-- data: C:\Windows\SysWow64\NOTEPAD.EXE C:\Windows\locker_64.dll.log
-  ioc_type: command
-  note: ''
-- data: makecab  lsass.dmp lsass.dmp.cab
-  ioc_type: command
-  note: ''
-- data: procdump64.exe -accepteula -ma lsass.exe lsass.dmp
-  ioc_type: command
-  note: ''
-- data: rundll32.exe\_ locker_64.dll,DllRegisterServer /SCAN:L
-  ioc_type: command
-  note: ''
-- data: rundll32.exe locker_64.dll,DllRegisterServer
-  ioc_type: command
-  note: ''
-- data: schtasks /Create /RU <domain>\\<username> /SC DAILY /ST 03:42 /TN updater /TR regsvr32.exe /i C:\\Users\\<username>\\AppData\\wininit64.dll /F
-  ioc_type: command
-  note: ''
-- data: taskhost.exe regsvr32.exe /i C:\\Users\\<username>\\AppData\\wininit64.dll
-  ioc_type: command
-  note: ''
-- data: 139.60.161.68
-  ioc_type: domain
-  note: Cobalt Strike
-- data: 185.38.185.87
-  ioc_type: domain
-  note: IcedID
-- data: 45.134.21.8
-  ioc_type: domain
-  note: Cobalt Strike
-- data: 46.21.153.135
-  ioc_type: domain
-  note: Cobalt Strike
-- data: albanallahacrab.club
-  ioc_type: domain
-  note: IcedID
-- data: dclogictrust.com
-  ioc_type: domain
-  note: Cobalt Strike
-- data: masskwearing.cyou
-  ioc_type: domain
-  note: IcedID
-- data: padishahmurrka.best
-  ioc_type: domain
-  note: IcedID
-- data: uragusexgre.club
-  ioc_type: domain
-  note: IcedID
-- data: locker_64.dll
-  ioc_type: filename
-  note: Mount Locker ransomware
-- data: RecoveryManual.html
-  ioc_type: filename
-  note: Ransom note
-- data: wininit64.dll
-  ioc_type: filename
-  note: RDP backdoor
-- data: "%COMSPEC% /C echo copy c:\\\\wininit64.dll c:\\\\Users\\\\<username>\\\\\ appdata ^> %SYSTEMDRIVE%\\\\WINDOWS\\\\Temp\\\\jEmLSzCoDrwddqjU.txt >\_\\\\WINDOWS\\\ \\Temp\\\\LtWMjPKPlFsUiCKD.bat & %COMSPEC% /C start %COMSPEC% /C\_\\\\WINDOWS\\\ \\Temp\\\\LtWMjPKPlFsUiCKD.bat"
-  ioc_type: service
-  note: Named with random 16-digit string
-- data: "%COMSPEC% /C echo REG ADD HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\\ CurrentVersion\\\\Image File Execution Options\\\\utilman.exe /f /v Debugger /t\ \ REG_SZ /d %windir%\\\\system32\\\\cmd.exe ^> %SYSTEMDRIVE%\\\\WINDOWS\\\\Temp\\\ \\DDEjIHhcFicEzhmu.txt > \\\\WINDOWS\\\\Temp\\\\mchdhcdhpdBvOxXF.bat & %COMSPEC%\ \ /C start %COMSPEC% /C\_\\\\WINDOWS\\\\Temp\\\\mchdhcdhpdBvOxXF.bat"
-  ioc_type: service
-  note: Named with random 16-digit string
-- data: "%COMSPEC% /C echo\_dir\_c:\\\\ ^> %SYSTEMDRIVE%\\\\WINDOWS\\\\Temp\\\\xJqUhSaZPqxAjHzn.txt\ \ > \\\\WINDOWS\\\\Temp\\\\mOWsUypRQFwlZMkF.bat & %COMSPEC% /C start %COMSPEC%\ \ /C"
-  ioc_type: service
-  note: Named with random 16-digit string
-- data: "%COMSPEC% /C echo\_whoami\_^> %SYSTEMDRIVE%\\\\WINDOWS\\\\Temp\\\\FaUocMGJjmCAbJMr.txt\ \ > \\\\WINDOWS\\\\Temp\\\\uxvbnnSkrkOMnsJg.bat & %COMSPEC% /C start %COMSPEC%\ \ /C"
-  ioc_type: service
-  note: Named with random 16-digit string
-- data: 0a671d9d7ca62274e5e210813d02d860846baf59188e2a07522cd3a1cc3f9cc0
-  ioc_type: sha256
-  note: RDP backdoor
-- data: 2c44444d207a78da7477ae1af195d4265134e895bebb476f7b2c003f1467a033
-  ioc_type: sha256
-  note: Mount Locker ransomware DLL
-- data: regsvr32.exe /i\_C:\\Users\\<username>\\AppData\\wininit64.dll
-  ioc_type: scheduled task
-  note: 'Name: updater'
-- data: regsvr32.exe /i\_C:\\Program Files\\Google\\Drive\\wininit64.dll
-  ioc_type: scheduled task
-  note: 'Name: updater'
-- data: regsvr32.exe /i\_C:\\AMD\\WU-CCC2\\ccc2_install\\wininit64.dll
-  ioc_type: scheduled task
-  note: 'Name: regsvr32'
+command:
+  - C:\Windows\SysWow64\NOTEPAD.EXE C:\Windows\locker_64.dll.log
+  - makecab  lsass.dmp lsass.dmp.cab
+  - procdump64.exe -accepteula -ma lsass.exe lsass.dmp
+  - rundll32.exe\_ locker_64.dll,DllRegisterServer /SCAN:L
+  - rundll32.exe locker_64.dll,DllRegisterServer
+  - schtasks /Create /RU <domain>\\<username> /SC DAILY /ST 03:42 /TN updater /TR
+    regsvr32.exe /i C:\\Users\\<username>\\AppData\\wininit64.dll /F
+  - taskhost.exe regsvr32.exe /i C:\\Users\\<username>\\AppData\\wininit64.dll
+  - '%COMSPEC% /C echo copy c:\\wininit64.dll c:\\Users\\<username>\\ appdata ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\\jEmLSzCoDrwddqjU.txt
+    > \\WINDOWS\ \Temp\\LtWMjPKPlFsUiCKD.bat & %COMSPEC% /C start %COMSPEC% /C \\WINDOWS\
+    \Temp\\LtWMjPKPlFsUiCKD.bat'
+  - '%COMSPEC% /C echo REG ADD HKLM\\SOFTWARE\\Microsoft\\Windows NT\\ CurrentVersion\\Image
+    File Execution Options\\utilman.exe /f /v Debugger /t  REG_SZ /d %windir%\\system32\\cmd.exe
+    ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\ \DDEjIHhcFicEzhmu.txt > \\WINDOWS\\Temp\\mchdhcdhpdBvOxXF.bat
+    & %COMSPEC%  /C start %COMSPEC% /C \\WINDOWS\\Temp\\mchdhcdhpdBvOxXF.bat'
+  - '%COMSPEC% /C echo dir c:\\ ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\\xJqUhSaZPqxAjHzn.txt  >
+    \\WINDOWS\\Temp\\mOWsUypRQFwlZMkF.bat & %COMSPEC% /C start %COMSPEC%  /C'
+  - '%COMSPEC% /C echo whoami ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\\FaUocMGJjmCAbJMr.txt  >
+    \\WINDOWS\\Temp\\uxvbnnSkrkOMnsJg.bat & %COMSPEC% /C start %COMSPEC%  /C'
+  - regsvr32.exe /i\_C:\\Users\\<username>\\AppData\\wininit64.dll
+  - regsvr32.exe /i\_C:\\Program Files\\Google\\Drive\\wininit64.dll
+  - regsvr32.exe /i\_C:\\AMD\\WU-CCC2\\ccc2_install\\wininit64.dll
+domain:
+  - 139.60.161.68
+  - 185.38.185.87
+  - 45.134.21.8
+  - 46.21.153.135
+  - albanallahacrab.club
+  - dclogictrust.com
+  - masskwearing.cyou
+  - padishahmurrka.best
+  - uragusexgre.club
+filename:
+  - locker_64.dll
+  - RecoveryManual.html
+  - wininit64.dll

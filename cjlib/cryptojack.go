@@ -22,7 +22,7 @@ import (
     "sync"
 	"time"
 	crand "crypto/rand"
-    "gopkg.in/yaml.v2"
+    "gopkg.in/yaml.v3"
 	"github.com/360EntSecGroup-Skylar/excelize"
 	"github.com/brianvoe/gofakeit"
 	"github.com/jung-kurt/gofpdf"
@@ -38,27 +38,31 @@ const NDIR_MAX = 30
 const EICAR = `X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*`
 
 var WORDLIST []string = strings.Split(WORDS, "\n")
-var IOCS = make(map[string][]string)
-type ioc struct {
-    Data string `yaml:"data"`
-    Ioc_type string `yaml:"ioc_type"`
-    Note string `yaml:"note"`
+
+type YAML_CONFIG struct {
+    Api_calls []string
+    Commands []string
+    Drop_file struct {
+        Path string
+        Content string
+    }
+    File_extension string
+    File_size_min string
+    File_size_max string
+    Ransom_note string
+    Registry_keys []struct {
+        Key string
+        Value string
+    }
+    Web_requests []string
 }
 
-func ReadYamlIOC(filename string) error {
-    var yamliocs []ioc
+func ReadYamlConfig(filename string) (YAML_CONFIG, error) {
+    config := YAML_CONFIG{}
     b, err := ioutil.ReadFile(filename)
-    if err != nil { return err }
-    if strings.HasSuffix(filename, ".enc") {
-        key := []byte { 0xde, 0xad, 0xbe, 0xef }
-        b = xorstr([]byte(b), key)
-        fmt.Println(string(b))
-    }
-    if err := yaml.Unmarshal([]byte(b), &yamliocs); err != nil { return err }
-    for _, i := range yamliocs {
-        IOCS[i.Ioc_type] = append(IOCS[i.Ioc_type], i.Data)
-    }
-    return nil
+    if err != nil { return config, err }
+    if err := yaml.Unmarshal([]byte(b), &config); err != nil { return config, err }
+    return config, nil
 }
 
 func xorstr(buf []byte, k []byte) []byte {
@@ -69,11 +73,11 @@ func xorstr(buf []byte, k []byte) []byte {
     return res
 }
 
-func Request_IOC_Commands() {
+func Request_IOC_Commands(config YAML_CONFIG) {
     wg := sync.WaitGroup{}
     ch := make(chan string)
-    wg.Add(len(IOCS["command"]))
-    for _, c := range IOCS["command"] {
+    wg.Add(len(config.Commands))
+    for _, c := range config.Commands {
         go OSCmd(c, ch, &wg)
     }
     go func() {
@@ -87,12 +91,12 @@ func Request_IOC_Commands() {
     }
 }
 
-func Request_IOC_HTTP() {
+func Request_IOC_HTTP(config YAML_CONFIG) {
     wg := sync.WaitGroup{}
     ch := make(chan string)
-    wg.Add(len(IOCS["url"]))
-    fmt.Printf("[*] Sending %d HTTP Requests\n", len(IOCS["url"]))
-    for _, u := range IOCS["url"] {
+    wg.Add(len(config.Web_requests))
+    fmt.Printf("[*] Sending %d HTTP Requests\n", len(config.Web_requests))
+    for _, u := range config.Web_requests {
         go HTTPRequest(u, ch, &wg)
     }
     go func() {

@@ -7,16 +7,15 @@ api_calls:
   - NetShareEnumA()
   - ShellExecuteA()
   - Socket()
-commands:
+command:
   - 'mimikatz'
   - 'net stop'
   - 'psexec'
   - 'scp file.txt root@127.0.0.1:'
   - 'taskkill /im:svchost.exe /f'
   - 'vssadmin delete shadows /all /quiet'
-drop_file:
-  path: 'c:\\windows\\temp\\file.txt'
-  content:
+filename:
+  - x.txt
 file_extension: .royal
 file_size_min: 1024
 file_size_max: 5242880

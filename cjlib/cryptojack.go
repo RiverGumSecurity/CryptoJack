@@ -41,7 +41,8 @@ var WORDLIST []string = strings.Split(WORDS, "\n")
 
 type YAML_CONFIG struct {
     Api_calls []string
-    Commands []string
+    Command []string
+    Filename []string
     Drop_file struct {
         Path string
         Content string

@@ -1,0 +1,64 @@
+file_extension:
+  - .HLjkNskOq
+  - .abcd
+command:
+  - vssadmin Delete Shadows /All /Quiet
+  - vssadmin delete shadows /all /quiet & wmic shadowcopy delete & bcdedit /set {default}
+    bootstatuspolicy ignoreallfailures & bcdedit /set {default} recoveryenabled no
+    & wbadmin delete catalog -quiet
+  - wmic SHADOWCOPY /nointeractive
+email:
+  - appro@openssl.org
+  - contact@lulusofware.com
+  - goodmen@cock.li
+  - pcabcd@countermail.com
+  - recoverymanager@cock.li
+filename:
+  - C:\Windows\System32\CloudBAK.exe
+  - C:\Windows\System32\defrag32.exe
+  - C:\Windows\System32\diagnosticMem.exe
+  - C:\Windows\System32\Ras.exe
+  - C:\Windows\System32\wermgupd.exe
+  - C:\Windows\System32\wermreport.exe
+  - 1_Remote Desktop Connectio~.lnk
+  - Remote Desktop Connection.lnk
+  - C:\badpath
+  - C:\dacufofupip2\rimemofozetozi\file-gedigitasopuv\36 yo.pdb
+  - C:\Program Files (x86)\Soda PDF Desktop
+  - C:\sources\cecil\symbols\mdb\obj\net_4_5_Release\Mono.Cecil.Mdb.pdb
+  - C:\Src\a\OfficeSuite\platforms\OfficeSuite\Projects\64bit_release\Reactive\.pdb
+  - C:\tmp\
+  - C:\Users\manzhang\Desktop\WeChat Image_20191022170753.jpg
+  - C:\Users\qt\work\qt\qtbase\lib\libEGL.pdb
+  - C:\Users\qt\work\qt\qtspeech\lib\Qt5TextToSpeech.pdb
+ip:
+  - 142.91.170.175
+  - 142.91.170.6
+web_request:
+  - https://docs.google.com/spreadsheets/d/11C7pdR3r_VeOPQXpRCGtUEJoftKO1wB7ZFfX0t94XTw/edit#gid=0&range=B1
+  - http://dualmonitortool.sourceforge.net
+  - http://fsf.org
+  - https://bridges.torproject.org
+  - http://jimmac.musichall.cz
+  - http://lockbit4g37glgfl.onion
+  - http://lockbit-decryptor.com
+  - http://lockbit-decryptor.top
+  - http://lockbit-decryptor.top/?12345678911234567891123456789112
+  - http://lockbitks2tvnmwk.onion/?12345678911234567891123456789112
+  - http://lockbitkodidilol.onion/?
+  - http://lockbitks2tvnmwk.onion/?
+  - http://lockbitsap2oaqhcun3syvbqt6n5nzt7fqosc6jdlmsfleu3ka4k2did.onion
+  - http://lockbitsup4yezcd5enk5unncx3zcy7kw6wllyqmiyhvanjj352jayid.onion
+  - http://lockbitapt6vx57t3eeqjofwgcglmutr3a35nygvokja5uuccip4ykyd.onion
+  - http://purl.org/dc/dcmitype/StillImage
+  - https://02ip.ru/1dDb77.jpg
+  - https://bigblog.at
+  - https://digitalclock4.sourceforge.io/
+  - https://hg.mozilla.org/releases/mozilla-release/raw-file/default/security/nss/lib/ckfw/builtins/certdata.txt
+  - https://iplo.ru/1LJjq7.txt
+  - http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd
+  - https://stage-api-updateservice.sodapdf.com
+  - https://tb-manual.torproject.org/about
+  - http://tempuri.org/
+  - http://upclick.com/
+  - http://upx.sf.net

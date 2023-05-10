@@ -1,0 +1,11 @@
+file_extension: .nefilim
+command:
+  - -nop -w hidden -c IEX ((new-object net.webclient).downloadstring
+domain:
+  - aes.one
+filename:
+  - '%AppData%/Local/MEGAsync.exe'
+  - '%AppData%/Local/MEGAupdater.exe'
+  - INFECTION-HELP.txt
+ip:
+  - 45.11.180.250

@@ -5,6 +5,7 @@ import collections
 import argparse
 import pathlib
 import re
+import sys
 
 
 class IndentDumper(yaml.Dumper):
@@ -14,18 +15,23 @@ class IndentDumper(yaml.Dumper):
 
 class YamlConvert():
 
-    newyaml = collections.defaultdict(lambda: [])
     yamlkeys = {}
 
-    def __init__(self, yamldir):
-        self.yamldir = yamldir
+    def __init__(self, indir, outdir):
+        self.indir = pathlib.Path(indir)
+        self.outdir = pathlib.Path(outdir)
+        if self.indir == self.outdir:
+            print('[-] Error: input dir cannot be the same as output dir')
+            sys.exit(1)
         yaml.add_representer(
             collections.defaultdict,
             yaml.representer.Representer.represent_dict)
         self.run()
 
     def run(self):
-        for f in pathlib.Path(self.yamldir).iterdir():
+        if not self.outdir.exists():
+            self.outdir.mkdir()
+        for f in self.indir.iterdir():
             if f.suffix != '.yml':
                 continue
             self.process_yaml(f)
@@ -39,51 +45,51 @@ class YamlConvert():
         y = yaml.safe_load(fh)
         fh.close()
 
+        newyaml = collections.defaultdict(lambda: [])
         for i in y:
             if not re.match(r'^[\w ]+$', i['ioc_type']) or \
                     i['ioc_type'] == 'md5' or \
                     i['ioc_type'].startswith('sha') or \
                     i['ioc_type'] == 'description':
                 continue
-            elif i['ioc_type'] == 'service' or i['ioc_type'] == 'scheduled task':
-                self.newyaml['command'].append(i['data'])
+            elif i['ioc_type'] == 'service' or \
+                    i['ioc_type'].startswith('command_line') or \
+                    i['ioc_type'] == 'scheduled task':
+                newyaml['command'].append(i['data'])
                 continue
             elif i['ioc_type'].startswith('ip'):
-                self.newyaml['ip'].append(i['data'])
+                newyaml['ip'].append(i['data'])
                 continue
-            elif i['ioc_type'] == 'url':
-                self.newyaml['web_request'].append(i['data'])
+            elif i['ioc_type'] == 'url' or re.match(r'^https?://', i['data']):
+                newyaml['web_request'].append(i['data'])
                 continue
             elif i['ioc_type'].startswith('file_path') or \
                      i['ioc_type'] == 'filepath' or \
                      i['ioc_type'] == 'file_name':
-                self.newyaml['filename'].append(i['data'])
+                newyaml['filename'].append(i['data'])
                 continue
             elif 'registry_path_key' in i['ioc_type']:
-                self.newyaml['registry_key'].append(i['data'])
+                newyaml['registry_key'].append(i['data'])
                 continue
-            self.newyaml[i['ioc_type']].append(i['data'])
+            newyaml[i['ioc_type']].append(i['data'])
 
         # create new file
-        newfile = pathlib.Path(pathlib.Path.cwd()) / filename.name
-        if newfile != filename:
-            print(f'[*] Creating new YAML file: {newfile}')
-            fh = open(newfile, 'wt')
-            fh.write(yaml.dump(
-                self.newyaml,
-                allow_unicode=True,
-                Dumper=IndentDumper))
-            fh.close()
+        newfile = self.outdir / filename.name
+        print(f'[*] Creating new YAML file: {newfile}')
+        fh = open(newfile, 'wt')
+        fh.write(yaml.dump(
+            newyaml, allow_unicode=True,
+            Dumper=IndentDumper))
+        fh.close()
 
         # add to unique keys
-        for k in self.newyaml:
+        for k in newyaml:
             self.yamlkeys[k] = ''
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        'yamldir',
-        help='directory of yaml files')
+    parser.add_argument('indir', help='location of source yaml files')
+    parser.add_argument('outdir', help='destination to write new files')
     args = parser.parse_args()
-    YamlConvert(args.yamldir)
+    YamlConvert(args.indir, args.outdir)

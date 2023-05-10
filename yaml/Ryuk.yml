@@ -1,0 +1,32 @@
+file_extension: .ryk
+domain:
+  - chainnss.com
+  - fastbloodhunter.com
+  - mn.fastbloodhunter.com
+  - mn.fastbloodhunter.com/templates
+filename:
+  - C:\PerfLogs\*.exe
+  - C:\ProgramData\c331b9e8724cb2dd8a2f\
+  - c:\programdata\sqav\
+  - C:\share$\
+  - c:\perflogs\Arti64.dll
+  - C:\PerfLogs\cc1.exe
+  - C:\PerfLogs\fx11_only_current_pc_for_crypt_x86.exe
+  - c:\perflogs\m8.exe
+  - C:\PerfLogs\mm1.exe
+  - C:\PerfLogs\RyukReadMe.html
+  - C:\PerfLogs\xXx.exe
+  - C:\PerfLogs\zZz.exe
+  - c:\programdata\sqav\itvs.exe
+  - C:\share$\xxx.exe
+  - C:\temp\nr6r.exe
+  - c:\users\[username]\appdata\local\microsoft\windows\inetcache\ie\tp7uyqhh\print_document.exe
+  - C:\Users\ntadmin\Pictures\svhost32.exe
+  - C:\Windows\Temp\adf\adf.bat
+  - C:\Windows\Temp\MRT\socks.exe
+  - c:\windows\temp\mrt\socks32.dll
+  - C:\Windows\Temp\Puhebes.exe
+  - 3iue88e0.exe
+  - P64.exe
+ip:
+  - 104.248.83.13

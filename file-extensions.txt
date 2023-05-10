@@ -1,0 +1,26 @@
+AstroLocker: .astralocker, .astra
+AtomSilo: .atomsilo
+BlackKingdom: .demon
+Cerber: .locked
+Conti: .conti
+Cuba: .cuba
+Deadbolt: .deadbolt
+Dearcry: .crypt
+Dharma: .dharma
+Egregor: (random string of 4 to 7 chars)
+EpilsonRed: .epsilonred
+Krus: .kruu
+Lockbit: .HLjkNskOq, .abcd
+Locky: .locky, .odin
+LockiLocker: .loki
+Maze: (random string to 4 to 7 chars)
+Memento: .vaultz
+MountLocker: .readmanual
+Midas: .axxes
+Netfilim: .nefilim
+NightSky: .nightsky
+ProLock: .prolock
+RansomExx: .txd0t
+Revil: (random string of 10 alphanum chars)
+Ryuk: .ryk
+Sugar: .encoded01

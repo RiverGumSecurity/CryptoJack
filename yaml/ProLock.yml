@@ -1,0 +1,19 @@
+file_extension: .prolock
+filename:
+  - C:\ProgramData\WinMgr.bmp
+  - C:\ProgramDaa\WinMgr.xml
+  - C:\ProgramData\run.bat
+  - C:\ProgramData\clean.bat
+  - C:\Windows\System32\Tasks\WinMgr
+  - '[HOW TO RECOVER FILES].txt'
+ip:
+  - 185.212.128.8
+registry_key:
+  - HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\UNCAsIntranet
+  - HKU\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\AutoDetect
+  - HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{1738D1D9-01DA-41FC-B106-6F4DF75D08C9}\Path
+  - HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{1738D1D9-01DA-41FC-B106-6F4DF75D08C9}\Hash
+  - HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\WinMgr\Id
+  - HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\WinMgr\Index
+web_request:
+  - http://185.212.128.8/B/

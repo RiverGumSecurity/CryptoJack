@@ -1,0 +1,83 @@
+file_extension: .vaultz
+domain:
+  - checkvisa.xyz
+  - novelengine. com
+  - google.onedriver-srv.ml
+email:
+  - benjamin@gentilkiwi.com
+  - cscasha2@certum.pl
+  - curve25519-sha256@libssh.org
+  - rijndael-cbc@lysator.liu.se
+  - simple@putty.projects.tartarus.org
+  - SSHCONNECTION@putty.projects.tartarus.org
+  - winadj@putty.projects.tartarus.org
+  - zlib@openssh.com
+filename:
+  - main.exe
+  - filter.txt
+  - r.exe
+  - config.key
+  - RuntimeBroker.exe
+  - RuntimeScheduler.exe
+  - kbview.bat
+  - wincert.bat
+  - pl.exe
+  - plin.exe
+  - BCWipeTM.exe
+  - BCShExt.dll
+  - BCWipeSvc.exe
+  - bcupdt.exe
+  - bcview.exe
+  - bcwipe.exe
+  - bcwipegui.exe
+  - insbcbus.exe
+  - logview.exe
+  - taskeng.exe
+  - mimikatz.exe
+  - secretsdump.exe
+  - wmiexec.exe
+  - nm.exe
+  - tmp5FE0.tmp.exe
+  - npcap-0.93.exe
+  - TxR.exe
+  - nssm.zip
+  - config.json
+  - peview.exe
+  - ProcessHacker.exe
+  - GoogleChangeManagement.xml
+  - MicrosoftOutLookUpdater.bat
+  - MicrosoftOutLookUpdater.exe
+  - MicrosoftOutlookUpdateSchedule.xml
+ip:
+  - 78.138.105.150
+  - 183.110.224.164
+  - 27.102.66.114
+  - 123.45.67.89
+  - 169.51.60.221
+  - 27.102.127.120
+  - 45.77.76.158:25643
+  - 190.144.115.54:443
+  - 195.201.124.214:10001
+web_request:
+  - hxxp://78.138.105.150:11180/sv.php
+  - https://google.onedriver-srv.ml/gadfTs55sghsSSS
+  - 169.51.60.221:1331/en-us/docs.html?type=&v=1
+  - 27.102.127.120/r.exe
+  - hxxp://45.77.76.158:25643/w
+  - transfer.sh/cnPW0x/Connector3.exe
+  - hxxp://190.144.115.54:443/mine.bat
+  - hxxp://27.102.127.120/x1.rar
+  - hxxp://27.102.127.120/x2.rar
+  - hxxp://27.102.127.120/r.exe
+  - hxxp://lurchmath.org/wordpress-temp/wp-content/plugins/xmrig.zip
+  - hxxps://raw.githubusercontent.com/c3pool/xmrig_setup/master/xmrig.zip
+  - http://blog.gentilkiwi.com/mimikatz
+  - http://crl.certum.pl/cscasha2.crl
+  - http://crl.certum.pl/ctnca.crl
+  - http://materialdesigninxaml.net
+  - http://metro.mahapps.com/winfx/xaml/controls
+  - http://repository.certum.pl/cscasha2.cer
+  - http://repository.certum.pl/ctnca.cer
+  - http://repository.certum.pl/ctnca.cer
+  - http://subca.ocsp-certum.com
+  - http://www.certum.pl/CPS

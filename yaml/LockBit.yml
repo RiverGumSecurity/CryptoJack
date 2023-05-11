@@ -1,6 +1,4 @@
-file_extension:
-  - .HLjkNskOq
-  - .abcd
+file_extension: .HLjkNskOq
 command:
   - vssadmin Delete Shadows /All /Quiet
   - vssadmin delete shadows /all /quiet & wmic shadowcopy delete & bcdedit /set {default}

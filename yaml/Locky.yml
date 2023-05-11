@@ -1,6 +1,4 @@
-file_extension:
-  - .locky
-  - .odin
+file_extension: .locky
 command:
   - vssadmin delete shadows /all
 web_request:

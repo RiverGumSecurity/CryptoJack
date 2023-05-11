@@ -68,8 +68,11 @@ __________________________________________________
     fmt.Printf("\r\n\n[*] =============================================================\n")
     fmt.Printf("[*]  Creating IOC Activty from [%s]\n", *arg_yaml)
     fmt.Printf("[*] =============================================================\n")
-    cjlib.Request_IOC_Commands(config)
-    cjlib.Request_IOC_HTTP(config)
+    //cjlib.Request_IOC_Commands(config)
+    //cjlib.Request_IOC_HTTP(config)
+
+    fmt.Printf("-> %s\r\n", config.File_extension)
+    panic("exiting...")
 
     // Encrypting directory structure
 	_, _, _, err = cjlib.EncryptDirectoryStructure(

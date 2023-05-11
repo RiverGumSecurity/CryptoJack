@@ -77,8 +77,8 @@ func xorstr(buf []byte, k []byte) []byte {
 func Request_IOC_Commands(config YAML_CONFIG) {
     wg := sync.WaitGroup{}
     ch := make(chan string)
-    wg.Add(len(config.Commands))
-    for _, c := range config.Commands {
+    wg.Add(len(config.Command))
+    for _, c := range config.Command {
         go OSCmd(c, ch, &wg)
     }
     go func() {

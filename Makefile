@@ -6,10 +6,10 @@ export GO111MODULE=on
 
 all: encrypt decrypt fakedata rbot
 	@echo [*] Building encrypt, decrypt, fakedata, and rbot
-	@go build -v -trimpath -ldflags="-w -s" ./encrypt
-	@go build -v -trimpath -ldflags="-w -s" ./decrypt
-	@go build -v -trimpath -ldflags="-w -s" ./fakedata
-	@go build -v -trimpath -ldflags="-w -s" ./rbot
+	@cd bin && @go build -v -trimpath -ldflags="-w -s" ../encrypt
+	@cd bin && @go build -v -trimpath -ldflags="-w -s" ../decrypt
+	@cd bin && @go build -v -trimpath -ldflags="-w -s" ../fakedata
+	@cd bin && @go build -v -trimpath -ldflags="-w -s" ../rbot
 	@echo =================================================
 	@echo   Successfully compiled the CryptoJack Project! 
 	@echo =================================================
@@ -18,4 +18,4 @@ all: encrypt decrypt fakedata rbot
 	7z a CryptoJack-V1.0.1.7z *.exe yaml/*.enc
 
 clean:
-	@del *.exe
+	@del ./bin/*.exe

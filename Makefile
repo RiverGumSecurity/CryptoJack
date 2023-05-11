@@ -17,7 +17,7 @@ all: encrypt decrypt fakedata rbot
 zip:
 	@copy bin\*.exe Release\bin
 	@copy yaml\*.enc Release\yaml
-	@cd Release && zip CryptoJack.zip bin/ yaml/
+	@cd Release && zip CryptoJack.zip bin\*.exe yaml\*.enc
 
 clean:
 	@del ./bin/*.exe

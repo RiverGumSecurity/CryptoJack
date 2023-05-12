@@ -4,8 +4,8 @@ exclude:
   - .dll
   - .lnk
   - .sys
-  - %SYSTEMDRIVE%\Windows
-  - %SYSTEMDRIVE%\ProgramData
+  - '%SYSTEMDRIVE%\Windows'
+  - '%SYSTEMDRIVE%\ProgramData'
 web_request:
   - http://pigetrzlperjreyr3fbytm27bljaq4eungv3gdq2tohnoyfrqu4bx5qd.onion/bt01
   - http://pigetrzlperjreyr3fbytm27bljaq4eungv3gdq2tohnoyfrqu4bx5qd.onion/bt10

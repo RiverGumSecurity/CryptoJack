@@ -4,8 +4,8 @@ exclude:
   - .dll
   - .lnk
   - .sys
-  - %SYSTEMDRIVE%\Windows
-  - %SYSTEMDRIVE%\ProgramData
+  - '%SYSTEMDRIVE%\Windows'
+  - '%SYSTEMDRIVE%\ProgramData'
 filename:
   - c:\users\public\videos
   - lz_els.ps1

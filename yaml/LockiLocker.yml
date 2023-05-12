@@ -4,8 +4,8 @@ exclude:
   - .dll
   - .lnk
   - .sys
-  - %SYSTEMDRIVE%\Windows
-  - %SYSTEMDRIVE%\ProgramData
+  - '%SYSTEMDRIVE%\Windows'
+  - '%SYSTEMDRIVE%\ProgramData'
 web_request:
   - https://picc.io/X8GRzsw.gif
   - https://localbitcoins.com/buy_bitcoins

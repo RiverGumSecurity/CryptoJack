@@ -4,8 +4,8 @@ exclude:
   - .dll
   - .lnk
   - .sys
-  - %SYSTEMDRIVE%\Windows
-  - %SYSTEMDRIVE%\ProgramData
+  - '%SYSTEMDRIVE%\Windows'
+  - '%SYSTEMDRIVE%\ProgramData'
 domain:
   - update.ajaxrenew.com
 filename:

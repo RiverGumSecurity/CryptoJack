@@ -4,8 +4,8 @@ exclude:
   - .dll
   - .lnk
   - .sys
-  - %SYSTEMDRIVE%\Windows
-  - %SYSTEMDRIVE%\ProgramData
+  - '%SYSTEMDRIVE%\Windows'
+  - '%SYSTEMDRIVE%\ProgramData'
 command:
   - rundll32.exe C:\\Windows\\sed.dll,DllRegisterServer -passegregor1313 --full
   - rundll32.exe C:\\Windows\\sed.dll,DllRegisterServer -passegregor1313 --full

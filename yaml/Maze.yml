@@ -4,8 +4,8 @@ exclude:
   - .dll
   - .lnk
   - .sys
-  - %SYSTEMDRIVE%\Windows
-  - %SYSTEMDRIVE%\ProgramData
+  - '%SYSTEMDRIVE%\Windows'
+  - '%SYSTEMDRIVE%\ProgramData'
 command:
   - cmd.exe /c c:\programdata\3.bat
   - cmd.exe /C mklink /j "C:\SDRSMLINK\Documents and Settings" "C:\Documents and Settings"

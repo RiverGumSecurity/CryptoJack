@@ -4,8 +4,8 @@ exclude:
   - .dll
   - .lnk
   - .sys
-  - %SYSTEMDRIVE%\Windows
-  - %SYSTEMDRIVE%\ProgramData
+  - '%SYSTEMDRIVE%\Windows'
+  - '%SYSTEMDRIVE%\ProgramData'
 command:
   - C:\Windows\SysWow64\NOTEPAD.EXE C:\Windows\locker_64.dll.log
   - makecab  lsass.dmp lsass.dmp.cab

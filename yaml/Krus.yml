@@ -1,4 +1,11 @@
 file_extension: .kruu
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 web_request:
   - http://creativecommons.org/licenses/by-sa/3.0
   - http://creativecommons.org/licenses/by-sa/4.0

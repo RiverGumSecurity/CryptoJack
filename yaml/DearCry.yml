@@ -1,4 +1,11 @@
 file_extension: .crypt
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 email:
   - appro@openssl.org
   - konedieyp@airmail.cc

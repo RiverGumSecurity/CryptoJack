@@ -1,4 +1,11 @@
 file_extension: .conti
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 domain:
   - docns.com
   - tapavi.com

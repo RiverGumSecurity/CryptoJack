@@ -1,4 +1,11 @@
 file_extension: .demon
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 domain:
   - yuuuuu44.com
 filename:

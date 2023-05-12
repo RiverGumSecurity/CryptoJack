@@ -1,4 +1,11 @@
 file_extension: .dharma
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 filename:
   - \\tsclient\e
   - \\tsclient\e\ps\

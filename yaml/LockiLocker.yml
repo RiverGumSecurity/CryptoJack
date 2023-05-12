@@ -1,4 +1,11 @@
 file_extension: .loki
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 web_request:
   - https://picc.io/X8GRzsw.gif
   - https://localbitcoins.com/buy_bitcoins

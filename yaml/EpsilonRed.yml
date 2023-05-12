@@ -1,4 +1,11 @@
 file_extension: .epsilonred
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 domain:
   - epsilons.red
 web_request:

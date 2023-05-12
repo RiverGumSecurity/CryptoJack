@@ -1,4 +1,11 @@
 file_extension: .cuba
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 web_request:
   - http://45.32.229.66/komar.ps1
   - http://cuba4mp6ximo2zlo.onion

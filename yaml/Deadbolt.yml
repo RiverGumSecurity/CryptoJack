@@ -1,3 +1,10 @@
 file_extension: .deadbolt
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 web_request:
   - https://www.blockchain.com/btc/address/xxxxxxxxxxxxxxxxx

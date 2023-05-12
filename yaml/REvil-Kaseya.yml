@@ -1,4 +1,11 @@
 file_extension: <random.10.10>
+exclude:
+  - .exe
+  - .dll
+  - .lnk
+  - .sys
+  - %SYSTEMDRIVE%\Windows
+  - %SYSTEMDRIVE%\ProgramData
 domain:
   - ncuccr.org
   - 1team.es

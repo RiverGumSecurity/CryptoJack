@@ -34,7 +34,7 @@ const RANSOM_KEY_FILE = "__RansomKey__.txt"
 const HASHDB_FILE = ".CryptoJack.Hashes.db"
 const UNIX_PRIVKEY_FILE = ".CryptoJack.rsaPrivKey"
 const UNIX_ENCKEY_FILE = ".CryptoJack.aesEncKey"
-const NFILE_MAX = 40
+const NFILE_MAX = 20
 const NDIR_MAX = 30
 const EICAR = `X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*`
 
@@ -366,7 +366,7 @@ func createDirectoryStructure(directory string, depth int) (int, int) {
 		return dirs, files
 	}
 	depth--
-	for i := 0; i < 10 + rand.Intn(NDIR_MAX); i++ {
+	for i := 0; i < 4 + rand.Intn(NDIR_MAX); i++ {
 		dirname, _ := filepath.Abs(path.Join(directory, strings.Title(RandomWord())))
 		err := os.Mkdir(dirname, 0755)
 		if err != nil {
@@ -416,17 +416,14 @@ func visitFilePath(files *[]string, skipcount *int, exclude []string) filepath.W
 }
 
 func createSampleFiles(directory string) int {
-    var wg1 sync.WaitGroup
-    var wg2 sync.WaitGroup
-	n := 10 + rand.Intn(NFILE_MAX)
-    wg1.Add(n)
-    wg2.Add(n)
+    var wg sync.WaitGroup
+	n := 4 + rand.Intn(NFILE_MAX)
+    wg.Add(n * 2)
 	for i := 0; i < n; i++ {
-		go createExcelFile(directory, &wg1)
-		go createPDFFile(directory, &wg2)
+		go createExcelFile(directory, &wg)
+		go createPDFFile(directory, &wg)
 	}
-    wg1.Wait()
-    wg2.Wait()
+    wg.Wait()
 	return n * 2
 }
 
@@ -434,7 +431,7 @@ func createExcelFile(directory string, wg *sync.WaitGroup) error {
     defer wg.Done()
 	f := excelize.NewFile()
 	f.SetCellValue("Sheet1", "A1", "WARNING: FAKE DATA AHEAD!!!!!")
-	for i := 2; i < rand.Intn(NFILE_MAX*10); i++ {
+	for i := 2; i < rand.Intn(NFILE_MAX*3); i++ {
 		cell := fmt.Sprintf("A%d", i)
 		data := RandomWord()
 		switch i % 6 {
@@ -467,7 +464,7 @@ func createPDFFile(directory string, wg *sync.WaitGroup) error {
 	pdf.SetFont("Arial", "B", 16)
 	height := float64(10)
 	data := RandomWord() + "\n"
-	for i := 0; i < rand.Intn(NFILE_MAX*10); i++ {
+	for i := 0; i < rand.Intn(NFILE_MAX*3); i++ {
 		switch i % 6 {
 		case 0:
 			data = gofakeit.Name()

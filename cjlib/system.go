@@ -3,6 +3,7 @@ package cjlib
 import (
     "net"
     "strings"
+    "regexp"
 )
 
 func inslice(s []string, str string) bool {
@@ -26,6 +27,7 @@ func AddressList() ([]string, error) {
         if err != nil ||
                     !strings.Contains(i.Flags.String(), "up") ||
                     strings.HasPrefix(strings.ToLower(i.Name), "lo") ||
+                    strings.HasPrefix(strings.ToLower(i.Name), "bluetooth") ||
                     strings.HasPrefix(strings.ToLower(i.Name), "vether") {
             continue
         }
@@ -36,4 +38,13 @@ func AddressList() ([]string, error) {
         }
     }
     return retlist, nil
+}
+
+func ValidIPv4(ipAddress string) bool {
+    ipAddress = strings.Trim(ipAddress, " ")
+    re, _ := regexp.Compile(`^[\.\d]{7,15}(/\d{2})?$`)
+    if re.MatchString(ipAddress) {
+        return true
+    }
+    return false
 }

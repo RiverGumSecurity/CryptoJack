@@ -30,7 +30,7 @@ import (
 	"github.com/360EntSecGroup-Skylar/excelize"
 	"github.com/brianvoe/gofakeit"
 	"github.com/jung-kurt/gofpdf"
-    "github.com/hirochachacha/go-smb2"
+    //"github.com/hirochachacha/go-smb2"
     //"github.com/seancfoley/ipaddress-go/ipaddr"
 )
 
@@ -679,37 +679,5 @@ func fetchDecryptKey(rootDir string) [32]byte {
 	}
 	copy(aesKey[:], tKey)
 	return aesKey
-}
-
-
-func EnumerateShares(username string, password string, host string, wg *sync.WaitGroup) error {
-    defer wg.Done()
-    host_and_port := fmt.Sprintf("%s:%d", host, 445)
-    conn, err := net.DialTimeout("tcp", host_and_port, time.Second * 5)
-    if err != nil {
-        fmt.Println(err.Error())
-        return err
-    }
-    defer conn.Close()
-
-    d := &smb2.Dialer{
-        Initiator: &smb2.NTLMInitiator{
-            User: username,
-            Password: password,
-        },
-    }
-    s, err := d.Dial(conn)
-    if err != nil {
-        fmt.Println(err.Error())
-        return err
-    }
-    defer s.Logoff()
-
-    names, err := s.ListSharenames()
-    if err != nil { return err }
-    for _, name := range names {
-        fmt.Printf("\\\\%s\\%s\n", host, name)
-    }
-    return nil
 }
 

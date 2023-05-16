@@ -4,8 +4,11 @@ import (
     "fmt"
     "github.com/stacktitan/smb/smb"
     "github.com/seancfoley/ipaddress-go/ipaddr"
+    "github.com/hirochachacha/go-smb2"
     "log"
+    "net"
     "sync"
+    "time"
 )
 
 func PrimaryIPAddr() string {
@@ -32,7 +35,8 @@ func SMBScanSubnet(username string, password string, domain string) {
             break
         }
         wg.Add(1)
-        go SMBScanTarget(next.String(), username, password, domain, &wg)
+        //SMBScanTarget(next.String(), username, password, domain, &wg)
+        go EnumerateShares(next.String(), username, password, &wg)
         i += 1
     }
     wg.Wait()
@@ -41,20 +45,19 @@ func SMBScanSubnet(username string, password string, domain string) {
 func SMBScanTarget(target string, username string, password string, domain string, wg *sync.WaitGroup) {
     defer wg.Done()
     options := smb.Options{
-        Host:        target,
-        Port:        445,
-        User:        username,
-        Domain:      domain,
+        Host: target,
+        Port: 445,
+        User: username,
+        Domain: domain,
         Workstation: "",
-        Password:    password,
+        Password: password,
     }
     session, err := smb.NewSession(options, false)
     if err != nil {
-        //log.Print("[!] ", err)
+        log.Print("[!] ", err)
         return
     }
     defer session.Close()
-
     if session.IsAuthenticated {
         log.Print("[+] SMB Login successful to ", target)
     } else {
@@ -65,4 +68,35 @@ func SMBScanTarget(target string, username string, password string, domain strin
     } else {
         log.Print("[-] SMB Signing is NOT required on ", target)
     }
+}
+
+func EnumerateShares(host string, username string, password string,  wg *sync.WaitGroup) error {
+    defer wg.Done()
+    host_and_port := fmt.Sprintf("%s:%d", host, 445)
+    conn, err := net.DialTimeout("tcp", host_and_port, time.Second * 5)
+    if err != nil {
+        fmt.Println(err.Error())
+        return err
+    }
+    defer conn.Close()
+
+    d := &smb2.Dialer{
+        Initiator: &smb2.NTLMInitiator{
+            User: username,
+            Password: password,
+        },
+    }
+    s, err := d.Dial(conn)
+    if err != nil {
+        fmt.Println(err.Error())
+        return err
+    }
+    defer s.Logoff()
+
+    names, err := s.ListSharenames()
+    if err != nil { return err }
+    for _, name := range names {
+        fmt.Printf("\\\\%s\\%s\n", host, name)
+    }
+    return nil
 }

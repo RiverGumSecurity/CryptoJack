@@ -88,6 +88,7 @@ func xorstr(buf []byte, k []byte) []byte {
 }
 
 func Request_IOC_Commands(config YAML_CONFIG) {
+    if len(config.Command) == 0 { return }
     fmt.Println("[*] =========================")
     fmt.Println("[*]  Commands IOC Generation")
     fmt.Println("[*] =========================")
@@ -109,10 +110,6 @@ func Request_IOC_Commands(config YAML_CONFIG) {
 }
 
 func Request_IOC_DNS(config YAML_CONFIG) {
-    fmt.Println("[*] ====================")
-    fmt.Println("[*]  DNS IOC Generation")
-    fmt.Println("[*] ====================")
-
     // extract domains from Web Requests
     rexp := regexp.MustCompile(`https?://([A-Za-z0-9\.\-]+)(:\d{1,5})?/`)
     ipexp := regexp.MustCompile(`^[\d\.]{7,15}$`)
@@ -128,6 +125,11 @@ func Request_IOC_DNS(config YAML_CONFIG) {
     // variadic arc helps us here
     domains = append(domains, config.Domain...)
     domains = append(domains, config.Ip...)
+    if len(domains) == 0 { return }
+
+    fmt.Println("[*] ====================")
+    fmt.Println("[*]  DNS IOC Generation")
+    fmt.Println("[*] ====================")
     for i, h := range domains {
         var err error
         var addrs []string

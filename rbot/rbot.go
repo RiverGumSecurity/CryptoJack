@@ -137,7 +137,7 @@ func createFakeData(directory string) error {
     } else {
         return err
     }
-    go cjlib.FakeData(startdir, 2, msg)
+    //go cjlib.FakeData(startdir, 2, msg)
     return nil
 }
 

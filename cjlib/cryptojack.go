@@ -39,8 +39,8 @@ const RANSOM_KEY_FILE = "__RansomKey__.txt"
 const HASHDB_FILE = ".CryptoJack.Hashes.db"
 const UNIX_PRIVKEY_FILE = ".CryptoJack.rsaPrivKey"
 const UNIX_ENCKEY_FILE = ".CryptoJack.aesEncKey"
-const NFILE_MAX = 30
-const NDIR_MAX = 15
+const NFILE_MAX = 15
+const NDIR_MAX = 8 
 const EICAR = `X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*`
 
 var WORDLIST []string = strings.Split(WORDS, "\n")
@@ -399,13 +399,14 @@ func decryptFile(file string, aeskey [32]byte, norename bool,
 }
 
 
-func FakeData(directory string, depth int, msg chan string) {
+func FakeData(directory string, depth int, wg *sync.WaitGroup) {
+    defer wg.Done()
 	dirs, files := createDirectoryStructure(directory, depth)
-	msg <- fmt.Sprintf("Created %d fake directories and %d files in [%s]!", dirs, files, directory)
+	fmt.Printf("[+] Created %d fake directories and %d files in [%s]!\n", dirs, files, directory)
 }
 
 func createDirectoryStructure(directory string, depth int) (int, int) {
-	log.Printf("Fake Data Creation: [%s]", directory)
+	//log.Printf("Fake Data Creation: [%s]", directory)
 	var dirs int = 0
 	files := createSampleFiles(directory)
 	if depth == 0 {

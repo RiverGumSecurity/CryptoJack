@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
+    "sync"
 
 	"cryptojack/cjlib"
 )
@@ -31,18 +32,11 @@ __________________________________________________
 	fmt.Println(banner)
 	arg_directory := flag.String("d", strings.Title(cjlib.RandomWord()), "Specify a starting directory.")
 	arg_fakedepth := flag.Int("depth", 2, "how deep to recurse when creating fake data structure")
+	arg_ndir := flag.Int("n", 1, "how many directories to create")
 	flag.Parse()
 	startdir, _ := filepath.Abs(strings.Title(*arg_directory))
 
-	fmt.Printf("[*] Fake data directory is: [%s], max depth = %d.\n", startdir, *arg_fakedepth)
-	fmt.Printf("[*] DO YOU WANT TO PROCEED [Y|N]? ")
-	ans := []byte("N")
-	os.Stdin.Read(ans)
-	if ans[0] != 89 {
-		os.Exit(0)
-	}
-
-	// panic if starting dir is not real!
+	fmt.Printf("[*] Starting directory is: [%s], max depth = %d.\n", startdir, *arg_fakedepth)
 	if _, err := os.Stat(startdir); err != nil {
 		err := os.Mkdir(startdir, 0755)
 		if err != nil {
@@ -50,8 +44,13 @@ __________________________________________________
 		}
 	}
 
-	msg := make(chan string)
-	go cjlib.FakeData(startdir, *arg_fakedepth, msg)
-	result := <-msg
-	fmt.Println(result)
+    var wg sync.WaitGroup
+    for i := 0; i < *arg_ndir; i++ {
+        si := fmt.Sprintf("%02d", i)
+        dir := filepath.Join(startdir, si)
+		os.Mkdir(dir, 0755)
+        wg.Add(1)
+	    go cjlib.FakeData(dir, *arg_fakedepth, &wg)
+    }
+    wg.Wait()
 }

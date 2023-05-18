@@ -2,7 +2,7 @@ package cjlib
 
 import (
     "fmt"
-    "golang.org/x/sys/windows"
+    "math/rand"
     "syscall"
     "unsafe"
     ps "github.com/mitchellh/go-ps"
@@ -18,62 +18,75 @@ const (
 )
 
 type RmUniqueProcess struct {
-    ProcessId         uint32
+    ProcessId uint32
     ProcessStartTime syscall.Filetime
 }
 
 var (
-    rsmdll = windows.NewLazyDLL("rstrtmgr.dll")
+    rsmdll = syscall.NewLazyDLL("rstrtmgr.dll")
     rmStartSession = rsmdll.NewProc("RmStartSession")
     rmRegisterResources = rsmdll.NewProc("RmRegisterResources")
     rmShutdown = rsmdll.NewProc("RmShutdown")
     rmEndSession = rsmdll.NewProc("RmEndSession")
 )
 
-var targetProcesses = []string { "msedge.exe", "chrome.exe" }
+var targetProcesses = []string { "chrome.exe" }
+//var targetProcesses = []string { "notepad.exe" }
 
-func rsmStartSession() (uintptr, string, error) {
-    var sessionHandle uintptr
-    var sessionKey [RmSessionKeyLen]uint16
-    ret, _, err := rmStartSession.Call(
-        sessionHandle, 0, uintptr(unsafe.Pointer(&sessionKey[0])))
-    fmt.Printf("rmStartSession(): %d\n", ret)
-    if err.Error() != "The operation completed successfully." {
-        return 0, "", err
+func randString(n int) string {
+    charset := []byte("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    b := make([]byte, n)
+    for i := range b {
+        b[i] = charset[rand.Intn(len(charset))]
     }
-    return sessionHandle, syscall.UTF16ToString(sessionKey[:]), nil
+    return string(b)
 }
 
-func rsmRegisterProcesses(sessionHandle uintptr, processIds []uint32) error {
-    if len(processIds) == 0 { return nil }
-    uniqueProcesses := make([]RmUniqueProcess, len(processIds))
-    for i, pid := range processIds {
+func rsmStartSession() (uint32, string, error) {
+    var sessionHandle uint32 = 0
+    sessionKey := randString(32)
+
+    ret, _, _ := rmStartSession.Call(
+        uintptr(unsafe.Pointer(&sessionHandle)), uintptr(0),
+        uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(sessionKey))))
+    if ret != 0 {
+        return 0, "", fmt.Errorf("ERROR: RmStartSession(): %d", ret)
+    }
+    return sessionHandle, sessionKey, nil
+}
+
+func rsmRegisterProcesses(sessionHandle uint32, pids []uint32) error {
+    if len(pids) == 0 {
+        return fmt.Errorf("Empty process ID list")
+    }
+
+    uniqueProcesses := make([]RmUniqueProcess, len(pids))
+    for i, pid := range pids {
         uniqueProcesses[i].ProcessId = pid
     }
-    ret, _, err := rmRegisterResources.Call(
-        sessionHandle, 0, 0, uintptr(len(uniqueProcesses)),
+    ret, _, _ := rmRegisterResources.Call(
+        uintptr(sessionHandle),
+        0, 0, uintptr(len(uniqueProcesses)),
         uintptr(unsafe.Pointer(&uniqueProcesses[0])), 0, 0)
-    fmt.Printf("rmRegisterResources(): %d\n", ret)
-    if err.Error() != "The operation completed successfully." {
-        return err
+    if ret != 0 {
+        return fmt.Errorf("failed to register processes. Error: %d", ret)
     }
     return nil
 }
 
-func rsmShutdownProcesses(sessionHandle uintptr, shutdownFlags uint32, restartType uint32) error {
-    ret, _, err := rmShutdown.Call(
-        sessionHandle, uintptr(shutdownFlags), uintptr(restartType), 0)
-    fmt.Printf("rmShutdown(): %d\n", ret)
-    if err.Error() != "The operation completed successfully." {
-        return err
+func rsmShutdown(sessionHandle uint32, shutdownFlags uint32) error {
+    ret, _, _ := rmShutdown.Call(
+        uintptr(sessionHandle), uintptr(shutdownFlags), 0)
+    if ret != 0 {
+        return fmt.Errorf("failed to initiate process shutdown. Error: %d", ret)
     }
     return nil
 }
 
-func rsmEndSession(sessionHandle uintptr) error {
-    _, _, err := rmEndSession.Call(sessionHandle)
-    if err.Error() != "The operation completed successfully." {
-        return err
+func rsmEndSession(sessionHandle uint32) error {
+    ret, _, _ := rmEndSession.Call(uintptr(sessionHandle))
+    if ret != 0 {
+        return fmt.Errorf("failed to end the restart manager session. Error: %d", ret)
     }
     return nil
 }
@@ -115,7 +128,7 @@ func Win32_RSMShutdownTargets() {
         fmt.Println(err)
         return
     }
-    err = rsmShutdownProcesses(sessionHandle, 0, RmShutdownOnlyRestart)
+    err = rsmShutdown(sessionHandle, RmShutdownOnlyRegistered)
     if err != nil {
         fmt.Println(err)
         return

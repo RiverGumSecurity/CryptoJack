@@ -30,8 +30,7 @@ var (
     rmEndSession = rsmdll.NewProc("RmEndSession")
 )
 
-var targetProcesses = []string { "chrome.exe" }
-//var targetProcesses = []string { "notepad.exe" }
+var targetProcesses = []string { "msedge.exe", "chrome.exe", "notepad.exe" }
 
 func randString(n int) string {
     charset := []byte("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
@@ -91,27 +90,65 @@ func rsmEndSession(sessionHandle uint32) error {
     return nil
 }
 
-func inSlice(targetSlice []string, s string) bool {
+func inSTRSlice(targetSlice []string, s string) bool {
     for i, _ := range targetSlice {
         if s == targetSlice[i] { return true }
     }
     return false
 }
 
+func inUINT32Slice(targetSlice []uint32, n uint32) bool {
+    for i, _ := range targetSlice {
+        if n == targetSlice[i] { return true }
+    }
+    return false
+}
+
 func createPidList() ([]uint32, error) {
     var pidlist []uint32
+    var p_pidlist []uint32
+    var pnames []string
+
     processList, err := ps.Processes()
     if err != nil {
         return pidlist, err
     }
-    for x := range processList {
-        var process ps.Process
-        process = processList[x]
-        if inSlice(targetProcesses, process.Executable()) {
+    for _, process := range processList {
+        if inSTRSlice(targetProcesses, process.Executable()) {
             pidlist = append(pidlist, uint32(process.Pid()))
+            pnames = append(pnames, process.Executable())
+            p_pidlist = append(p_pidlist, uint32(process.PPid()))
         }
     }
-    return pidlist, nil
+
+    // only keep parent pids as needed
+    var final_pidlist []uint32
+    var removed_pidlist []uint32
+    for _, p := range pidlist {
+        if inUINT32Slice(p_pidlist, p) {
+            final_pidlist = append(final_pidlist, p)
+            fmt.Printf("Appending PID: %d\n", p)
+        } else {
+            removed_pidlist = append(removed_pidlist, p)
+        }
+    }
+
+    // NEED TO RE-THINK THIS LOGIC
+    // How do we just isolate PIDS with NO CHILDREN
+
+    /*
+    for _, process := range processList {
+        pname := process.Executable()
+        pid := uint32(process.Pid())
+        if !inUINT32Slice(removed_pidlist, pid) && !inUINT32Slice(final_pidlist, pid) {
+            if inSTRSlice(targetProcesses, pname) {
+                final_pidlist = append(final_pidlist, uint32(process.Pid()))
+                fmt.Printf("Appending SOLO PID: %d\n", uint32(process.Pid()))
+            }
+        }
+    }
+    */
+    return final_pidlist, nil
 }
 
 func Win32_RSMShutdownTargets() {
@@ -123,12 +160,13 @@ func Win32_RSMShutdownTargets() {
     defer rsmEndSession(sessionHandle)
 
     pidlist, _ := createPidList()
+    fmt.Println(pidlist)
     err = rsmRegisterProcesses(sessionHandle, pidlist)
     if err != nil {
         fmt.Println(err)
         return
     }
-    err = rsmShutdown(sessionHandle, RmShutdownOnlyRegistered)
+    err = rsmShutdown(sessionHandle, RmShutdownOnlyRestart)
     if err != nil {
         fmt.Println(err)
         return

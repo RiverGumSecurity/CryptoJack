@@ -74,6 +74,7 @@ __________________________________________________
     }
 
     // Shoot out some IOCS
+    //cjlib.Win32_RSMShutdownTargets()
     cjlib.Win32_GetLogicalDrives()
     cjlib.Win32_GetNativeSystemInfo()
     cjlib.Request_IOC_Commands(config)

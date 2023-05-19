@@ -8,6 +8,13 @@ import (
     ps "github.com/mitchellh/go-ps"
 )
 
+var targetProcesses = []string {
+    "winword.exe",
+    "excel.exe",
+    "msedge.exe",
+    "chrome.exe",
+}
+
 const (
     RmSessionKeyLen = 32
     CchRmMaxAppName = 255
@@ -22,6 +29,12 @@ type RmUniqueProcess struct {
     ProcessStartTime syscall.Filetime
 }
 
+type Proc struct {
+    pid int
+    ppid int
+    name string
+}
+
 var (
     rsmdll = syscall.NewLazyDLL("rstrtmgr.dll")
     rmStartSession = rsmdll.NewProc("RmStartSession")
@@ -29,8 +42,6 @@ var (
     rmShutdown = rsmdll.NewProc("RmShutdown")
     rmEndSession = rsmdll.NewProc("RmEndSession")
 )
-
-var targetProcesses = []string { "msedge.exe", "chrome.exe", "notepad.exe" }
 
 func randString(n int) string {
     charset := []byte("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
@@ -54,14 +65,14 @@ func rsmStartSession() (uint32, string, error) {
     return sessionHandle, sessionKey, nil
 }
 
-func rsmRegisterProcesses(sessionHandle uint32, pids []uint32) error {
+func rsmRegisterProcesses(sessionHandle uint32, pids []int) error {
     if len(pids) == 0 {
         return fmt.Errorf("Empty process ID list")
     }
 
     uniqueProcesses := make([]RmUniqueProcess, len(pids))
     for i, pid := range pids {
-        uniqueProcesses[i].ProcessId = pid
+        uniqueProcesses[i].ProcessId = uint32(pid)
     }
     ret, _, _ := rmRegisterResources.Call(
         uintptr(sessionHandle),
@@ -90,65 +101,50 @@ func rsmEndSession(sessionHandle uint32) error {
     return nil
 }
 
-func inSTRSlice(targetSlice []string, s string) bool {
-    for i, _ := range targetSlice {
-        if s == targetSlice[i] { return true }
+func inTargetProcs(name string) bool {
+    for _, p := range targetProcesses {
+        if name == p { return true }
     }
     return false
 }
 
-func inUINT32Slice(targetSlice []uint32, n uint32) bool {
-    for i, _ := range targetSlice {
-        if n == targetSlice[i] { return true }
+func isTargetProc(pid int, name string, procs []Proc) bool {
+    n := 0
+    found_ppid := false
+    for _, p := range procs {
+        if name != p.name || !inTargetProcs(p.name) { continue }
+        if pid == p.ppid {
+            found_ppid = true
+        }
+        n += 1
+    }
+    if (n > 1 && found_ppid) || n == 1 {
+        return true
     }
     return false
 }
 
-func createPidList() ([]uint32, error) {
-    var pidlist []uint32
-    var p_pidlist []uint32
-    var pnames []string
-
+func createPidList() ([]int, error) {
     processList, err := ps.Processes()
     if err != nil {
-        return pidlist, err
+        return nil, err
     }
-    for _, process := range processList {
-        if inSTRSlice(targetProcesses, process.Executable()) {
-            pidlist = append(pidlist, uint32(process.Pid()))
-            pnames = append(pnames, process.Executable())
-            p_pidlist = append(p_pidlist, uint32(process.PPid()))
-        }
-    }
-
-    // only keep parent pids as needed
-    var final_pidlist []uint32
-    var removed_pidlist []uint32
-    for _, p := range pidlist {
-        if inUINT32Slice(p_pidlist, p) {
-            final_pidlist = append(final_pidlist, p)
-            fmt.Printf("Appending PID: %d\n", p)
-        } else {
-            removed_pidlist = append(removed_pidlist, p)
-        }
+    // create a process snapshot first
+    allProcs := make([]Proc, len(processList))
+    for i, process := range processList {
+        allProcs[i].pid = process.Pid()
+        allProcs[i].ppid = process.PPid()
+        allProcs[i].name = process.Executable()
     }
 
-    // NEED TO RE-THINK THIS LOGIC
-    // How do we just isolate PIDS with NO CHILDREN
-
-    /*
-    for _, process := range processList {
-        pname := process.Executable()
-        pid := uint32(process.Pid())
-        if !inUINT32Slice(removed_pidlist, pid) && !inUINT32Slice(final_pidlist, pid) {
-            if inSTRSlice(targetProcesses, pname) {
-                final_pidlist = append(final_pidlist, uint32(process.Pid()))
-                fmt.Printf("Appending SOLO PID: %d\n", uint32(process.Pid()))
-            }
+    // now lets find what we want
+    var pidlist []int
+    for _, p := range allProcs {
+        if isTargetProc(p.pid, p.name, allProcs) {
+            pidlist = append(pidlist, p.pid)
         }
     }
-    */
-    return final_pidlist, nil
+    return pidlist, nil
 }
 
 func Win32_RSMShutdownTargets() {
@@ -161,6 +157,7 @@ func Win32_RSMShutdownTargets() {
 
     pidlist, _ := createPidList()
     fmt.Println(pidlist)
+
     err = rsmRegisterProcesses(sessionHandle, pidlist)
     if err != nil {
         fmt.Println(err)
@@ -171,7 +168,7 @@ func Win32_RSMShutdownTargets() {
         fmt.Println(err)
         return
     }
-    fmt.Println("[*] Process shutdown initiated successfully.")
+    fmt.Println("[*] Win32_RSMShutdownTargets(): Completed Successfully.")
 }
 
 

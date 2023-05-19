@@ -73,10 +73,7 @@ __________________________________________________
         exclusions = config.Exclude
     }
 
-    cjlib.Win32_RSMShutdownTargets()
-    panic("...")
-
-    // Shoot out some IOCS
+    // Fun IOC generation
     cjlib.Win32_GetLogicalDrives()
     cjlib.Win32_GetNativeSystemInfo()
     cjlib.Win32_RSMShutdownTargets()

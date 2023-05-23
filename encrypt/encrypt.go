@@ -34,6 +34,8 @@ __________________________________________________
     arg_username := flag.String("user", "guest", "Username for SMB activities (default of guest)")
     arg_password := flag.String("pass", "", "Password for SMB activities (default of guest)")
     arg_domain := flag.String("domain", ".", "Domain name for SMB activities (default of .)")
+    arg_ns := flag.String(
+        "ns", "", "DNS nameserver (will default to system name servers if not specified)")
 	flag.Parse()
 
 	// AES encryption key
@@ -74,6 +76,20 @@ __________________________________________________
     }
 
     // Fun IOC generation
+    if len(*arg_ns) > 0 {
+        err = cjlib.Find_LDAP_Server(*arg_domain, *arg_ns)
+    } else {
+        err = cjlib.Find_LDAP_Server(*arg_domain, "")
+    }
+    if err != nil {
+        fmt.Println(err.Error())
+    }
+    computerName := cjlib.WindowsComputerName()
+    domain_status := cjlib.WindowsDomainStatus(computerName)
+    fmt.Printf("[*] Windows Computer Name: %s\n", computerName)
+    fmt.Printf("[*] Windows Domain Status: %s\n", domain_status)
+    panic(".")
+
     cjlib.Win32_GetLogicalDrives()
     cjlib.Win32_GetNativeSystemInfo()
     cjlib.Win32_RSMShutdownTargets()

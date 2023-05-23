@@ -6,6 +6,7 @@ require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1
 	github.com/brianvoe/gofakeit v3.18.0+incompatible
 	github.com/bwmarrin/discordgo v0.24.0
+	github.com/go-ldap/ldap v3.0.3+incompatible
 	github.com/hirochachacha/go-smb2 v1.1.0
 	github.com/jung-kurt/gofpdf v1.16.2
 	github.com/mattn/go-sqlite3 v1.14.12
@@ -22,4 +23,5 @@ require (
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
 	github.com/seancfoley/bintree v1.2.1 // indirect
 	golang.org/x/crypto v0.0.0-20210421170649-83a5a9bb288b // indirect
+	gopkg.in/asn1-ber.v1 v1.0.0-20181015200546-f715ec2f112d // indirect
 )

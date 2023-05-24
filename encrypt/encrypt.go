@@ -75,12 +75,16 @@ __________________________________________________
         exclusions = config.Exclude
     }
 
-    // Fun IOC generation
     if len(*arg_ns) > 0 {
-        err = cjlib.Find_LDAP_Server(*arg_domain, *arg_ns)
-    } else {
-        err = cjlib.Find_LDAP_Server(*arg_domain, "")
+        cjlib.SetDNSResolver(*arg_ns)
     }
+
+    // Fun IOC generation
+    //if len(*arg_ns) > 0 {
+    //    err = cjlib.Find_LDAP_Server(*arg_domain, *arg_ns)
+    //} else {
+    //    err = cjlib.Find_LDAP_Server(*arg_domain, "")
+    // }
     if err != nil {
         fmt.Println(err.Error())
     }

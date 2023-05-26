@@ -22,13 +22,22 @@ func SetDNSResolver(ns string) {
     }
 }
 
-func DNSLookup(name string, rectype string) ([]string, error) {
+func DNSLookup(name string, rectype string, extra ...string) ([]string, error) {
     var result []string
-    if rectype == "A" || rectype == "ANY" {
-        result, err := net.LookupHost(name)
+    var err error
+    if rectype == "A" || rectype == "ANY" || rectype == "CNAME" {
+        result, err = dnsResolver.LookupHost(context.Background(), name)
+    } else if rectype == "PTR" {
+        result, err = dnsResolver.LookupAddr(context.Background(), name)
+    } else if rectype == "TXT" {
+        result, err = dnsResolver.LookupTXT(context.Background(), name)
     } else if rectype == "SRV" {
-        _, addr, err := dnsResolver.LookupSRV(
-            context.Background(), "ldap._tcp.gc", "msdcs", name)
+        if len(extra) < 2 {
+            return result, fmt.Errorf("not enough extra params")
+        }
+        var addr []*net.SRV
+        _, addr, err = dnsResolver.LookupSRV(
+            context.Background(), name, extra[0], extra[1])
         for _, s := range addr {
             result = append(result, fmt.Sprintf("%v:%v:%d:%d",
                 s.Target, s.Port, s.Priority, s.Weight))

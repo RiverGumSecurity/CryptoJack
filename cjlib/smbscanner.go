@@ -64,7 +64,10 @@ func SMBScanDomainComputers(username string, password string, domain string) err
     wg.Add(len(domainComputers))
     for _, c := range domainComputers {
         addrs, _ := DNSLookup(fmt.Sprintf("%s.%s", strings.TrimSuffix(c, "$"), domain), "A")
-        ip := addrs[0]
+        ip := ""
+        if len(addrs) > 0 {
+            ip = addrs[0]
+        }
         fmt.Printf("[+] %-12s (%s)\n", c, ip)
         go EnumerateShares(ip, c, username, password, ch, &wg)
     }

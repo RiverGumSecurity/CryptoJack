@@ -63,8 +63,8 @@ func SMBScanDomainComputers(username string, password string, domain string) err
     var wg sync.WaitGroup
     wg.Add(len(domainComputers))
     for _, c := range domainComputers {
+        ip := "0.0.0.0"
         addrs, _ := DNSLookup(fmt.Sprintf("%s.%s", strings.TrimSuffix(c, "$"), domain), "A")
-        ip := ""
         if len(addrs) > 0 {
             ip = addrs[0]
         }

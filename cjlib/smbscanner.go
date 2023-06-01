@@ -59,7 +59,7 @@ func SMBScanDomainComputers(username string, password string, domain string) err
 [+]  Domain Computer List
 [*] ======================`)
 
-    fmt.Println("LDAP Query Returned %d computers.\n", len(domainComputers))
+    fmt.Printf("LDAP Query Returned %d computers.\n", len(domainComputers))
     ch := make(chan string)
     var wg sync.WaitGroup
     wg.Add(len(domainComputers))

